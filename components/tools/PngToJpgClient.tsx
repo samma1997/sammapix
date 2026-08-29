@@ -16,6 +16,7 @@ import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { trackEvent } from "@/lib/analytics";
 import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
+import { resolveFileLimit } from "@/lib/constants";
 
 // ── Constants ─────────────────────────────────────────────────────────────
 const MAX_FILES_FREE = 20;
@@ -124,7 +125,8 @@ async function convertPngToJpg(
 export default function PngToJpgClient() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const fileLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+  const isAuthenticated = Boolean(session?.user);
+  const fileLimit = resolveFileLimit({ isPro, isAuthenticated, freeCap: MAX_FILES_FREE, proCap: MAX_FILES_PRO });
 
   const [items, setItems] = useState<ConvertItem[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);

@@ -16,6 +16,7 @@ import { saveAs } from "file-saver";
 import { useSession } from "next-auth/react";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
 import { trackEvent } from "@/lib/analytics";
+import { resolveFileLimit } from "@/lib/constants";
 import {
   incrementDownloadCount,
   shouldShowSuccessUpsell,
@@ -225,7 +226,8 @@ async function applyLabel(file: File, opts: DrawOptions): Promise<Blob> {
 export default function AiLabelClient() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const fileLimit = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+  const isAuthenticated = Boolean(session?.user);
+  const fileLimit = resolveFileLimit({ isPro, isAuthenticated, freeCap: MAX_FILES_FREE, proCap: MAX_FILES_PRO });
 
   // Label settings
   const [preset, setPreset] = useState<TextPreset>("Made with AI");

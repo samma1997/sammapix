@@ -48,17 +48,8 @@ export default function AdUnit({
   // Loggati (free/Pro), dashboard, o sessione ancora in caricamento: niente annuncio.
   if (!showAd) return null;
 
-  // In sviluppo: placeholder invece dell'annuncio reale.
-  if (!isProd) {
-    return (
-      <div
-        className={`flex items-center justify-center bg-gray-50 border border-dashed border-gray-200 rounded text-xs text-gray-400 dark:bg-[#1C1C1C] dark:border-[#2A2A2A] dark:text-[#737373] ${className}`}
-        style={{ minHeight: 90 }}
-      >
-        Ad placeholder (dev · solo utenti non loggati)
-      </div>
-    );
-  }
+  // In sviluppo: niente annuncio nè placeholder (fastidiosi mentre si sviluppa).
+  if (!isProd) return null;
 
   return (
     <ins

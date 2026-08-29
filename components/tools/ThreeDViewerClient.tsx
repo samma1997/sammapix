@@ -15,6 +15,7 @@ import {
   ExternalLink,
   FolderArchive,
   X,
+  ChevronDown,
 } from "lucide-react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
@@ -149,8 +150,24 @@ async function convertFileToBlob(
     const { GLTFLoader } = await import(
       "three/examples/jsm/loaders/GLTFLoader.js"
     );
+    const { DRACOLoader } = await import(
+      "three/examples/jsm/loaders/DRACOLoader.js"
+    );
     const buffer = await file.arrayBuffer();
     const loader = new GLTFLoader();
+    const draco = new DRACOLoader();
+    draco.setDecoderPath("/draco/gltf/");
+    loader.setDRACOLoader(draco);
+    try {
+      const { MeshoptDecoder } = await import(
+        "three/examples/jsm/libs/meshopt_decoder.module.js"
+      );
+      loader.setMeshoptDecoder(
+        MeshoptDecoder as unknown as Parameters<typeof loader.setMeshoptDecoder>[0]
+      );
+    } catch {
+      // meshopt optional
+    }
     const gltf = await new Promise<
       import("three/examples/jsm/loaders/GLTFLoader.js").GLTF
     >((resolve, reject) => {
@@ -243,6 +260,39 @@ export default function ThreeDViewerClient() {
   const frameRef = useRef<number>(0);
   const currentMeshRef = useRef<import("three").Mesh | null>(null);
   const geometryRef = useRef<import("three").BufferGeometry | null>(null);
+  // Configurator: the loaded model root (may contain many parts) + the part list.
+  const rootRef = useRef<import("three").Object3D | null>(null);
+  const partsRef = useRef<{ id: string; mesh: import("three").Mesh }[]>([]);
+  // Scene realism refs (environment reflections + ground contact shadow)
+  const groundRef = useRef<import("three").Mesh | null>(null);
+  const gridRef = useRef<import("three").GridHelper | null>(null);
+  const envTexRef = useRef<import("three").Texture | null>(null);
+  const keyLightRef = useRef<import("three").DirectionalLight | null>(null);
+  const threeRef = useRef<typeof import("three") | null>(null);
+  // Cache of loaded HDRI environments: { env: PMREM map for lighting, bg: equirect for 360 backdrop }
+  const hdriCacheRef = useRef<
+    Record<string, { env: import("three").Texture; bg: import("three").Texture }>
+  >({});
+  const maxDimRef = useRef(1);
+  // Original baseColor map per part, so a custom texture can be removed without
+  // destroying the model's own baked texture.
+  const origMapsRef = useRef<Map<string, import("three").Texture | null>>(
+    new Map()
+  );
+  // 2D texture editor: draw on a flat canvas (the unwrapped texture) with the
+  // mouse; it is the model's live texture. paintRef lets the canvas handlers
+  // read current brush settings without re-attaching.
+  const paintRef = useRef({ mode: false, color: "#e11d48", size: 24 });
+  const paintingRef = useRef(false);
+  const painting3DRef = useRef(false);
+  const lastPtRef = useRef<{ x: number; y: number } | null>(null);
+  const paint2DRef = useRef<{
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
+    tex: import("three").CanvasTexture;
+  } | null>(null);
+  const paint2DHostRef = useRef<HTMLDivElement | null>(null);
+  const paintSaveRef = useRef<(() => void) | null>(null);
 
   // ── Single-file viewer state ───────────────────────────────────────────────
   const [isDragging, setIsDragging] = useState(false);
@@ -250,6 +300,34 @@ export default function ThreeDViewerClient() {
   const [stats, setStats] = useState<ModelStats | null>(null);
   const [unit, setUnit] = useState<Unit>("mm");
   const [error, setError] = useState<string | null>(null);
+  // Material / appearance controls (live-applied to the loaded mesh)
+  const [matColor, setMatColor] = useState("#8888ff");
+  const [wireframe, setWireframe] = useState(false);
+  const [metalness, setMetalness] = useState(0.2);
+  const [roughness, setRoughness] = useState(0.5);
+  // Vertex paint (paint pieces of the mesh, export keeps colors in PLY/GLB)
+  // Configurator parts (each colorable independently). >1 = multi-part model.
+  const [parts, setParts] = useState<{ id: string; name: string; color: string }[]>([]);
+  // Render output settings
+  const [renderRes, setRenderRes] = useState(2048);
+  const [renderTransparent, setRenderTransparent] = useState(false);
+  const [rendering, setRendering] = useState(false);
+  // Custom texture (image mapped onto the surface). Tinted by the color picker.
+  const [textureUrl, setTextureUrl] = useState<string | null>(null);
+  // Paint on the model surface with the mouse (draws onto the texture via UVs).
+  const [paintMode, setPaintMode] = useState(false);
+  const [paintColor, setPaintColor] = useState("#e11d48");
+  const [brushSize, setBrushSize] = useState(24);
+  // Scene realism controls
+  const [envReflections, setEnvReflections] = useState(true);
+  const [groundShadow, setGroundShadow] = useState(true);
+  const [showGrid, setShowGrid] = useState(true);
+  // Environment (HDRI lighting/reflections/backdrop) + plain backdrop
+  const [env, setEnv] = useState<"soft" | "studio" | "sunset" | "warehouse" | "city">("soft");
+  const [showEnvBg, setShowEnvBg] = useState(false);
+  const [envLoading, setEnvLoading] = useState(false);
+  const [bgMode, setBgMode] = useState<"studio" | "dark" | "white" | "color">("dark");
+  const [bgColor, setBgColor] = useState("#e8e8ec");
   const [loading, setLoading] = useState(false);
 
   // ── Batch conversion state ────────────────────────────────────────────────
@@ -302,6 +380,7 @@ export default function ThreeDViewerClient() {
 
     (async () => {
       const THREE = await import("three");
+      threeRef.current = THREE;
       const { OrbitControls } = await import(
         "three/examples/jsm/controls/OrbitControls.js"
       );
@@ -312,13 +391,16 @@ export default function ThreeDViewerClient() {
 
       const renderer = new THREE.WebGLRenderer({
         antialias: true,
-        alpha: false,
+        alpha: true, // allow transparent-background renders
         preserveDrawingBuffer: true,
       });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(width, height);
       renderer.setClearColor(0x1a1a2e, 1);
       renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.0;
       rendererRef.current = renderer;
       canvasRef.current = renderer.domElement;
       mountRef.current.appendChild(renderer.domElement);
@@ -326,14 +408,38 @@ export default function ThreeDViewerClient() {
       const scene = new THREE.Scene();
       sceneRef.current = scene;
 
+      // Environment reflections (image-based lighting) — instant realism, no HDR
+      // file needed. RoomEnvironment is a procedural studio lit scene.
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      const { RoomEnvironment } = await import(
+        "three/examples/jsm/environments/RoomEnvironment.js"
+      );
+      const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      envTexRef.current = envTex;
+      scene.environment = envTex;
+
       const grid = new THREE.GridHelper(20, 20, 0x444466, 0x333355);
+      gridRef.current = grid;
       scene.add(grid);
 
-      const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+      // Ground plane that only catches shadows (invisible except the shadow).
+      const ground = new THREE.Mesh(
+        new THREE.PlaneGeometry(1, 1),
+        new THREE.ShadowMaterial({ opacity: 0.35 })
+      );
+      ground.rotation.x = -Math.PI / 2;
+      ground.receiveShadow = true;
+      groundRef.current = ground;
+      scene.add(ground);
+
+      const ambient = new THREE.AmbientLight(0xffffff, 0.35);
       scene.add(ambient);
-      const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.4);
       keyLight.position.set(5, 10, 7);
       keyLight.castShadow = true;
+      keyLight.shadow.mapSize.set(2048, 2048);
+      keyLight.shadow.bias = -0.0002;
+      keyLightRef.current = keyLight;
       scene.add(keyLight);
       const fillLight = new THREE.DirectionalLight(0x8888ff, 0.3);
       fillLight.position.set(-5, 5, -5);
@@ -358,6 +464,67 @@ export default function ThreeDViewerClient() {
       }
       animate();
 
+      // ── Paint directly on the 3D model (raycast → UV → draw on the texture) ──
+      const raycaster = new THREE.Raycaster();
+      const ndc = new THREE.Vector2();
+      let last3D: { x: number; y: number } | null = null;
+      const paint3D = (clientX: number, clientY: number) => {
+        const cam = cameraRef.current;
+        const rootObj = rootRef.current;
+        const entry = paint2DRef.current;
+        if (!cam || !rootObj || !entry) return;
+        const rect = renderer.domElement.getBoundingClientRect();
+        ndc.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+        ndc.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+        raycaster.setFromCamera(ndc, cam);
+        const hits = raycaster.intersectObject(rootObj, true);
+        if (!hits.length || !hits[0].uv) return;
+        const { canvas, ctx, tex } = entry;
+        const u = hits[0].uv!.x;
+        const v = hits[0].uv!.y;
+        const x = u * canvas.width;
+        const y = (tex.flipY ? 1 - v : v) * canvas.height;
+        const size = paintRef.current.size;
+        ctx.fillStyle = paintRef.current.color;
+        // Connect strokes only within the same UV island (avoid lines across seams)
+        if (last3D) {
+          const d = Math.hypot(x - last3D.x, y - last3D.y);
+          if (d < canvas.width * 0.08) {
+            ctx.strokeStyle = paintRef.current.color;
+            ctx.lineWidth = size * 2;
+            ctx.lineCap = "round";
+            ctx.beginPath();
+            ctx.moveTo(last3D.x, last3D.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+          }
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+        last3D = { x, y };
+        tex.needsUpdate = true;
+      };
+      const pd3 = (e: PointerEvent) => {
+        if (!paintRef.current.mode) return;
+        painting3DRef.current = true;
+        last3D = null;
+        paint3D(e.clientX, e.clientY);
+      };
+      const pm3 = (e: PointerEvent) => {
+        if (!paintRef.current.mode || !painting3DRef.current) return;
+        paint3D(e.clientX, e.clientY);
+      };
+      const pu3 = () => {
+        if (!painting3DRef.current) return;
+        painting3DRef.current = false;
+        last3D = null;
+        paintSaveRef.current?.();
+      };
+      renderer.domElement.addEventListener("pointerdown", pd3);
+      renderer.domElement.addEventListener("pointermove", pm3);
+      window.addEventListener("pointerup", pu3);
+
       const ro = new ResizeObserver(() => {
         if (!mountRef.current || !cameraRef.current || !rendererRef.current)
           return;
@@ -371,6 +538,9 @@ export default function ThreeDViewerClient() {
 
       return () => {
         ro.disconnect();
+        renderer.domElement.removeEventListener("pointerdown", pd3);
+        renderer.domElement.removeEventListener("pointermove", pm3);
+        window.removeEventListener("pointerup", pu3);
       };
     })();
 
@@ -388,6 +558,348 @@ export default function ThreeDViewerClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // ── Live material sync ────────────────────────────────────────────────────
+  // Applies the appearance controls to the current mesh, and re-applies them
+  // whenever a new file loads (stats changes on load). No THREE import needed:
+  // material.color is a THREE.Color with a .set(cssString) method.
+  useEffect(() => {
+    const list = partsRef.current;
+    if (!list.length) return;
+    const single = list.length <= 1;
+    for (const { mesh } of list) {
+      const m = mesh.material as import("three").MeshStandardMaterial;
+      if (!m) continue;
+      m.wireframe = wireframe;
+      m.metalness = metalness;
+      m.roughness = roughness;
+      // Global color only applies to single-part models. Multi-part colors are
+      // managed per-part by the Parts panel, so we never override them here.
+      if (single) {
+        m.vertexColors = false;
+        m.color.set(matColor);
+      }
+      m.needsUpdate = true;
+    }
+    // NOTE: intentionally NOT keyed on `stats` (i.e. not on load) so imported
+    // GLB/OBJ materials (their real textures/colors) are preserved on load and
+    // only overridden when the user actually touches a Material control.
+  }, [matColor, wireframe, metalness, roughness]);
+
+  // ── Ground shadow + grid visibility ─────────────────────────────────────────
+  useEffect(() => {
+    if (groundRef.current) groundRef.current.visible = groundShadow;
+    if (gridRef.current) gridRef.current.visible = showGrid;
+  }, [groundShadow, showGrid, stats]);
+
+  // ── Custom texture (mapped onto every part; color picker tints it) ──────────
+  useEffect(() => {
+    const THREE = threeRef.current;
+    const list = partsRef.current;
+    if (!THREE || !list.length) return;
+
+    if (!textureUrl) {
+      // Remove the CUSTOM texture and restore the model's own baked map. If we
+      // never replaced it, leave it untouched (this is the bug fix: previously
+      // this stripped the GLB's own texture on load).
+      for (const { mesh } of list) {
+        const m = mesh.material as import("three").MeshStandardMaterial;
+        if (m && origMapsRef.current.has(mesh.uuid)) {
+          m.map = origMapsRef.current.get(mesh.uuid) ?? null;
+          origMapsRef.current.delete(mesh.uuid);
+          m.needsUpdate = true;
+        }
+      }
+      return;
+    }
+
+    new THREE.TextureLoader().load(textureUrl, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.RepeatWrapping;
+      for (const { mesh } of list) {
+        ensureUV(mesh.geometry, THREE);
+        const m = mesh.material as import("three").MeshStandardMaterial;
+        if (m) {
+          if (!origMapsRef.current.has(mesh.uuid)) {
+            origMapsRef.current.set(mesh.uuid, m.map ?? null);
+          }
+          m.map = tex;
+          m.needsUpdate = true;
+        }
+      }
+    });
+  }, [textureUrl]);
+
+  // Keep brush settings current for the (once-attached) canvas handlers, and
+  // disable orbit while in paint mode so dragging on the 3D model paints it.
+  useEffect(() => {
+    paintRef.current = { mode: paintMode, color: paintColor, size: brushSize };
+    const controls = controlsRef.current as unknown as { enabled: boolean } | null;
+    if (controls) controls.enabled = !paintMode;
+  }, [paintMode, paintColor, brushSize]);
+
+  // ── 2D texture editor: a flat canvas you draw on = the model's live texture ──
+  useEffect(() => {
+    const THREE = threeRef.current;
+    const host = paint2DHostRef.current;
+    const mesh = currentMeshRef.current;
+    if (!paintMode || !THREE || !host || !mesh) return;
+    const m = mesh.material as import("three").MeshStandardMaterial;
+    if (!m) return;
+
+    const SIZE = 1024;
+    const flip = m.map ? m.map.flipY : false;
+
+    // Wrapper stacks the paint canvas + a UV-guide overlay on top.
+    const wrap = document.createElement("div");
+    wrap.style.position = "relative";
+    wrap.style.width = "100%";
+
+    const canvas = document.createElement("canvas");
+    canvas.width = SIZE;
+    canvas.height = SIZE;
+    canvas.style.width = "100%";
+    canvas.style.aspectRatio = "1 / 1";
+    canvas.style.display = "block";
+    canvas.style.cursor = "crosshair";
+    canvas.style.touchAction = "none";
+    canvas.style.borderRadius = "8px";
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Seed the canvas from the model's current texture so you draw over it.
+    const img = m.map?.image as CanvasImageSource | undefined;
+    let seeded = false;
+    if (img) {
+      try {
+        ctx.drawImage(img, 0, 0, SIZE, SIZE);
+        seeded = true;
+      } catch {
+        seeded = false;
+      }
+    }
+    if (!seeded) {
+      ctx.fillStyle = "#" + m.color.getHexString();
+      ctx.fillRect(0, 0, SIZE, SIZE);
+    }
+
+    ensureUV(mesh.geometry, THREE);
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.flipY = flip;
+    if (!origMapsRef.current.has(mesh.uuid)) {
+      origMapsRef.current.set(mesh.uuid, m.map ?? null);
+    }
+    m.map = tex;
+    m.color.set("#ffffff");
+    m.needsUpdate = true;
+    paint2DRef.current = { canvas, ctx, tex };
+
+    // Persistence: restore a previously saved drawing for this file.
+    const storeKey = `sx3d_paint_${fileName ?? "model"}`;
+    try {
+      const saved = localStorage.getItem(storeKey);
+      if (saved) {
+        const im = new Image();
+        im.onload = () => {
+          ctx.drawImage(im, 0, 0, SIZE, SIZE);
+          tex.needsUpdate = true;
+        };
+        im.src = saved;
+      }
+    } catch {}
+
+    // UV-guide overlay: draw the unwrapped mesh so you SEE where each area maps.
+    const overlay = document.createElement("canvas");
+    overlay.width = SIZE;
+    overlay.height = SIZE;
+    overlay.style.position = "absolute";
+    overlay.style.inset = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.cursor = "crosshair";
+    overlay.style.touchAction = "none";
+    overlay.style.borderRadius = "8px";
+    const octx = overlay.getContext("2d");
+    const g = mesh.geometry;
+    const uv = g.getAttribute("uv");
+    if (octx && uv) {
+      octx.strokeStyle = "rgba(99,102,241,0.30)";
+      octx.lineWidth = 0.6;
+      octx.beginPath();
+      const px = (i: number) => uv.getX(i) * SIZE;
+      const py = (i: number) => (flip ? 1 - uv.getY(i) : uv.getY(i)) * SIZE;
+      const idx = g.index;
+      const tri = (a: number, b: number, c: number) => {
+        octx.moveTo(px(a), py(a));
+        octx.lineTo(px(b), py(b));
+        octx.lineTo(px(c), py(c));
+        octx.lineTo(px(a), py(a));
+      };
+      const count = idx ? idx.count : uv.count;
+      for (let i = 0; i < count; i += 3) {
+        if (idx) tri(idx.getX(i), idx.getX(i + 1), idx.getX(i + 2));
+        else tri(i, i + 1, i + 2);
+      }
+      octx.stroke();
+    }
+
+    wrap.appendChild(canvas);
+    wrap.appendChild(overlay);
+    host.innerHTML = "";
+    host.appendChild(wrap);
+
+    let saveTimer: ReturnType<typeof setTimeout> | undefined;
+    const save = () => {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        try {
+          localStorage.setItem(storeKey, canvas.toDataURL("image/png"));
+        } catch {}
+      }, 600);
+    };
+    paintSaveRef.current = save; // let 3D painting trigger a save too
+    // Events are captured on the overlay (topmost); we draw onto the paint
+    // canvas below. Same size/position, so coordinates match 1:1.
+    const toXY = (e: PointerEvent) => {
+      const r = overlay.getBoundingClientRect();
+      return {
+        x: ((e.clientX - r.left) / r.width) * SIZE,
+        y: ((e.clientY - r.top) / r.height) * SIZE,
+      };
+    };
+    const stamp = (x: number, y: number) => {
+      ctx.fillStyle = paintRef.current.color;
+      ctx.beginPath();
+      ctx.arc(x, y, paintRef.current.size, 0, Math.PI * 2);
+      ctx.fill();
+    };
+    const strokeSeg = (a: { x: number; y: number }, b: { x: number; y: number }) => {
+      ctx.strokeStyle = paintRef.current.color;
+      ctx.lineWidth = paintRef.current.size * 2;
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+      ctx.stroke();
+    };
+    const down = (e: PointerEvent) => {
+      paintingRef.current = true;
+      const p = toXY(e);
+      lastPtRef.current = p;
+      stamp(p.x, p.y);
+      tex.needsUpdate = true;
+      try {
+        overlay.setPointerCapture(e.pointerId);
+      } catch {}
+    };
+    const move = (e: PointerEvent) => {
+      if (!paintingRef.current) return;
+      const p = toXY(e);
+      if (lastPtRef.current) strokeSeg(lastPtRef.current, p);
+      stamp(p.x, p.y);
+      lastPtRef.current = p;
+      tex.needsUpdate = true;
+    };
+    const up = () => {
+      if (!paintingRef.current) return;
+      paintingRef.current = false;
+      lastPtRef.current = null;
+      save();
+    };
+    overlay.addEventListener("pointerdown", down);
+    overlay.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+
+    return () => {
+      clearTimeout(saveTimer);
+      overlay.removeEventListener("pointerdown", down);
+      overlay.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      if (host.contains(wrap)) host.removeChild(wrap);
+      paint2DRef.current = null;
+      paintSaveRef.current = null;
+    };
+  }, [paintMode, stats, fileName]);
+
+  // ── Environment (HDRI lighting/reflections/backdrop) + plain backdrop ────────
+  // One coherent effect so environment and background never fight each other.
+  useEffect(() => {
+    const THREE = threeRef.current;
+    const scene = sceneRef.current;
+    const renderer = rendererRef.current;
+    if (!THREE || !scene || !renderer) return;
+    let cancelled = false;
+
+    const plainBackdrop = () => {
+      if (bgMode === "studio") {
+        const c = document.createElement("canvas");
+        c.width = 16;
+        c.height = 256;
+        const ctx = c.getContext("2d");
+        if (ctx) {
+          const g = ctx.createLinearGradient(0, 0, 0, 256);
+          g.addColorStop(0, "#f5f5f8");
+          g.addColorStop(1, "#c7c7d1");
+          ctx.fillStyle = g;
+          ctx.fillRect(0, 0, 16, 256);
+        }
+        const t = new THREE.CanvasTexture(c);
+        t.colorSpace = THREE.SRGBColorSpace;
+        scene.background = t;
+      } else if (bgMode === "white") {
+        scene.background = new THREE.Color(0xffffff);
+      } else if (bgMode === "color") {
+        scene.background = new THREE.Color(bgColor);
+      } else {
+        scene.background = new THREE.Color(0x1a1a2e);
+      }
+    };
+
+    const apply = (envMap: import("three").Texture | null, bgTex: import("three").Texture | null) => {
+      if (cancelled) return;
+      scene.environment = envReflections ? envMap : null;
+      if (showEnvBg && bgTex) scene.background = bgTex;
+      else plainBackdrop();
+    };
+
+    if (env === "soft") {
+      apply(envTexRef.current, null); // procedural RoomEnvironment, no 360 backdrop
+      return;
+    }
+
+    const cached = hdriCacheRef.current[env];
+    if (cached) {
+      apply(cached.env, cached.bg);
+      return;
+    }
+
+    setEnvLoading(true);
+    (async () => {
+      const { RGBELoader } = await import(
+        "three/examples/jsm/loaders/RGBELoader.js"
+      );
+      new RGBELoader().load(
+        `/hdri/${env}.hdr`,
+        (tex) => {
+          if (cancelled) return;
+          const pmrem = new THREE.PMREMGenerator(renderer);
+          const envMap = pmrem.fromEquirectangular(tex).texture;
+          tex.mapping = THREE.EquirectangularReflectionMapping;
+          hdriCacheRef.current[env] = { env: envMap, bg: tex };
+          setEnvLoading(false);
+          apply(envMap, tex);
+        },
+        undefined,
+        () => setEnvLoading(false)
+      );
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [env, envReflections, showEnvBg, bgMode, bgColor, stats]);
+
   // ── Load single file into viewer ──────────────────────────────────────────
   const loadFile = useCallback(async (file: File) => {
     setLoading(true);
@@ -399,106 +911,179 @@ export default function ThreeDViewerClient() {
       const THREE = await import("three");
       const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
 
-      let geometry: import("three").BufferGeometry | null = null;
+      let root: import("three").Object3D | null = null;
 
       if (ext === "stl") {
         const { STLLoader } = await import(
           "three/examples/jsm/loaders/STLLoader.js"
         );
-        const buffer = await file.arrayBuffer();
-        geometry = new STLLoader().parse(buffer);
+        const g = new STLLoader().parse(await file.arrayBuffer());
+        g.computeVertexNormals();
+        root = new THREE.Mesh(
+          g,
+          new THREE.MeshStandardMaterial({
+            color: 0x8888ff,
+            metalness: 0.2,
+            roughness: 0.5,
+            side: THREE.DoubleSide,
+          })
+        );
+      } else if (ext === "ply") {
+        const { PLYLoader } = await import(
+          "three/examples/jsm/loaders/PLYLoader.js"
+        );
+        const g = new PLYLoader().parse(await file.arrayBuffer());
+        g.computeVertexNormals();
+        root = new THREE.Mesh(
+          g,
+          new THREE.MeshStandardMaterial({
+            color: 0x8888ff,
+            metalness: 0.2,
+            roughness: 0.5,
+            side: THREE.DoubleSide,
+            vertexColors: !!g.getAttribute("color"),
+          })
+        );
       } else if (ext === "obj") {
         const { OBJLoader } = await import(
           "three/examples/jsm/loaders/OBJLoader.js"
         );
-        const text = await file.text();
-        const group = new OBJLoader().parse(text);
-        group.traverse((child) => {
-          if (!geometry && (child as import("three").Mesh).isMesh) {
-            geometry = (
-              (child as import("three").Mesh)
-                .geometry as import("three").BufferGeometry
-            ).clone();
-          }
-        });
+        root = new OBJLoader().parse(await file.text());
       } else if (ext === "glb" || ext === "gltf") {
         const { GLTFLoader } = await import(
           "three/examples/jsm/loaders/GLTFLoader.js"
         );
-        const buffer = await file.arrayBuffer();
+        const { DRACOLoader } = await import(
+          "three/examples/jsm/loaders/DRACOLoader.js"
+        );
         const loader = new GLTFLoader();
+        // Web-optimized GLBs are usually Draco-compressed (and sometimes use
+        // meshopt), so wire both decoders or the geometry fails to load.
+        const draco = new DRACOLoader();
+        draco.setDecoderPath("/draco/gltf/");
+        loader.setDRACOLoader(draco);
+        try {
+          const { MeshoptDecoder } = await import(
+            "three/examples/jsm/libs/meshopt_decoder.module.js"
+          );
+          loader.setMeshoptDecoder(
+            MeshoptDecoder as unknown as Parameters<
+              typeof loader.setMeshoptDecoder
+            >[0]
+          );
+        } catch {
+          // meshopt is optional
+        }
+        const buffer = await file.arrayBuffer();
         const gltf = await new Promise<
           import("three/examples/jsm/loaders/GLTFLoader.js").GLTF
         >((resolve, reject) => {
           loader.parse(buffer, "", resolve, reject);
         });
-        // Bake node transforms into the geometry — GLB/GLTF often store the
-        // mesh scale/rotation/position on the node, not the geometry. Ignoring
-        // it renders the model at the wrong scale/orientation.
         gltf.scene.updateMatrixWorld(true);
-        gltf.scene.traverse((child) => {
-          if (!geometry && (child as import("three").Mesh).isMesh) {
-            const g = (
-              (child as import("three").Mesh)
-                .geometry as import("three").BufferGeometry
-            ).clone();
-            g.applyMatrix4((child as import("three").Mesh).matrixWorld);
-            geometry = g;
-          }
-        });
-      } else if (ext === "ply") {
-        const { PLYLoader } = await import(
-          "three/examples/jsm/loaders/PLYLoader.js"
-        );
-        const buffer = await file.arrayBuffer();
-        geometry = new PLYLoader().parse(buffer);
+        root = gltf.scene;
       } else {
         throw new Error(
           `Unsupported format: .${ext}. Supported: STL, OBJ, GLB, GLTF, PLY.`
         );
       }
 
-      if (!geometry) throw new Error("Could not extract geometry from the file.");
+      if (!root) throw new Error("Could not load the 3D file.");
 
-      (geometry as import("three").BufferGeometry).computeVertexNormals();
-      const s = computeStats(geometry as import("three").BufferGeometry);
-      geometryRef.current = geometry as import("three").BufferGeometry;
-      setStats(s);
-
-      (geometry as import("three").BufferGeometry).center();
-
-      if (currentMeshRef.current && sceneRef.current) {
-        sceneRef.current.remove(currentMeshRef.current);
-        currentMeshRef.current.geometry.dispose();
-        if (Array.isArray(currentMeshRef.current.material)) {
-          currentMeshRef.current.material.forEach((m) => m.dispose());
+      // Collect every mesh as a colorable "part". Clone each material so
+      // recoloring one part never affects another, and force MeshStandardMaterial
+      // so all parts light consistently under the environment.
+      const collected: { id: string; mesh: import("three").Mesh }[] = [];
+      root.traverse((child) => {
+        const m = child as import("three").Mesh;
+        if (!m.isMesh) return;
+        if (!m.geometry.getAttribute("normal")) m.geometry.computeVertexNormals();
+        const srcMat = Array.isArray(m.material) ? m.material[0] : m.material;
+        let mat: import("three").MeshStandardMaterial;
+        if (
+          srcMat &&
+          (srcMat as import("three").MeshStandardMaterial).isMeshStandardMaterial
+        ) {
+          mat = (srcMat as import("three").MeshStandardMaterial).clone();
         } else {
-          (
-            currentMeshRef.current.material as import("three").Material
-          ).dispose();
+          const hex =
+            (srcMat as unknown as { color?: import("three").Color })?.color?.getHex?.() ??
+            0x8888ff;
+          mat = new THREE.MeshStandardMaterial({
+            color: hex,
+            metalness: 0.2,
+            roughness: 0.5,
+          });
         }
-      }
-
-      const material = new THREE.MeshStandardMaterial({
-        color: 0x8888ff,
-        metalness: 0.2,
-        roughness: 0.5,
-        side: THREE.DoubleSide,
+        mat.side = THREE.DoubleSide;
+        m.material = mat;
+        m.castShadow = true;
+        m.receiveShadow = true;
+        if (!m.name) m.name = `Part ${collected.length + 1}`;
+        collected.push({ id: `p${collected.length}`, mesh: m });
       });
-      const mesh = new THREE.Mesh(
-        geometry as import("three").BufferGeometry,
-        material
+
+      if (!collected.length) throw new Error("No mesh found in the file.");
+
+      // Swap the new model into the scene.
+      if (rootRef.current && sceneRef.current) {
+        sceneRef.current.remove(rootRef.current);
+      }
+      rootRef.current = root;
+      partsRef.current = collected;
+      currentMeshRef.current = collected[0].mesh;
+      geometryRef.current = collected[0].mesh.geometry;
+      sceneRef.current?.add(root);
+
+      // Reset per-model paint/texture state so a new file starts clean.
+      paint2DRef.current = null;
+      origMapsRef.current.clear();
+      setPaintMode(false);
+      setTextureUrl(null);
+
+      // Center the whole model at the origin.
+      const box0 = new THREE.Box3().setFromObject(root);
+      const center0 = box0.getCenter(new THREE.Vector3());
+      root.position.sub(center0);
+
+      // Aggregate stats across all parts.
+      let aggTris = 0,
+        aggVerts = 0,
+        aggVol = 0,
+        aggArea = 0;
+      for (const part of collected) {
+        const st = computeStats(part.mesh.geometry);
+        aggTris += st.triangles;
+        aggVerts += st.vertices;
+        aggVol += st.volume;
+        aggArea += st.surfaceArea;
+      }
+      const sizeBox = new THREE.Box3().setFromObject(root);
+      const sizeV = sizeBox.getSize(new THREE.Vector3());
+      setStats({
+        triangles: aggTris,
+        vertices: aggVerts,
+        bbX: sizeV.x,
+        bbY: sizeV.y,
+        bbZ: sizeV.z,
+        volume: aggVol,
+        surfaceArea: aggArea,
+      });
+
+      // Publish the colorable parts list for the configurator UI.
+      setParts(
+        collected.map((p) => ({
+          id: p.id,
+          name: p.mesh.name,
+          color:
+            "#" +
+            (p.mesh.material as import("three").MeshStandardMaterial).color.getHexString(),
+        }))
       );
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      currentMeshRef.current = mesh;
-      sceneRef.current?.add(mesh);
 
       if (cameraRef.current && controlsRef.current) {
-        const box = new THREE.Box3().setFromObject(mesh);
-        const size = new THREE.Vector3();
-        box.getSize(size);
-        const maxDim = Math.max(size.x, size.y, size.z);
+        const maxDim = Math.max(sizeV.x, sizeV.y, sizeV.z) || 1;
+        maxDimRef.current = maxDim;
         const fov = cameraRef.current.fov * (Math.PI / 180);
         const cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.8;
         cameraRef.current.position.set(cameraZ * 0.6, cameraZ * 0.5, cameraZ);
@@ -507,12 +1092,44 @@ export default function ThreeDViewerClient() {
           controlsRef.current as unknown as import("three/examples/jsm/controls/OrbitControls.js").OrbitControls
         ).target.set(0, 0, 0);
         controlsRef.current.update();
+
+        const minY = -sizeV.y / 2;
+        if (groundRef.current) {
+          groundRef.current.position.y = minY;
+          groundRef.current.scale.set(maxDim * 6, maxDim * 6, 1);
+        }
+        if (gridRef.current) {
+          gridRef.current.position.y = minY;
+          gridRef.current.scale.setScalar(Math.max(maxDim / 10, 0.0001));
+        }
+        if (keyLightRef.current) {
+          keyLightRef.current.position.set(maxDim * 2, maxDim * 4, maxDim * 3);
+          const sc = keyLightRef.current.shadow
+            .camera as import("three").OrthographicCamera;
+          const d = maxDim * 1.5;
+          sc.left = -d;
+          sc.right = d;
+          sc.top = d;
+          sc.bottom = -d;
+          sc.near = Math.max(maxDim * 0.01, 0.001);
+          sc.far = maxDim * 30;
+          sc.updateProjectionMatrix();
+        }
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Failed to load 3D file.");
     } finally {
       setLoading(false);
     }
+  }, []);
+
+  // ── Configurator: recolor a single part ─────────────────────────────────────
+  const setPartColor = useCallback((id: string, hex: string) => {
+    const part = partsRef.current.find((p) => p.id === id);
+    if (part) {
+      (part.mesh.material as import("three").MeshStandardMaterial).color.set(hex);
+    }
+    setParts((prev) => prev.map((p) => (p.id === id ? { ...p, color: hex } : p)));
   }, []);
 
   // ── Drag and drop (single-file viewer) ───────────────────────────────────
@@ -540,6 +1157,58 @@ export default function ThreeDViewerClient() {
   );
 
   // ── Export single model ───────────────────────────────────────────────────
+  // ── Export the UV template PNG (base texture + UV borders) for Photoshop ─────
+  const exportUVTemplate = useCallback(() => {
+    const THREE = threeRef.current;
+    const mesh = currentMeshRef.current;
+    if (!THREE || !mesh) return;
+    const g = mesh.geometry;
+    ensureUV(g, THREE);
+    const uv = g.getAttribute("uv");
+    if (!uv) return;
+    const m = mesh.material as import("three").MeshStandardMaterial;
+    const SIZE = 2048;
+    const canvas = document.createElement("canvas");
+    canvas.width = SIZE;
+    canvas.height = SIZE;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, SIZE, SIZE);
+    const img = m.map?.image as CanvasImageSource | undefined;
+    if (img) {
+      try {
+        ctx.drawImage(img, 0, 0, SIZE, SIZE);
+      } catch {}
+    }
+    // UV borders (guide) on top
+    const flip = m.map ? m.map.flipY : false;
+    const px = (i: number) => uv.getX(i) * SIZE;
+    const py = (i: number) => (flip ? 1 - uv.getY(i) : uv.getY(i)) * SIZE;
+    ctx.strokeStyle = "rgba(0,0,0,0.55)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    const idx = g.index;
+    const count = idx ? idx.count : uv.count;
+    for (let i = 0; i < count; i += 3) {
+      const a = idx ? idx.getX(i) : i;
+      const b = idx ? idx.getX(i + 1) : i + 1;
+      const c = idx ? idx.getX(i + 2) : i + 2;
+      ctx.moveTo(px(a), py(a));
+      ctx.lineTo(px(b), py(b));
+      ctx.lineTo(px(c), py(c));
+      ctx.lineTo(px(a), py(a));
+    }
+    ctx.stroke();
+    const url = canvas.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = url;
+    a.download =
+      (fileName?.replace(/\.[^.]+$/, "") || "model") + "_uv_template.png";
+    a.click();
+    trackEvent("3d_uv_template_export");
+  }, [fileName]);
+
   const exportModel = useCallback(
     async (format: ExportFormat) => {
       const geo = geometryRef.current;
@@ -549,7 +1218,9 @@ export default function ThreeDViewerClient() {
       try {
         const THREE = await import("three");
         const scene = new THREE.Scene();
-        scene.add(mesh.clone());
+        // Export the whole model (all parts, with their per-part colors), not
+        // just the primary mesh — so a recoloured configurator exports correctly.
+        scene.add((rootRef.current ?? mesh).clone());
         let blob: Blob;
 
         if (format === "stl") {
@@ -626,6 +1297,60 @@ export default function ThreeDViewerClient() {
       URL.revokeObjectURL(url);
     }, "image/png");
   }, [fileName]);
+
+  // High-resolution render: renders the current view at the chosen resolution,
+  // optional transparent background (for product shots), then restores the view.
+  const renderImage = useCallback(() => {
+    const renderer = rendererRef.current;
+    const scene = sceneRef.current;
+    const camera = cameraRef.current;
+    const mount = mountRef.current;
+    if (!renderer || !scene || !camera) return;
+    setRendering(true);
+    const dispW = mount?.clientWidth || 786;
+    const dispH = mount?.clientHeight || 420;
+    const outW = renderRes;
+    const outH = Math.max(1, Math.round(renderRes * (dispH / dispW)));
+    const oldPR = renderer.getPixelRatio();
+    const oldBg = scene.background;
+    const oldGrid = gridRef.current?.visible ?? true;
+    const oldAspect = camera.aspect;
+
+    renderer.setPixelRatio(1);
+    renderer.setSize(outW, outH, false);
+    camera.aspect = outW / outH;
+    camera.updateProjectionMatrix();
+    if (gridRef.current) gridRef.current.visible = false; // clean product render
+    if (renderTransparent) {
+      scene.background = null;
+      renderer.setClearAlpha(0);
+    }
+    renderer.render(scene, camera);
+
+    renderer.domElement.toBlob((blob) => {
+      if (blob) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${(fileName ?? "model").replace(/\.[^.]+$/, "")}-render.png`;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+      // Restore the live view.
+      renderer.setPixelRatio(oldPR);
+      renderer.setSize(dispW, dispH, false);
+      camera.aspect = oldAspect;
+      camera.updateProjectionMatrix();
+      scene.background = oldBg;
+      renderer.setClearAlpha(1);
+      if (gridRef.current) gridRef.current.visible = oldGrid;
+      setRendering(false);
+    }, "image/png");
+    trackEvent("3d_render_export", {
+      res: renderRes,
+      transparent: renderTransparent,
+    });
+  }, [renderRes, renderTransparent, fileName]);
 
   // ── Reset view ────────────────────────────────────────────────────────────
   const resetView = useCallback(() => {
@@ -938,9 +1663,10 @@ export default function ThreeDViewerClient() {
 
       {/* ── VIEWER MODE ── */}
       {!batchMode && (
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-4">
-          {/* Left: viewer + drop zone */}
-          <div className="space-y-3">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-4 lg:items-start">
+          {/* Left: viewer + drop zone — sticky so it stays in view while the
+              right-hand tool panels scroll. */}
+          <div className="space-y-3 lg:sticky lg:top-4 lg:self-start">
             {/* Drop zone is rendered as an overlay inside the persistent mount below */}
 
             {/* Toolbar — only once a file is loaded */}
@@ -1083,14 +1809,9 @@ export default function ThreeDViewerClient() {
 
           {/* Right: stats panel */}
           <div className="space-y-3">
-            <div className="rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] overflow-hidden">
-              <div className="flex items-center justify-between px-4 py-3 border-b border-[#E5E5E5] dark:border-[#2A2A2A]">
-                <div className="flex items-center gap-2">
-                  <Ruler className="h-4 w-4 text-[#6366F1]" strokeWidth={1.5} />
-                  <span className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">
-                    Mesh Stats
-                  </span>
-                </div>
+            <CollapsibleSection
+              title="Mesh Stats"
+              headerRight={
                 <div className="flex rounded-lg overflow-hidden border border-[#E5E5E5] dark:border-[#2A2A2A]">
                   {(["mm", "inch"] as Unit[]).map((u) => (
                     <button
@@ -1106,8 +1827,9 @@ export default function ThreeDViewerClient() {
                     </button>
                   ))}
                 </div>
-              </div>
-              <div className="p-4 space-y-3">
+              }
+            >
+              <div className="space-y-3">
                 {stats ? (
                   <>
                     <StatRow
@@ -1136,13 +1858,285 @@ export default function ThreeDViewerClient() {
                   </div>
                 )}
               </div>
-            </div>
+            </CollapsibleSection>
+
+            {/* Parts configurator — recolor each part independently (multi-part) */}
+            {parts.length > 1 && (
+              <CollapsibleSection title={`Parts (${parts.length})`}>
+                <div className="space-y-2 max-h-64 overflow-y-auto">
+                  {parts.map((p) => (
+                    <div key={p.id} className="flex items-center justify-between gap-2">
+                      <span className="text-xs text-[#737373] dark:text-[#A3A3A3] truncate">
+                        {p.name}
+                      </span>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <span
+                          className="h-4 w-4 rounded-full border border-[#E5E5E5] dark:border-[#2A2A2A]"
+                          style={{ backgroundColor: p.color }}
+                        />
+                        <input
+                          type="color"
+                          value={p.color}
+                          onChange={(e) => setPartColor(p.id, e.target.value)}
+                          aria-label={`Color ${p.name}`}
+                          className="h-6 w-6 rounded cursor-pointer bg-transparent border border-[#E5E5E5] dark:border-[#2A2A2A] p-0"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-[10px] text-[#A3A3A3] leading-relaxed">
+                  Export as GLB to keep the colors. STL and OBJ do not store color.
+                </p>
+              </CollapsibleSection>
+            )}
+
+            {/* Material / appearance — only once a mesh is loaded */}
+            {fileName && (
+              <CollapsibleSection title="Material" defaultOpen={false}>
+                {/* Color */}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">Color</span>
+                  <div className="flex items-center gap-1.5">
+                    {["#8888ff", "#e5e5e5", "#f97316", "#22c55e", "#ef4444", "#111111"].map((c) => (
+                      <button
+                        key={c}
+                        onClick={() => setMatColor(c)}
+                        aria-label={`Set color ${c}`}
+                        className={`h-5 w-5 rounded-full border transition-transform hover:scale-110 ${
+                          matColor.toLowerCase() === c ? "ring-2 ring-[#6366F1] ring-offset-1 dark:ring-offset-[#1E1E1E]" : "border-[#E5E5E5] dark:border-[#2A2A2A]"
+                        }`}
+                        style={{ backgroundColor: c }}
+                      />
+                    ))}
+                    <input
+                      type="color"
+                      value={matColor}
+                      onChange={(e) => setMatColor(e.target.value)}
+                      aria-label="Custom color"
+                      className="h-5 w-5 rounded cursor-pointer bg-transparent border border-[#E5E5E5] dark:border-[#2A2A2A] p-0"
+                    />
+                  </div>
+                </div>
+
+                {/* Wireframe */}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">Wireframe</span>
+                  <button
+                    onClick={() => setWireframe((w) => !w)}
+                    role="switch"
+                    aria-checked={wireframe}
+                    className={`relative h-5 w-9 rounded-full transition-colors ${wireframe ? "bg-[#6366F1]" : "bg-[#E5E5E5] dark:bg-[#3A3A3A]"}`}
+                  >
+                    <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${wireframe ? "translate-x-4" : "translate-x-0.5"}`} />
+                  </button>
+                </div>
+
+                {/* Metalness */}
+                <div className="mb-3">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">Metalness</span>
+                    <span className="text-[10px] font-mono text-[#A3A3A3]">{metalness.toFixed(2)}</span>
+                  </div>
+                  <input
+                    type="range" min={0} max={1} step={0.05} value={metalness}
+                    onChange={(e) => setMetalness(parseFloat(e.target.value))}
+                    className="w-full accent-[#6366F1]"
+                  />
+                </div>
+
+                {/* Roughness */}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">Roughness</span>
+                    <span className="text-[10px] font-mono text-[#A3A3A3]">{roughness.toFixed(2)}</span>
+                  </div>
+                  <input
+                    type="range" min={0} max={1} step={0.05} value={roughness}
+                    onChange={(e) => setRoughness(parseFloat(e.target.value))}
+                    className="w-full accent-[#6366F1]"
+                  />
+                </div>
+              </CollapsibleSection>
+            )}
+
+            {/* Scene realism — environment reflections + contact shadow */}
+            {fileName && (
+              <CollapsibleSection title="Scene" defaultOpen={false}>
+                {([
+                  ["Reflections", envReflections, setEnvReflections],
+                  ["Ground shadow", groundShadow, setGroundShadow],
+                  ["Grid", showGrid, setShowGrid],
+                ] as const).map(([label, val, set], i) => (
+                  <div
+                    key={label}
+                    className={`flex items-center justify-between ${i < 2 ? "mb-3" : ""}`}
+                  >
+                    <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">{label}</span>
+                    <button
+                      onClick={() => set((v: boolean) => !v)}
+                      role="switch"
+                      aria-checked={val}
+                      aria-label={label}
+                      className={`relative h-5 w-9 rounded-full transition-colors ${val ? "bg-[#6366F1]" : "bg-[#E5E5E5] dark:bg-[#3A3A3A]"}`}
+                    >
+                      <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${val ? "translate-x-4" : "translate-x-0.5"}`} />
+                    </button>
+                  </div>
+                ))}
+              </CollapsibleSection>
+            )}
+
+            {/* Environment (HDRI) + backdrop */}
+            {fileName && (
+              <CollapsibleSection
+                title="Environment"
+                defaultOpen={false}
+                headerRight={
+                  envLoading ? (
+                    <span className="text-[10px] text-[#A3A3A3] animate-pulse">loading…</span>
+                  ) : undefined
+                }
+              >
+                {/* HDRI presets — each lights, reflects and can back the scene */}
+                <div className="grid grid-cols-3 gap-1.5 mb-3">
+                  {([
+                    ["soft", "Soft"],
+                    ["studio", "Studio"],
+                    ["sunset", "Sunset"],
+                    ["warehouse", "Warehouse"],
+                    ["city", "City"],
+                  ] as const).map(([mode, label]) => (
+                    <button
+                      key={mode}
+                      onClick={() => setEnv(mode)}
+                      className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-colors ${
+                        env === mode
+                          ? "border-[#6366F1] bg-[#6366F1]/10 text-[#6366F1]"
+                          : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] dark:text-[#A3A3A3] hover:border-[#6366F1]/50"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Show the HDRI as the 360 backdrop (only meaningful for real HDRIs) */}
+                {env !== "soft" && (
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">Show in background</span>
+                    <button
+                      onClick={() => setShowEnvBg((v) => !v)}
+                      role="switch"
+                      aria-checked={showEnvBg}
+                      aria-label="Show environment in background"
+                      className={`relative h-5 w-9 rounded-full transition-colors ${showEnvBg ? "bg-[#6366F1]" : "bg-[#E5E5E5] dark:bg-[#3A3A3A]"}`}
+                    >
+                      <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${showEnvBg ? "translate-x-4" : "translate-x-0.5"}`} />
+                    </button>
+                  </div>
+                )}
+
+                {/* Plain backdrop (used when the HDRI isn't shown as background) */}
+                {!(env !== "soft" && showEnvBg) && (
+                  <>
+                    <p className="text-[10px] uppercase tracking-wide text-[#A3A3A3] mb-1.5">Backdrop</p>
+                    <div className="grid grid-cols-3 gap-1.5 mb-2">
+                      {([
+                        ["studio", "Studio"],
+                        ["white", "White"],
+                        ["dark", "Dark"],
+                      ] as const).map(([mode, label]) => (
+                        <button
+                          key={mode}
+                          onClick={() => setBgMode(mode)}
+                          className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-colors ${
+                            bgMode === mode
+                              ? "border-[#6366F1] bg-[#6366F1]/10 text-[#6366F1]"
+                              : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] dark:text-[#A3A3A3] hover:border-[#6366F1]/50"
+                          }`}
+                        >
+                          {label}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">Custom color</span>
+                      <input
+                        type="color"
+                        value={bgColor}
+                        onChange={(e) => {
+                          setBgColor(e.target.value);
+                          setBgMode("color");
+                        }}
+                        aria-label="Background color"
+                        className="h-6 w-6 rounded cursor-pointer bg-transparent border border-[#E5E5E5] dark:border-[#2A2A2A] p-0"
+                      />
+                    </div>
+                  </>
+                )}
+              </CollapsibleSection>
+            )}
+
+            {/* Render — export a high-res image of the current view */}
+            {fileName && (
+              <CollapsibleSection title="Render">
+                <p className="text-[10px] uppercase tracking-wide text-[#A3A3A3] mb-1.5">
+                  Resolution
+                </p>
+                <div className="grid grid-cols-3 gap-1.5 mb-3">
+                  {([
+                    [1024, "1K"],
+                    [2048, "2K"],
+                    [4096, "4K"],
+                  ] as const).map(([res, label]) => (
+                    <button
+                      key={res}
+                      onClick={() => setRenderRes(res)}
+                      className={`px-2 py-1.5 rounded-lg text-[11px] font-medium border transition-colors ${
+                        renderRes === res
+                          ? "border-[#6366F1] bg-[#6366F1]/10 text-[#6366F1]"
+                          : "border-[#E5E5E5] dark:border-[#2A2A2A] text-[#737373] dark:text-[#A3A3A3] hover:border-[#6366F1]/50"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs text-[#737373] dark:text-[#A3A3A3]">Transparent background</span>
+                  <button
+                    onClick={() => setRenderTransparent((v) => !v)}
+                    role="switch"
+                    aria-checked={renderTransparent}
+                    aria-label="Transparent background"
+                    className={`relative h-5 w-9 rounded-full transition-colors ${renderTransparent ? "bg-[#6366F1]" : "bg-[#E5E5E5] dark:bg-[#3A3A3A]"}`}
+                  >
+                    <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white transition-transform ${renderTransparent ? "translate-x-4" : "translate-x-0.5"}`} />
+                  </button>
+                </div>
+                <button
+                  onClick={renderImage}
+                  disabled={rendering}
+                  className="flex items-center justify-center gap-1.5 w-full px-3 py-2 rounded-lg bg-[#6366F1] hover:bg-[#5457E5] text-white text-xs font-semibold transition-colors disabled:opacity-60"
+                >
+                  {rendering ? (
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                  ) : (
+                    <Camera className="h-3.5 w-3.5" strokeWidth={1.5} />
+                  )}
+                  {rendering ? "Rendering..." : "Render PNG"}
+                </button>
+                <p className="mt-2 text-[10px] text-[#A3A3A3] leading-relaxed">
+                  Renders the current angle, lighting and background. Rotate/zoom
+                  to frame it first. Transparent background is great for product
+                  shots on any page.
+                </p>
+              </CollapsibleSection>
+            )}
 
             {/* Controls guide */}
-            <div className="rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] p-4">
-              <p className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-                Controls
-              </p>
+            <CollapsibleSection title="Controls" defaultOpen={false}>
               <div className="space-y-1.5 text-xs text-[#737373] dark:text-[#A3A3A3]">
                 <div className="flex gap-2">
                   <span className="font-mono text-[10px] bg-[#F5F5F5] dark:bg-[#2A2A2A] px-1.5 py-0.5 rounded">
@@ -1163,13 +2157,10 @@ export default function ThreeDViewerClient() {
                   <span>Pan</span>
                 </div>
               </div>
-            </div>
+            </CollapsibleSection>
 
             {/* Supported formats */}
-            <div className="rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] p-4">
-              <p className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-                Supported formats
-              </p>
+            <CollapsibleSection title="Supported formats" defaultOpen={false}>
               <div className="flex flex-wrap gap-1.5">
                 {["STL", "OBJ", "GLB", "GLTF", "PLY"].map((f) => (
                   <span
@@ -1184,7 +2175,7 @@ export default function ThreeDViewerClient() {
               <p className="mt-2 text-[11px] text-[#A3A3A3] leading-relaxed">
                 Input: STL (binary and ASCII), OBJ, GLB, GLTF, PLY. Export: STL, OBJ, GLB, PLY.
               </p>
-            </div>
+            </CollapsibleSection>
           </div>
         </div>
       )}
@@ -1570,6 +2561,64 @@ export default function ThreeDViewerClient() {
 }
 
 // ── Sub-components ────────────────────────────────────────────────────────────
+
+// Give a geometry simple planar UVs when it has none (e.g. STL), so a texture
+// at least shows. Models with real UVs (most GLB/OBJ) keep their own mapping.
+function ensureUV(
+  g: import("three").BufferGeometry,
+  THREE: typeof import("three")
+) {
+  if (g.getAttribute("uv")) return;
+  g.computeBoundingBox();
+  const bb = g.boundingBox;
+  if (!bb) return;
+  const size = new THREE.Vector3();
+  bb.getSize(size);
+  const sx = size.x || 1;
+  const sy = size.y || 1;
+  const pos = g.getAttribute("position");
+  const uv = new Float32Array(pos.count * 2);
+  for (let i = 0; i < pos.count; i++) {
+    uv[i * 2] = (pos.getX(i) - bb.min.x) / sx;
+    uv[i * 2 + 1] = (pos.getY(i) - bb.min.y) / sy;
+  }
+  g.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
+}
+
+function CollapsibleSection({
+  title,
+  defaultOpen = true,
+  headerRight,
+  children,
+}: {
+  title: string;
+  defaultOpen?: boolean;
+  headerRight?: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+  return (
+    <div className="rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E]">
+      <div className="flex items-center justify-between gap-2 p-4">
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="flex items-center gap-2 text-left flex-1 min-w-0"
+          aria-expanded={open}
+        >
+          <ChevronDown
+            className={`h-3.5 w-3.5 text-[#A3A3A3] shrink-0 transition-transform ${open ? "" : "-rotate-90"}`}
+            strokeWidth={2}
+          />
+          <span className="text-xs font-semibold text-[#171717] dark:text-[#E5E5E5] truncate">
+            {title}
+          </span>
+        </button>
+        {headerRight}
+      </div>
+      {open && <div className="px-4 pb-4 -mt-1">{children}</div>}
+    </div>
+  );
+}
 
 function StatRow({ label, value }: { label: string; value: string }) {
   return (

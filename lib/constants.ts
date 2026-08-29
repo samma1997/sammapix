@@ -5,7 +5,32 @@ import { ImageFormat } from "@/types/image";
 export const MAX_FILE_SIZE_FREE = 20 * 1024 * 1024; // 20MB
 export const MAX_FILE_SIZE_PRO = 50 * 1024 * 1024; // 50MB
 export const MAX_FILES_FREE = 20;
+export const MAX_FILES_REGISTERED = 50; // free account (signed-in, non-Pro)
 export const MAX_FILES_PRO = 500;
+
+/**
+ * Resolve the effective file-limit for the current user tier.
+ *
+ * Tiers (additive, never lowers the tool-specific freeCap):
+ *   anonymous  → freeCap  (unchanged, keeps one-shot Google traffic unblocked)
+ *   registered → Math.min(proCap, Math.max(freeCap, MAX_FILES_REGISTERED))
+ *   Pro        → proCap
+ */
+export function resolveFileLimit({
+  isPro,
+  isAuthenticated,
+  freeCap,
+  proCap,
+}: {
+  isPro: boolean;
+  isAuthenticated: boolean;
+  freeCap: number;
+  proCap: number;
+}): number {
+  if (isPro) return proCap;
+  if (isAuthenticated) return Math.min(proCap, Math.max(freeCap, MAX_FILES_REGISTERED));
+  return freeCap;
+}
 
 // Flip to true the day the Chrome extension is published on the Web Store.
 // Controls whether the "Get the extension" navbar button and post-action prompts show.
@@ -26,6 +51,9 @@ export const MAX_HEIC_PRO = 500;
 // AI limits (unified pool: ALL AI tools share a single daily counter per user)
 export const AI_OPS_FREE_PER_DAY = 10;
 export const AI_OPS_PRO_PER_DAY = 200;
+
+// One-time welcome gift: AI credits granted on first sign-in (incentive to register).
+export const SIGNUP_BONUS_CREDITS = 20;
 
 // Legacy aliases removed- all AI endpoints now share the unified AI_OPS pool
 

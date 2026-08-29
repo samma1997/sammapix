@@ -50,6 +50,7 @@ export default function SignInPage() {
     ClientSafeProvider
   > | null>(null);
   const [loading, setLoading] = useState<string | null>(null);
+  const [devEmail, setDevEmail] = useState("lucasamm97@gmail.com");
 
   useEffect(() => {
     getProviders().then(setProviders);
@@ -122,6 +123,36 @@ export default function SignInPage() {
             </>
           )}
         </div>
+
+        {/* Dev-only login — appare solo in locale (provider dev-login assente in produzione) */}
+        {providers?.["dev-login"] && (
+          <div className="mt-4 rounded-lg border border-dashed border-amber-300 dark:border-amber-700/50 bg-amber-50/50 dark:bg-amber-950/20 p-3">
+            <p className="text-[11px] font-medium text-amber-700 dark:text-amber-500 mb-2">
+              Dev login (solo locale)
+            </p>
+            <input
+              type="email"
+              value={devEmail}
+              onChange={(e) => setDevEmail(e.target.value)}
+              placeholder="email@dev.local"
+              className="w-full mb-2 h-9 rounded-md border border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] px-3 text-sm text-gray-900 dark:text-[#E5E5E5]"
+            />
+            <Button
+              variant="secondary"
+              size="md"
+              className="w-full justify-center h-9"
+              loading={loading === "dev-login"}
+              onClick={() => {
+                setLoading("dev-login");
+                signIn("dev-login", { email: devEmail, callbackUrl }).catch(() =>
+                  setLoading(null)
+                );
+              }}
+            >
+              Entra come {devEmail || "..."}
+            </Button>
+          </div>
+        )}
 
         {/* Divider */}
         <div className="mt-6 pt-6 border-t border-gray-100 dark:border-[#2A2A2A]">

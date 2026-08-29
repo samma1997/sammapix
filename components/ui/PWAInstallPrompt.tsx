@@ -17,9 +17,24 @@ export default function PWAInstallPrompt() {
   const { status } = useSession();
 
   useEffect(() => {
-    // Register service worker
+    // Service worker: in local dev NON registrarlo, e ANZI disattiva quelli
+    // gia' presenti + svuota le cache. Un SW vecchio serve chunk stale e fa
+    // vedere versioni vecchie della UI durante lo sviluppo.
+    const isLocalhost =
+      typeof window !== "undefined" &&
+      /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
+
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/sw.js").catch(() => {});
+      if (isLocalhost) {
+        navigator.serviceWorker.getRegistrations().then((regs) => {
+          regs.forEach((r) => r.unregister());
+        });
+        if ("caches" in window) {
+          caches.keys().then((keys) => keys.forEach((k) => caches.delete(k)));
+        }
+      } else {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      }
     }
 
     // Check if already dismissed

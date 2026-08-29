@@ -97,6 +97,32 @@ export async function addCredits(email: string, amount: number): Promise<number>
 }
 
 /**
+ * One-time welcome bonus: grants signup AI credits exactly once per account.
+ * Uses SET NX on a marker key so a repeated login never re-grants.
+ * Returns true if the bonus was granted on this call, false if already granted.
+ */
+export async function grantSignupBonusOnce(
+  email: string,
+  amount: number
+): Promise<boolean> {
+  const marker = `credits:signup_bonus:${email}`;
+
+  if (redisConfigured) {
+    // SET marker NX -> "OK" only the first time, null if it already exists.
+    const set = await redisExec<string | null>(["SET", marker, "1", "NX"]);
+    if (set !== "OK") return false; // already granted (or redis error -> skip to be safe)
+    await addCredits(email, amount);
+    return true;
+  }
+
+  // Memory fallback (dev)
+  if (memoryStore.get(marker) === 1) return false;
+  memoryStore.set(marker, 1);
+  await addCredits(email, amount);
+  return true;
+}
+
+/**
  * Deducts `count` credits from a user's balance (default: 1).
  * Returns `{ success: true, remaining }` when deduction succeeds.
  * Returns `{ success: false, remaining }` when balance is insufficient.

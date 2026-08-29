@@ -15,7 +15,7 @@ const AiRenameModal = dynamic(() => import("@/components/ai/AiRenameModal"), { s
 const ProUpsellModal = dynamic(() => import("@/components/ui/ProUpsellModal"), { ssr: false });
 import { useImageStore } from "@/store/imageStore";
 import { cn } from "@/lib/utils";
-import { AI_OPS_FREE_PER_DAY, MAX_FILES_FREE } from "@/lib/constants";
+import { AI_OPS_FREE_PER_DAY, MAX_FILES_FREE, MAX_FILES_PRO, resolveFileLimit } from "@/lib/constants";
 import { trackEvent } from "@/lib/analytics";
 import { incrementDownloadCount, shouldShowSuccessUpsell, markSuccessUpsellShown } from "@/lib/success-upsell";
 
@@ -47,6 +47,8 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
   } = useImageStore();
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
+  const isAuthenticated = Boolean(session?.user);
+  const effectiveFileLimit = resolveFileLimit({ isPro, isAuthenticated, freeCap: MAX_FILES_FREE, proCap: MAX_FILES_PRO });
   const pathname = usePathname() || "";
   const inDashboard = pathname.startsWith("/dashboard");
   const isIt = pathname === "/it" || pathname.startsWith("/it/");
@@ -294,7 +296,7 @@ export default function ToolInterface({ defaultMode, toolName, compactHero, embe
         onClose={() => setFilesUpsellOpen(false)}
         trigger="batch"
         filesDropped={items.length}
-        freeLimit={MAX_FILES_FREE}
+        freeLimit={effectiveFileLimit}
       />
 
       {/* Pro Upsell Modal - moment of value: shown after a successful download (Day Pass primary) */}

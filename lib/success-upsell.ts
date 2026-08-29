@@ -21,6 +21,12 @@ export function incrementDownloadCount(): number {
   const current = parseInt(localStorage.getItem(KEY_DL_COUNT) ?? "0", 10);
   const next = current + 1;
   localStorage.setItem(KEY_DL_COUNT, String(next));
+  // Notify SignupPrompt so it can evaluate the threshold immediately
+  try {
+    window.dispatchEvent(new CustomEvent("sammapix:download-complete"));
+  } catch {
+    // ignore
+  }
   return next;
 }
 

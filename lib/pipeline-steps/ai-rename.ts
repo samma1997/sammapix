@@ -13,13 +13,15 @@ export interface AiRenameResult {
 
 /**
  * Convert file to base64 for the AI rename API.
+ * Uses chunked String.fromCharCode to avoid blocking the main thread on large files.
  */
 async function fileToBase64(file: File): Promise<{ base64: string; mimeType: string }> {
   const buffer = await file.arrayBuffer();
   const bytes = new Uint8Array(buffer);
   let binary = "";
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i]);
+  const chunk = 8192;
+  for (let i = 0; i < bytes.length; i += chunk) {
+    binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
   }
   return {
     base64: btoa(binary),

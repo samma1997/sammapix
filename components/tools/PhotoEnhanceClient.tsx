@@ -21,6 +21,7 @@ import { trackEvent } from "@/lib/analytics";
 import { useSession } from "next-auth/react";
 import { recordBatchRun, shouldShowUpsell } from "@/lib/session-tracking";
 import ProUpsellModal from "@/components/ui/ProUpsellModal";
+import { resolveFileLimit } from "@/lib/constants";
 
 const ACCEPTED: Record<string, string[]> = {
   "image/jpeg": [".jpg", ".jpeg"],
@@ -75,7 +76,8 @@ function formatBytes(bytes: number): string {
 export default function PhotoEnhanceClient() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const maxFiles = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+  const isAuthenticated = Boolean(session?.user);
+  const maxFiles = resolveFileLimit({ isPro, isAuthenticated, freeCap: MAX_FILES_FREE, proCap: MAX_FILES_PRO });
 
   const [files, setFiles] = useState<EnhanceFile[]>([]);
   const filesRef = useRef<EnhanceFile[]>([]);

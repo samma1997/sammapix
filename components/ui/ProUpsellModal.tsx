@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Zap, Check, X, Loader2, Clock } from "lucide-react";
+import { Zap, Check, X, Loader2, Clock, UserPlus } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 import { useFoundingStatus, applyFoundingDiscount } from "@/lib/hooks/useFoundingStatus";
 import { fireBeginCheckoutEvent } from "@/lib/checkout-tracking";
-import { TOOL_COUNT } from "@/lib/constants";
+import { TOOL_COUNT, SIGNUP_BONUS_CREDITS, MAX_FILES_REGISTERED } from "@/lib/constants";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -115,7 +115,7 @@ function getSubtext(
     case "zip":
       return "ZIP batch download is a Pro feature. One click, all files in a single archive.";
     case "upscale_daily":
-      return "Free plan limits daily upscales. Pro removes the cap and adds 4×/8× scale.";
+      return "Free plan limits daily upscales. Pro removes the cap and adds 4x/8x scale.";
     case "power_user":
       return `You've explored ${toolsExplored ?? 3}+ tools already — there are ${TOOL_COUNT} total. Pro unlocks unlimited usage, no daily caps, and 500-file batches.`;
     case "lut_export":
@@ -153,7 +153,16 @@ export default function ProUpsellModal({
   freeLimit,
   toolsExplored,
 }: ProUpsellModalProps) {
-  const { data: session } = useSession();
+  const { data: session, status: sessionStatus } = useSession();
+  // Three-state: "unauthenticated" | "loading" | "authenticated"
+  const isAnonymous = sessionStatus === "unauthenticated";
+  const isAuthenticated = sessionStatus === "authenticated";
+  // isPro: NextAuth callbacks set user.plan on the session token
+  const isPro =
+    isAuthenticated &&
+    !!(session?.user as { plan?: string } | undefined)?.plan &&
+    (session?.user as { plan?: string }).plan !== "free";
+
   const router = useRouter();
   const pathname = usePathname();
   const isIt = (pathname || "").startsWith("/it");
@@ -203,6 +212,18 @@ export default function ProUpsellModal({
   const checkoutSource = () => {
     const path = typeof window !== "undefined" ? window.location.pathname : "";
     return `upsell:${trigger}:${path}`;
+  };
+
+  // Low-friction signup for anonymous users: redirects to /auth/signin and
+  // returns the user to the same tool page after authentication.
+  const handleRegister = () => {
+    trackEvent("upsell_register_click", { trigger, tool: pathname ?? "" });
+    const callbackUrl =
+      typeof window !== "undefined"
+        ? encodeURIComponent(window.location.pathname + window.location.search)
+        : encodeURIComponent(pathname ?? "/");
+    router.push(`/auth/signin?callbackUrl=${callbackUrl}`);
+    onClose();
   };
 
   const handleCheckout = async () => {
@@ -355,6 +376,35 @@ export default function ProUpsellModal({
     ? (isVideoUpsell ? VIDEO_FEATURES_IT : FEATURES_IT)
     : (isVideoUpsell ? VIDEO_FEATURES : FEATURES);
 
+  // Shared button styles
+  const btnPrimary =
+    "w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-[#6366F1] text-white text-sm font-semibold rounded-md hover:bg-[#4F46E5] transition-colors mb-1 focus:outline-none focus:ring-2 focus:ring-[#6366F1] focus:ring-offset-2 dark:focus:ring-offset-[#1E1E1E] disabled:opacity-60";
+  const btnDark =
+    "w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60";
+  const btnSubtle =
+    "w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60";
+  const btnLink =
+    "w-full inline-flex items-center justify-center gap-1 px-4 py-1.5 text-[11px] font-medium text-[#6366F1] hover:text-[#4F46E5] transition-colors mb-2 disabled:opacity-60";
+
+  // Reusable CTA snippets
+  const proTrialLabel = loading
+    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+    : isFounding
+      ? (isIt ? `Blocca €${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever — Start trial`)
+      : (isIt ? "Oppure Pro illimitato — prova gratis 7 giorni" : "Or go unlimited with Pro — 7-day free trial");
+
+  const annualLabel = annualLoading
+    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+    : (isIt
+        ? `Oppure paga annuale ${curr}${annualFinal}/anno · risparmi ~${annualSavePct}%`
+        : `Or pay yearly ${curr}${annualFinal}/yr · save ~${annualSavePct}%`);
+
+  const dayPassSecondaryLabel = dayPassLoading
+    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+    : (isIt
+        ? `Oppure sblocca subito con un ${isVideoUpsell ? "Day Pass video €4,99" : "Day Pass €2,99"}`
+        : `Or unlock now with a ${isVideoUpsell ? "Video Day Pass $4.99" : "Day Pass $2.99"}`);
+
   return (
     <Dialog.Root open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
       <Dialog.Portal>
@@ -421,128 +471,59 @@ export default function ProUpsellModal({
           {isFounding && (
             <div className="mb-3 px-2.5 py-1.5 rounded bg-[#FEF2F2] dark:bg-red-950/30 border border-red-200 dark:border-red-900/40 text-center">
               <p className="text-[11px] font-medium text-red-700 dark:text-red-400">
-                <span className="font-bold">{founding!.spotsLeft}</span> {isIt ? `di ${founding!.totalSpots} posti fondatori rimasti` : `of ${founding!.totalSpots} founding spots left`} ·{" "}
-                <span className="font-bold">{curr}{monthlyFinal}{isIt ? "/mese" : "/mo"}</span> {isIt ? "bloccato per sempre" : "locks forever"}
+                <span className="font-bold">{founding!.spotsLeft}</span>{" "}
+                {isIt
+                  ? `di ${founding!.totalSpots} posti fondatori rimasti`
+                  : `of ${founding!.totalSpots} founding spots left`}{" "}
+                ·{" "}
+                <span className="font-bold">{curr}{monthlyFinal}{isIt ? "/mese" : "/mo"}</span>{" "}
+                {isIt ? "bloccato per sempre" : "locks forever"}
               </p>
             </div>
           )}
 
-          {/* ─ CTA buttons — order depends on trigger */}
-          {trigger === "success" ? (
+          {/* ─────────────────────────────────────────────────────────────────
+              CTA hierarchy — 3 branches based on session state:
+              1. ANONYMOUS    → primary = register free, secondary = Day Pass
+              2. FREE ACCOUNT → primary = Day Pass, secondary = Pro / annual / credits
+              3. PRO          → modal should not open; renders nothing if it does
+          ──────────────────────────────────────────────────────────────────── */}
+
+          {/* ── BRANCH 1: ANONYMOUS ──────────────────────────────────────── */}
+          {isAnonymous && (
             <>
-              {/* SUCCESS: Day Pass is PRIMARY (black filled), trial is secondary */}
+              {/* Primary: create free account — accent indigo, high visual weight */}
+              <button
+                onClick={handleRegister}
+                className={btnPrimary}
+              >
+                <UserPlus className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                {isIt ? "Registrati gratis" : "Create a free account"}
+              </button>
+
+              {/* Benefit line directly under primary to reinforce the value */}
+              <p className="text-center text-[11px] text-[#737373] dark:text-[#A3A3A3] mb-4 leading-relaxed">
+                {isIt
+                  ? `${SIGNUP_BONUS_CREDITS} crediti AI gratis + ${MAX_FILES_REGISTERED} file per batch, senza pubblicità`
+                  : `${SIGNUP_BONUS_CREDITS} free AI credits + ${MAX_FILES_REGISTERED} files per batch, no ads`}
+              </p>
+
+              {/* Secondary: pay option for users who want to skip registration */}
               <button
                 onClick={handleDayPass}
                 disabled={dayPassLoading}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60"
-                aria-label="Buy a Day Pass for $2.99 — 24h full Pro access"
+                className={btnSubtle}
+                aria-label={isVideoUpsell ? "Buy a Video Day Pass — 24h full Pro access" : "Buy a Day Pass — 24h full Pro access"}
               >
                 {dayPassLoading ? (
                   <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
                 ) : (
                   <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
                 )}
-                {dayPassLoading ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...") : dayPassLabel}
+                {dayPassSecondaryLabel}
               </button>
 
-              <button
-                onClick={handleCheckout}
-                disabled={loading}
-                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
-              >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                ) : (
-                  <Zap className="h-4 w-4" strokeWidth={1.5} />
-                )}
-                {loading
-                  ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-                  : isFounding
-                    ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
-                    : (isIt ? "Oppure Pro illimitato \u2014 prova gratis 7 giorni" : "Or go unlimited with Pro \u2014 7-day free trial")}
-              </button>
-
-              {annualSavePct > 0 && (
-                <button
-                  onClick={handleAnnual}
-                  disabled={annualLoading}
-                  className="w-full inline-flex items-center justify-center gap-1 px-4 py-1.5 text-[11px] font-medium text-[#6366F1] hover:text-[#4F46E5] transition-colors mb-2 disabled:opacity-60"
-                >
-                  {annualLoading
-                    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-                    : (isIt
-                        ? `Oppure paga annuale ${curr}${annualFinal}/anno \u00b7 risparmi ~${annualSavePct}%`
-                        : `Or pay yearly ${curr}${annualFinal}/yr \u00b7 save ~${annualSavePct}%`)}
-                </button>
-              )}
-              {/* No "Continue with first N files" and no credit-pack alt for success */}
-            </>
-          ) : (
-            <>
-              {/* DEFAULT: existing order \u2014 trial first, Day Pass third */}
-              <button
-                onClick={handleCheckout}
-                disabled={loading}
-                className="w-full inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
-              >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                ) : (
-                  <Zap className="h-4 w-4" strokeWidth={1.5} />
-                )}
-                {loading
-                  ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-                  : isFounding
-                    ? (isIt ? `Blocca \u20ac${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever \u2014 Start trial`)
-                    : (isIt ? "Oppure Pro illimitato \u2014 prova gratis 7 giorni" : "Or go unlimited with Pro \u2014 7-day free trial")}
-              </button>
-
-              {annualSavePct > 0 && (
-                <button
-                  onClick={handleAnnual}
-                  disabled={annualLoading}
-                  className="w-full inline-flex items-center justify-center gap-1 px-4 py-1.5 text-[11px] font-medium text-[#6366F1] hover:text-[#4F46E5] transition-colors mb-2 disabled:opacity-60"
-                >
-                  {annualLoading
-                    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-                    : (isIt
-                        ? `Oppure paga annuale ${curr}${annualFinal}/anno · risparmi ~${annualSavePct}%`
-                        : `Or pay yearly ${curr}${annualFinal}/yr · save ~${annualSavePct}%`)}
-                </button>
-              )}
-
-              {/* Credit pack alternative for AI-ops triggers — one-click to Stripe */}
-              {showCreditAlt && (
-                <button
-                  onClick={handleBuyCredits}
-                  disabled={creditsLoading}
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 text-xs font-medium text-[#525252] dark:text-[#A3A3A3] border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] bg-white dark:bg-[#1E1E1E] transition-colors mb-2 disabled:opacity-60"
-                >
-                  {creditsLoading ? (
-                    <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
-                  ) : null}
-                  {creditsLoading
-                    ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-                    : (isIt ? "Oppure 100 crediti a €5,99 — una tantum, non scadono" : "Or buy 100 credits for $5.99 — one-time, never expire")}
-                </button>
-              )}
-
-              {/* Day Pass \u2014 one-time 24h full access */}
-              <button
-                onClick={handleDayPass}
-                disabled={dayPassLoading}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-2 disabled:opacity-60"
-                aria-label={isVideoUpsell ? "Buy a Video Day Pass for $4.99 \u2014 24h full Pro access" : "Buy a Day Pass for $2.99 \u2014 24h full Pro access"}
-              >
-                {dayPassLoading ? (
-                  <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
-                ) : (
-                  <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-                )}
-                {dayPassLoading ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...") : dayPassLabel}
-              </button>
-
-              {/* Continue with first N files \u2014 only for files/batch triggers */}
+              {/* Continue with first N files — only files/batch triggers */}
               {showContinue && freeLimit && (
                 <button
                   onClick={onClose}
@@ -554,9 +535,129 @@ export default function ProUpsellModal({
             </>
           )}
 
-          {/* Trust line \u2014 single row, slightly more visible */}
+          {/* ── BRANCH 2: REGISTERED FREE ────────────────────────────────── */}
+          {isAuthenticated && !isPro && (
+            <>
+              {trigger === "success" ? (
+                <>
+                  {/* After a successful task: Day Pass primary (dark filled) */}
+                  <button
+                    onClick={handleDayPass}
+                    disabled={dayPassLoading}
+                    className={btnDark}
+                    aria-label={isVideoUpsell ? "Buy a Video Day Pass for $4.99 — 24h full Pro access" : "Buy a Day Pass for $2.99 — 24h full Pro access"}
+                  >
+                    {dayPassLoading ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                    ) : (
+                      <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+                    )}
+                    {dayPassLoading ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...") : dayPassLabel}
+                  </button>
+
+                  {/* Pro trial secondary */}
+                  <button
+                    onClick={handleCheckout}
+                    disabled={loading}
+                    className={btnSubtle}
+                  >
+                    {loading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                    ) : (
+                      <Zap className="h-4 w-4" strokeWidth={1.5} />
+                    )}
+                    {proTrialLabel}
+                  </button>
+
+                  {/* Annual tertiary link */}
+                  {annualSavePct > 0 && (
+                    <button
+                      onClick={handleAnnual}
+                      disabled={annualLoading}
+                      className={btnLink}
+                    >
+                      {annualLabel}
+                    </button>
+                  )}
+                </>
+              ) : (
+                <>
+                  {/* All other triggers: Day Pass primary (dark filled) */}
+                  <button
+                    onClick={handleDayPass}
+                    disabled={dayPassLoading}
+                    className={btnDark}
+                    aria-label={isVideoUpsell ? "Buy a Video Day Pass for $4.99 — 24h full Pro access" : "Buy a Day Pass for $2.99 — 24h full Pro access"}
+                  >
+                    {dayPassLoading ? (
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                    ) : (
+                      <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+                    )}
+                    {dayPassLoading ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...") : dayPassLabel}
+                  </button>
+
+                  {/* Pro trial secondary */}
+                  <button
+                    onClick={handleCheckout}
+                    disabled={loading}
+                    className={btnSubtle}
+                  >
+                    {loading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                    ) : (
+                      <Zap className="h-4 w-4" strokeWidth={1.5} />
+                    )}
+                    {proTrialLabel}
+                  </button>
+
+                  {/* Annual tertiary link */}
+                  {annualSavePct > 0 && (
+                    <button
+                      onClick={handleAnnual}
+                      disabled={annualLoading}
+                      className={btnLink}
+                    >
+                      {annualLabel}
+                    </button>
+                  )}
+
+                  {/* Credit pack for AI-ops and per-file triggers */}
+                  {showCreditAlt && (
+                    <button
+                      onClick={handleBuyCredits}
+                      disabled={creditsLoading}
+                      className={btnSubtle}
+                    >
+                      {creditsLoading ? (
+                        <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                      ) : null}
+                      {creditsLoading
+                        ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
+                        : (isIt ? "Oppure 100 crediti a €5,99 — una tantum, non scadono" : "Or buy 100 credits for $5.99 — one-time, never expire")}
+                    </button>
+                  )}
+
+                  {/* Continue with first N files — only files/batch triggers */}
+                  {showContinue && freeLimit && (
+                    <button
+                      onClick={onClose}
+                      className="w-full inline-flex items-center justify-center px-4 py-2 text-sm text-[#737373] dark:text-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
+                    >
+                      {isIt ? `Continua con i primi ${freeLimit} file` : `Continue with first ${freeLimit} files`}
+                    </button>
+                  )}
+                </>
+              )}
+            </>
+          )}
+
+          {/* ── BRANCH 3: PRO — should not open; safety net renders nothing ── */}
+          {isPro && null}
+
+          {/* Trust line */}
           <p className="text-center text-xs text-[#737373] dark:text-[#A3A3A3] mt-3">
-            {isIt ? "Rimborso entro 30 giorni \u00b7 Disdici quando vuoi" : "30-day money-back \u00b7 Cancel anytime"}
+            {isIt ? "Rimborso entro 30 giorni · Disdici quando vuoi" : "30-day money-back · Cancel anytime"}
           </p>
         </Dialog.Content>
       </Dialog.Portal>

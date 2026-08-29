@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { removeBackground, RemoveBgResult, BackgroundColor } from "@/lib/remove-bg";
-import { MAX_FILES_FREE, MAX_FILES_PRO, MAX_FILE_SIZE_FREE, MAX_FILE_SIZE_PRO } from "@/lib/constants";
+import { MAX_FILES_FREE, MAX_FILES_PRO, MAX_FILE_SIZE_FREE, MAX_FILE_SIZE_PRO, resolveFileLimit } from "@/lib/constants";
 import { useSession } from "next-auth/react";
 import { trackEvent } from "@/lib/analytics";
 import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
@@ -62,7 +62,8 @@ const ACCEPTED: Record<string, string[]> = {
 export default function RemoveBgClient() {
   const { data: session } = useSession();
   const isPro = (session?.user as { plan?: string })?.plan === "pro";
-  const maxFiles = isPro ? MAX_FILES_PRO : MAX_FILES_FREE;
+  const isAuthenticated = Boolean(session?.user);
+  const maxFiles = resolveFileLimit({ isPro, isAuthenticated, freeCap: MAX_FILES_FREE, proCap: MAX_FILES_PRO });
   const maxFileSize = isPro ? MAX_FILE_SIZE_PRO : MAX_FILE_SIZE_FREE;
 
   const [files, setFiles] = useState<BgFile[]>([]);
