@@ -7,12 +7,17 @@ import dynamic from "next/dynamic";
 
 const UnrarClient = dynamic(() => import("@/components/tools/UnrarClient"));
 
+// Freshness signal (bump when the page/tool is meaningfully updated)
+const PUBLISHED = "2025-05-01";
+const LAST_UPDATED = "2026-08-31";
+const LAST_UPDATED_LABEL = "August 2026";
+
 // ── Metadata ──────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
   title: "Open RAR Online Free: Extract & View RAR Files",
   description:
-    "Open RAR files directly in your browser. View file list, download individual files, or convert the entire archive to ZIP. Files never leave your device.",
+    "Open and view RAR files directly in your browser. A free WinRAR online alternative: preview the file list, download files individually, or convert the archive to ZIP. No install, files never leave your device.",
   keywords: [
     "open rar online",
     "unrar online",
@@ -33,14 +38,14 @@ export const metadata: Metadata = {
     url: `${APP_URL}/tools/unrar`,
     title: "Open RAR Online Free: Extract & View RAR Files",
     description:
-      "Open RAR files directly in your browser. View file list, download individual files, or convert the entire archive to ZIP. Files never leave your device.",
+      "Open and view RAR files directly in your browser. A free WinRAR online alternative: preview the file list, download files individually, or convert the archive to ZIP. No install, files never leave your device.",
     siteName: "SammaPix",
   },
   twitter: {
     card: "summary_large_image",
     title: "Open RAR Online Free: Extract & View RAR Files",
     description:
-      "Open RAR files directly in your browser. View file list, download individual files, or convert the entire archive to ZIP. Files never leave your device.",
+      "Open and view RAR files directly in your browser. A free WinRAR online alternative: preview the file list, download files individually, or convert the archive to ZIP. No install, files never leave your device.",
   },
 };
 
@@ -55,6 +60,8 @@ const softwareSchema = {
   url: `${APP_URL}/tools/unrar`,
   applicationCategory: "UtilitiesApplication",
   operatingSystem: "Web Browser",
+  datePublished: PUBLISHED,
+  dateModified: LAST_UPDATED,
   offers: {
     "@type": "Offer",
     price: "0",
@@ -179,6 +186,30 @@ const faqSchema = {
         text: "Yes. This is a fully online RAR file opener with nothing to install. It runs in your browser on Windows, Mac, Linux, Chromebook and phones: just drop the .rar file and it extracts instantly, with your files never leaving your device.",
       },
     },
+    {
+      "@type": "Question",
+      name: "Is this a WinRAR online version?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, you can think of it as WinRAR online: it opens and extracts .rar archives straight in your browser, so there is no WinRAR download, no 40-day trial nag and no license to buy. Drop the file, preview the contents and download what you need, all free and with nothing uploaded to a server.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I preview what's inside a RAR file before extracting?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes. This works as a RAR viewer too: the moment you drop the archive, the full file list appears with names and sizes so you can inspect the contents before downloading anything. You can then pull out just the files you want, one by one, instead of extracting the whole archive.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do I need to download anything to extract a RAR file?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No download needed. Unlike a 'RAR extractor free download', this tool runs entirely in the browser, so there is no installer, no app and no extension. It opens the archive online instantly and your files stay on your device.",
+      },
+    },
   ],
 };
 
@@ -213,6 +244,8 @@ const howToSchema = {
   name: "How to open a RAR file online",
   description:
     "Open and extract RAR files in your browser without installing any software.",
+  datePublished: PUBLISHED,
+  dateModified: LAST_UPDATED,
   totalTime: "PT1M",
   step: [
     {
@@ -275,6 +308,9 @@ export default function UnrarPage() {
           </p>
           <p className="text-xs text-[#A3A3A3] dark:text-[#525252]">
             Supports RAR4, RAR5, password-protected archives, up to 200 MB free
+          </p>
+          <p className="text-xs text-[#A3A3A3] dark:text-[#525252] mt-1">
+            Updated {LAST_UPDATED_LABEL} · works on Windows, Mac, Chromebook &amp; phone
           </p>
         </section>
 
@@ -341,6 +377,27 @@ export default function UnrarPage() {
               guide to opening RAR files on Mac
             </Link>
             .
+          </p>
+
+          <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
+            A free WinRAR online alternative (no download, no trial)
+          </h2>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-4 leading-relaxed">
+            WinRAR is the classic way to open .rar archives, but it means
+            downloading an installer, sitting through the endless 40-day trial
+            reminder, and eventually being asked to buy a license. This page is a{" "}
+            <strong className="text-[#525252] dark:text-[#A3A3A3]">
+              WinRAR online
+            </strong>{" "}
+            replacement for the one thing most people actually need: opening a
+            RAR file. There is nothing to install and nothing to pay for. It also
+            doubles as a{" "}
+            <strong className="text-[#525252] dark:text-[#A3A3A3]">
+              RAR viewer
+            </strong>
+            : drop the archive and the full file list appears instantly, so you
+            can preview what is inside and pull out just the files you want
+            before downloading anything.
           </p>
 
           <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">
