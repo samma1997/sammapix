@@ -502,6 +502,22 @@ export default function AspectRatioInPixelsGuidePage() {
           <li><Link href="/crop/5-4">Crop to 5:4</Link> (8x10 prints)</li>
           <li><Link href="/crop/21-9">Crop to 21:9</Link> (ultrawide, banners)</li>
         </ul>
+        <p>
+          Prefer to look up the numbers first? Each ratio has a dedicated{" "}
+          <Link href="/aspect-ratio">aspect ratio in pixels</Link> page with the exact sizes and a
+          full dimensions table:
+        </p>
+        <ul>
+          <li><Link href="/aspect-ratio/9-16">9:16 in pixels</Link> (1080 x 1920 and more)</li>
+          <li><Link href="/aspect-ratio/16-9">16:9 in pixels</Link> (1280 x 720, 1920 x 1080, 4K)</li>
+          <li><Link href="/aspect-ratio/1-1">1:1 in pixels</Link> (square sizes)</li>
+          <li><Link href="/aspect-ratio/4-5">4:5 in pixels</Link> (Instagram portrait)</li>
+          <li><Link href="/aspect-ratio/3-4">3:4 in pixels</Link> (mobile portrait, products)</li>
+          <li><Link href="/aspect-ratio/4-3">4:3 in pixels</Link> (iPad, classic cameras)</li>
+          <li><Link href="/aspect-ratio/3-2">3:2 in pixels</Link> (DSLR, 4x6 prints)</li>
+          <li><Link href="/aspect-ratio/21-9">21:9 in pixels</Link> (ultrawide, banners)</li>
+          <li><Link href="/aspect-ratio/a4">A4 in pixels</Link> (72 / 150 / 300 DPI print sizes)</li>
+        </ul>
 
         {/* FAQ */}
         <h2 id="faq">FAQ</h2>

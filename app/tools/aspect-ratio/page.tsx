@@ -4,6 +4,7 @@ import { TOOLS } from "@/lib/tools-metadata";
 import RelatedTools from "@/components/tools/RelatedTools";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { getAllRatios, namedSizes } from "@/lib/aspect-ratios";
 
 const AspectRatioClient = dynamic(() => import("@/components/tools/AspectRatioClient"));
 
@@ -399,6 +400,35 @@ export default function AspectRatioPage() {
                 <p className="text-sm text-[#737373] dark:text-[#A3A3A3]">{q.acceptedAnswer.text}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Popular aspect ratios in pixels — links into the /aspect-ratio cluster */}
+        <section className="px-4 sm:px-6 py-10 max-w-3xl mx-auto border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
+          <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
+            Aspect ratios in pixels
+          </h2>
+          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-5">
+            See the exact pixel sizes and a full dimensions table for each common ratio.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {getAllRatios().map((r) => {
+              const primary = namedSizes(r.slug)[0]?.px;
+              return (
+                <Link
+                  key={r.slug}
+                  href={`/aspect-ratio/${r.slug}`}
+                  className="group flex items-center justify-between px-3 py-2 border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-md bg-white dark:bg-[#1E1E1E] hover:border-[#A3A3A3] dark:hover:border-[#404040] transition-colors"
+                >
+                  <span className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">
+                    {r.ratioLabel} in pixels
+                  </span>
+                  {primary && (
+                    <span className="text-[11px] text-[#A3A3A3] font-mono hidden sm:inline">{primary}</span>
+                  )}
+                </Link>
+              );
+            })}
           </div>
         </section>
 
