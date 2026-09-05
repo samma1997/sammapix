@@ -491,6 +491,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
+  // Programmatic aspect-ratio (in pixels) pages — same ratio list as crop
+  const aspectRatioPages: MetadataRoute.Sitemap = [
+    {
+      url: `${APP_URL}/aspect-ratio`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    ...getAllRatios().map((r) => ({
+      url: `${APP_URL}/aspect-ratio/${r.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
+  ];
+
   return [
     ...staticPages,
     ...toolPages,
@@ -509,5 +525,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...imageSizePages,
     ...passportPhotoPages,
     ...cropPages,
+    ...aspectRatioPages,
   ];
 }
