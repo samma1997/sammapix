@@ -316,7 +316,14 @@ export default async function CropToRatioPage({
               Common {r.ratioLabel} Sizes
             </h2>
             <p className="text-sm text-[#737373] leading-relaxed mb-6">
-              {r.ratioLabel} is an aspect ratio — these are the pixel sizes people most often export after cropping.
+              {r.ratioLabel} is an aspect ratio — these are the pixel sizes people most often export after cropping. See the full{" "}
+              <Link
+                href={`/aspect-ratio/${r.slug}`}
+                className="underline underline-offset-2 hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors"
+              >
+                {r.ratioLabel} pixel dimensions table
+              </Link>
+              .
             </p>
             <div className="border border-[#E5E5E5] dark:border-[#2A2A2A] rounded-lg overflow-hidden">
               <table className="w-full text-sm">
