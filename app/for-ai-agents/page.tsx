@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 const FAQ = [
   {
     q: "What is the SammaPix MCP server?",
-    a: "It is a Model Context Protocol (MCP) server that lets AI agents run SammaPix's image and PDF tools directly: compress, convert, resize, crop, rotate, read metadata, chain operations in a pipeline, and compress PDFs. The agent calls a tool, sends an image (as base64 or a URL) and gets the processed file back.",
+    a: "It is a Model Context Protocol (MCP) server that lets AI agents run SammaPix's 20+ image and PDF tools directly: compress, convert, resize, crop, rotate, flip, adjust, grayscale, blur, tint, negate, round corners, add borders, watermark, read metadata, compress and merge and split and rotate PDFs, turn images into a PDF, and chain any of these in a pipeline. The agent calls a tool, sends an image (as base64 or a URL) and gets the processed file back.",
   },
   {
     q: "How does an agent connect — do I need an API key?",
@@ -81,9 +81,9 @@ function jsonLd() {
     creator: { "@type": "Organization", name: "SammaPix", url: APP_URL },
     featureList: [
       "MCP server for AI agents (OAuth 2.1)",
-      "Image compress, convert, resize, crop, rotate",
+      "20+ image tools: compress, convert, resize, crop, rotate, flip, adjust, grayscale, blur, tint, watermark, round, border",
+      "PDF tools: compress, merge, split, rotate, image-to-PDF, info",
       "Pipeline: chain operations in one call",
-      "PDF compress",
       "Zero-retention processing",
       "REST API with API keys",
     ],

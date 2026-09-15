@@ -4,6 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Link2, ShieldCheck, Boxes, Coins,
   Gauge, RefreshCw, Image as ImageIcon, Crop, Layers, FileText,
+  RotateCw, Droplets, Contrast, Stamp, SquareRoundCorner,
+  Info, FilePlus2, MoreHorizontal,
   type LucideIcon,
 } from "lucide-react";
 
@@ -23,12 +25,20 @@ const VALUES: { icon: LucideIcon; title: string; body: string }[] = [
 ];
 
 const TOOLS: { icon: LucideIcon; name: string; desc: string }[] = [
+  { icon: Layers, name: "Pipeline", desc: "Chain any steps in one call" },
   { icon: Gauge, name: "Compress", desc: "Shrink images, keep the format" },
   { icon: RefreshCw, name: "Convert", desc: "webp · avif · jpeg · png" },
   { icon: ImageIcon, name: "Resize", desc: "Exact width/height, safe caps" },
   { icon: Crop, name: "Crop", desc: "Pixels or aspect ratio (16:9…)" },
-  { icon: Layers, name: "Pipeline", desc: "Chain steps in one call" },
-  { icon: FileText, name: "PDF compress", desc: "Slim PDFs, strip metadata" },
+  { icon: RotateCw, name: "Rotate · Flip", desc: "Any angle, mirror H/V" },
+  { icon: Contrast, name: "Adjust · Grayscale", desc: "Brightness, saturation, hue" },
+  { icon: Droplets, name: "Blur · Tint · Negate", desc: "Filters and color effects" },
+  { icon: SquareRoundCorner, name: "Round · Border", desc: "Rounded corners, framed" },
+  { icon: Stamp, name: "Watermark", desc: "Overlay text, set opacity" },
+  { icon: FileText, name: "PDF compress · merge", desc: "Slim, join, split, rotate" },
+  { icon: FilePlus2, name: "Image → PDF", desc: "Bundle images into one PDF" },
+  { icon: Info, name: "Metadata · PDF info", desc: "Read size, format, pages" },
+  { icon: MoreHorizontal, name: "20+ tools", desc: "One key, the whole toolbox" },
 ];
 
 /** Reveal-on-scroll wrapper local to the grids (staggered). */

@@ -24,7 +24,13 @@ import { fetchRemoteFile, UnsafeUrlError } from "@/lib/api/fetch-image";
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
-const SUPPORTED: ApiOp[] = ["compress", "resize", "crop", "convert", "rotate", "metadata", "pdf-compress", "pdf-merge"];
+const SUPPORTED: ApiOp[] = [
+  "compress", "resize", "crop", "convert", "rotate", "metadata",
+  "flip", "grayscale", "blur", "adjust", "tint", "negate", "flatten", "border", "round", "watermark",
+  "pdf-compress", "pdf-merge", "pdf-split", "pdf-rotate", "image-to-pdf", "pdf-info",
+];
+// Ops that accept multiple files (repeated "file" fields)
+const MULTI_FILE: ApiOp[] = ["pdf-merge", "image-to-pdf"];
 
 function json(body: unknown, status = 200, extraHeaders: Record<string, string> = {}) {
   return new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json", ...extraHeaders } });
@@ -111,7 +117,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
   let inputBuffers: Buffer[] = [];
   let params: Record<string, unknown> = {};
   try {
-    if (apiOp === "pdf-merge") {
+    if (MULTI_FILE.includes(apiOp)) {
       inputBuffers = await readMany(req);
       inputBuffer = inputBuffers[0] ?? Buffer.alloc(0);
     } else {
@@ -142,18 +148,19 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
   const billHeaders = { "x-op": apiOp, "x-op-cost": String(bill.cost), "x-credits-remaining": String(bill.remaining) };
 
   try {
-    // ── PDF merge (multiple files) ──────────────────────────────────────────
-    if (apiOp === "pdf-merge") {
-      const out = await pdf.pdfMerge(inputBuffers);
-      return binary(out.buffer, out.contentType, { ...billHeaders, "x-output-pages": String(out.info.pages), "x-output-bytes": String(out.info.bytes) });
-    }
+    const pdfHdr = (out: pdf.PdfResult) => ({ ...billHeaders, "x-output-pages": String(out.info.pages), "x-output-bytes": String(out.info.bytes) });
+
+    // ── Multi-file PDF ops ──────────────────────────────────────────────────
+    if (apiOp === "pdf-merge") return binaryPdf(await pdf.pdfMerge(inputBuffers), pdfHdr);
+    if (apiOp === "image-to-pdf") return binaryPdf(await pdf.imagesToPdf(inputBuffers), pdfHdr);
 
     const buffer = inputBuffer;
 
-    if (apiOp === "pdf-compress") {
-      const out = await pdf.pdfCompress(buffer);
-      return binary(out.buffer, out.contentType, { ...billHeaders, "x-output-pages": String(out.info.pages), "x-output-bytes": String(out.info.bytes) });
-    }
+    // ── Single-file PDF ops ─────────────────────────────────────────────────
+    if (apiOp === "pdf-compress") return binaryPdf(await pdf.pdfCompress(buffer), pdfHdr);
+    if (apiOp === "pdf-split") return binaryPdf(await pdf.pdfSplit(buffer, str(params.pages) ?? "1"), pdfHdr);
+    if (apiOp === "pdf-rotate") return binaryPdf(await pdf.pdfRotate(buffer, num(params.angle) ?? 90), pdfHdr);
+    if (apiOp === "pdf-info") return json({ ok: true, op: apiOp, info: await pdf.pdfInfo(buffer) }, 200, billHeaders);
 
     if (apiOp === "metadata") {
       const meta = await img.metadata(buffer);
@@ -184,4 +191,16 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
 
 function binary(buf: Buffer, contentType: string, headers: Record<string, string>) {
   return new Response(new Uint8Array(buf), { status: 200, headers: { "content-type": contentType, ...headers } });
+}
+
+function binaryPdf(out: pdf.PdfResult, hdr: (o: pdf.PdfResult) => Record<string, string>) {
+  return binary(out.buffer, out.contentType, hdr(out));
+}
+
+function num(v: unknown): number | undefined {
+  const n = Number(v);
+  return v != null && v !== "" && !Number.isNaN(n) ? n : undefined;
+}
+function str(v: unknown): string | undefined {
+  return typeof v === "string" && v ? v : undefined;
 }
