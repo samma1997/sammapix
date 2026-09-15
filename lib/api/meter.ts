@@ -14,33 +14,19 @@ import { deductCreditsAtomic, getCreditBalance, addCredits } from "@/lib/credits
 import { consumeDailyFree, restoreDailyFree } from "@/lib/api/daily";
 
 export type ApiOp =
-  | "compress"
-  | "resize"
-  | "crop"
-  | "convert"
-  | "rotate"
-  | "metadata"
-  | "pdf-compress"
-  | "pdf-merge"
-  | "upscale"
-  | "enhance"
-  | "remove-bg";
+  | "compress" | "resize" | "crop" | "convert" | "rotate" | "metadata"
+  | "flip" | "grayscale" | "blur" | "adjust" | "tint" | "negate" | "flatten" | "border" | "round" | "watermark"
+  | "pdf-compress" | "pdf-merge" | "pdf-split" | "pdf-rotate" | "image-to-pdf" | "pdf-info"
+  | "upscale" | "enhance" | "remove-bg";
 
 /** Credit cost per successful operation. Everything is cheap for us (~$0.00001
  *  deterministic, ~$0.0000013 Gemini), so ops are 1 credit; remove-bg (heavier
  *  local model) is 2; pdf-merge 2. AI ops stay modest — no Replicate. */
 export const OP_COST: Record<ApiOp, number> = {
-  compress: 1,
-  resize: 1,
-  crop: 1,
-  convert: 1,
-  rotate: 1,
-  metadata: 1,
-  "pdf-compress": 1,
-  "pdf-merge": 2,
-  upscale: 2,
-  enhance: 2,
-  "remove-bg": 2,
+  compress: 1, resize: 1, crop: 1, convert: 1, rotate: 1, metadata: 1,
+  flip: 1, grayscale: 1, blur: 1, adjust: 1, tint: 1, negate: 1, flatten: 1, border: 1, round: 1, watermark: 1,
+  "pdf-compress": 1, "pdf-merge": 2, "pdf-split": 1, "pdf-rotate": 1, "image-to-pdf": 2, "pdf-info": 1,
+  upscale: 2, enhance: 2, "remove-bg": 2,
 };
 
 export function costOf(op: ApiOp): number {

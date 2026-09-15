@@ -11,7 +11,10 @@
 import * as img from "@/lib/server-ops/image";
 
 /** Image ops that are chainable in a pipeline (Buffer -> Buffer). */
-export const IMAGE_OPS = ["compress", "resize", "crop", "convert", "rotate"] as const;
+export const IMAGE_OPS = [
+  "compress", "resize", "crop", "convert", "rotate",
+  "flip", "grayscale", "blur", "adjust", "tint", "negate", "flatten", "border", "round", "watermark",
+] as const;
 export type ImageOp = (typeof IMAGE_OPS)[number];
 
 export function isImageOp(op: string): op is ImageOp {
@@ -41,6 +44,26 @@ export async function runImageOp(op: ImageOp, buffer: Buffer, p: Params): Promis
       return img.convert(buffer, { format: (str(p.format) ?? "webp") as img.OutFormat, quality: num(p.quality) });
     case "rotate":
       return img.rotate(buffer, { angle: num(p.angle), quality: num(p.quality) });
+    case "flip":
+      return img.flip(buffer, { direction: str(p.direction), quality: num(p.quality) });
+    case "grayscale":
+      return img.grayscale(buffer, { quality: num(p.quality) });
+    case "blur":
+      return img.blur(buffer, { sigma: num(p.sigma), quality: num(p.quality) });
+    case "adjust":
+      return img.adjust(buffer, { brightness: num(p.brightness), saturation: num(p.saturation), hue: num(p.hue), quality: num(p.quality) });
+    case "tint":
+      return img.tint(buffer, { color: str(p.color), quality: num(p.quality) });
+    case "negate":
+      return img.negate(buffer, { quality: num(p.quality) });
+    case "flatten":
+      return img.flatten(buffer, { background: str(p.background), quality: num(p.quality) });
+    case "border":
+      return img.border(buffer, { width: num(p.width), color: str(p.color), quality: num(p.quality) });
+    case "round":
+      return img.round(buffer, { radius: num(p.radius) });
+    case "watermark":
+      return img.watermark(buffer, { text: str(p.text), opacity: num(p.opacity), position: str(p.position), quality: num(p.quality) });
   }
 }
 

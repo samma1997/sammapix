@@ -68,6 +68,30 @@ async function runImg(op: ImageOp, args: Record<string, unknown>): Promise<McpTo
 const RO = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 const RW = { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 
+/** Compact factory for a chainable image tool (base64 or imageUrl in, image out). */
+function imageTool(name: string, op: ImageOp, description: string, extraProps: Record<string, unknown>): McpTool {
+  return {
+    name,
+    description: `${description} Returns the processed image (base64).`,
+    inputSchema: { type: "object", properties: { ...IMG_INPUT, ...extraProps, ...QUALITY }, required: [] },
+    annotations: RW,
+    cost: () => OP_COST[op],
+    run: (a) => runImg(op, a),
+  };
+}
+
+function decodePdf(a: Record<string, unknown>): Buffer {
+  const b64 = a.pdfBase64;
+  if (typeof b64 !== "string" || !b64) throw new img.ApiOpError('"pdfBase64" is required');
+  const buf = Buffer.from(b64.includes(",") ? b64.split(",")[1] : b64, "base64");
+  assertFileSize(buf.length);
+  return buf;
+}
+
+function pdfResult(out: { buffer: Buffer; contentType: string; info: { pages: number; bytes: number } }): McpToolResult {
+  return { base64: out.buffer.toString("base64"), mimeType: out.contentType, info: { pages: out.info.pages, bytes: out.info.bytes } };
+}
+
 // ── tools ──────────────────────────────────────────────────────────────
 
 export const MCP_TOOLS: McpTool[] = [
@@ -160,6 +184,62 @@ export const MCP_TOOLS: McpTool[] = [
       assertFileSize(buf.length);
       const out = await pdf.pdfCompress(buf);
       return { base64: out.buffer.toString("base64"), mimeType: out.contentType, info: { pages: out.info.pages, bytes: out.info.bytes } };
+    },
+  },
+
+  // ── more image ops (all chainable, base64 or imageUrl in, image out) ──────
+  imageTool("sammapix_flip", "flip", "Flip an image horizontally, vertically or both.", { direction: { type: "string", enum: ["horizontal", "vertical", "both"] } }),
+  imageTool("sammapix_grayscale", "grayscale", "Convert an image to grayscale (black & white).", {}),
+  imageTool("sammapix_blur", "blur", "Apply a Gaussian blur to an image.", { sigma: { type: "number", description: "Blur strength 0.3-100 (default 8)." } }),
+  imageTool("sammapix_adjust", "adjust", "Adjust brightness, saturation and/or hue of an image.", { brightness: { type: "number", description: "0-3 (1 = unchanged)." }, saturation: { type: "number", description: "0-3 (1 = unchanged)." }, hue: { type: "number", description: "degrees to rotate hue." } }),
+  imageTool("sammapix_tint", "tint", "Tint an image a colour (e.g. sepia with #704214).", { color: { type: "string", description: "Hex colour, e.g. #704214." } }),
+  imageTool("sammapix_negate", "negate", "Invert the colours of an image.", {}),
+  imageTool("sammapix_flatten", "flatten", "Flatten transparency onto a solid background colour.", { background: { type: "string", description: "Hex background colour (default #ffffff)." } }),
+  imageTool("sammapix_border", "border", "Add a solid border/frame around an image.", { width: { type: "number", description: "Border width in px." }, color: { type: "string", description: "Hex colour." } }),
+  imageTool("sammapix_round", "round", "Round the corners of an image (outputs PNG with transparency).", { radius: { type: "number", description: "Corner radius in px." } }),
+  imageTool("sammapix_watermark", "watermark", "Overlay a text watermark on an image.", { text: { type: "string" }, opacity: { type: "number", description: "0-1." }, position: { type: "string", enum: ["top-left", "top-right", "bottom-left", "bottom-right", "center"] } }),
+
+  // ── more PDF ops ──────────────────────────────────────────────────────────
+  {
+    name: "sammapix_pdf_split",
+    description: "Extract a subset of pages from a PDF into a new PDF. pages like \"1-3,5\". Returns the new PDF (base64).",
+    inputSchema: { type: "object", properties: { pdfBase64: { type: "string", description: "Source PDF base64." }, pages: { type: "string", description: 'Pages to keep, e.g. "1-3,5" (1-based).' } }, required: ["pdfBase64", "pages"] },
+    annotations: RW,
+    cost: () => OP_COST["pdf-split"],
+    run: async (a) => pdfResult(await pdf.pdfSplit(decodePdf(a), (typeof a.pages === "string" ? a.pages : "1"))),
+  },
+  {
+    name: "sammapix_pdf_rotate",
+    description: "Rotate all pages of a PDF by 90/180/270 degrees. Returns the rotated PDF (base64).",
+    inputSchema: { type: "object", properties: { pdfBase64: { type: "string" }, angle: { type: "number", description: "Degrees clockwise (90/180/270)." } }, required: ["pdfBase64"] },
+    annotations: RW,
+    cost: () => OP_COST["pdf-rotate"],
+    run: async (a) => pdfResult(await pdf.pdfRotate(decodePdf(a), typeof a.angle === "number" ? a.angle : 90)),
+  },
+  {
+    name: "sammapix_pdf_info",
+    description: "Read a PDF's page count and per-page sizes. Returns JSON, no file.",
+    inputSchema: { type: "object", properties: { pdfBase64: { type: "string" } }, required: ["pdfBase64"] },
+    annotations: RO,
+    cost: () => OP_COST["pdf-info"],
+    run: async (a) => ({ info: await pdf.pdfInfo(decodePdf(a)) }),
+  },
+  {
+    name: "sammapix_image_to_pdf",
+    description: "Build a PDF from one or more images (one image per page). Input imagesBase64 (array). Returns the PDF (base64).",
+    inputSchema: { type: "object", properties: { imagesBase64: { type: "array", items: { type: "string" }, description: "Array of image base64 strings (max 20)." } }, required: ["imagesBase64"] },
+    annotations: RW,
+    cost: () => OP_COST["image-to-pdf"],
+    run: async (a) => {
+      const arr = a.imagesBase64;
+      if (!Array.isArray(arr) || arr.length === 0) throw new img.ApiOpError('"imagesBase64" must be a non-empty array');
+      const bufs = arr.slice(0, 20).map((s) => {
+        const raw = typeof s === "string" ? (s.includes(",") ? s.split(",")[1] : s) : "";
+        const b = Buffer.from(raw, "base64");
+        assertFileSize(b.length);
+        return b;
+      });
+      return pdfResult(await pdf.imagesToPdf(bufs));
     },
   },
 ];

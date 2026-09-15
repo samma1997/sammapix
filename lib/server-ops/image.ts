@@ -165,9 +165,137 @@ export async function metadata(input: Buffer): Promise<Record<string, unknown>> 
   };
 }
 
+/** Flip an image: horizontal, vertical, or both. */
+export async function flip(input: Buffer, opts: { direction?: string; quality?: number } = {}): Promise<OpResult> {
+  const meta = await sharp(input, SAFE_SHARP).metadata();
+  let img = sharp(input, SAFE_SHARP).rotate();
+  const dir = (opts.direction ?? "horizontal").toLowerCase();
+  if (dir === "horizontal" || dir === "both") img = img.flop();
+  if (dir === "vertical" || dir === "both") img = img.flip();
+  const fmt = (meta.format ?? "jpeg") as string;
+  return finalize(img, input, fmt, opts.quality ?? 90);
+}
+
+/** Convert to grayscale. */
+export async function grayscale(input: Buffer, opts: { quality?: number } = {}): Promise<OpResult> {
+  const meta = await sharp(input, SAFE_SHARP).metadata();
+  const fmt = (meta.format ?? "jpeg") as string;
+  return finalize(sharp(input, SAFE_SHARP).rotate().grayscale(), input, fmt, opts.quality ?? 85);
+}
+
+/** Gaussian blur (sigma 0.3-100). */
+export async function blur(input: Buffer, opts: { sigma?: number; quality?: number } = {}): Promise<OpResult> {
+  const sigma = clamp(opts.sigma ?? 8, 0.3, 100);
+  const meta = await sharp(input, SAFE_SHARP).metadata();
+  const fmt = (meta.format ?? "jpeg") as string;
+  return finalize(sharp(input, SAFE_SHARP).rotate().blur(sigma), input, fmt, opts.quality ?? 85);
+}
+
+/** Adjust brightness / saturation / hue (modulate). */
+export async function adjust(
+  input: Buffer,
+  opts: { brightness?: number; saturation?: number; hue?: number; quality?: number } = {},
+): Promise<OpResult> {
+  const meta = await sharp(input, SAFE_SHARP).metadata();
+  const fmt = (meta.format ?? "jpeg") as string;
+  const img = sharp(input, SAFE_SHARP).rotate().modulate({
+    brightness: opts.brightness != null ? clamp(opts.brightness, 0, 3) : undefined,
+    saturation: opts.saturation != null ? clamp(opts.saturation, 0, 3) : undefined,
+    hue: opts.hue != null ? Math.round(opts.hue) : undefined,
+  });
+  return finalize(img, input, fmt, opts.quality ?? 90);
+}
+
+/** Tint the image a colour (e.g. sepia with "#704214"). */
+export async function tint(input: Buffer, opts: { color?: string; quality?: number } = {}): Promise<OpResult> {
+  const rgb = hexToRgb(opts.color ?? "#704214");
+  const meta = await sharp(input, SAFE_SHARP).metadata();
+  const fmt = (meta.format ?? "jpeg") as string;
+  return finalize(sharp(input, SAFE_SHARP).rotate().tint(rgb), input, fmt, opts.quality ?? 90);
+}
+
+/** Invert colours. */
+export async function negate(input: Buffer, opts: { quality?: number } = {}): Promise<OpResult> {
+  const meta = await sharp(input, SAFE_SHARP).metadata();
+  const fmt = (meta.format ?? "jpeg") as string;
+  return finalize(sharp(input, SAFE_SHARP).rotate().negate({ alpha: false }), input, fmt, opts.quality ?? 90);
+}
+
+/** Flatten transparency onto a solid background colour. */
+export async function flatten(input: Buffer, opts: { background?: string; quality?: number } = {}): Promise<OpResult> {
+  const meta = await sharp(input, SAFE_SHARP).metadata();
+  const fmt = (meta.format ?? "jpeg") as string;
+  return finalize(sharp(input, SAFE_SHARP).rotate().flatten({ background: hexToRgb(opts.background ?? "#ffffff") }), input, fmt, opts.quality ?? 90);
+}
+
+/** Add a solid border/frame of given width and colour. */
+export async function border(input: Buffer, opts: { width?: number; color?: string; quality?: number } = {}): Promise<OpResult> {
+  const w = clamp(opts.width ?? 24, 1, 1000);
+  const meta = await sharp(input, SAFE_SHARP).metadata();
+  const fmt = (meta.format ?? "jpeg") as string;
+  const img = sharp(input, SAFE_SHARP)
+    .rotate()
+    .extend({ top: w, bottom: w, left: w, right: w, background: hexToRgb(opts.color ?? "#ffffff") });
+  return finalize(img, input, fmt, opts.quality ?? 90);
+}
+
+/** Round the corners (radius in px); outputs PNG to keep transparency. */
+export async function round(input: Buffer, opts: { radius?: number } = {}): Promise<OpResult> {
+  const base = sharp(input, SAFE_SHARP).rotate();
+  const meta = await base.metadata();
+  const W = meta.width ?? 0;
+  const H = meta.height ?? 0;
+  const r = clamp(opts.radius ?? Math.round(Math.min(W, H) * 0.1), 1, Math.floor(Math.min(W, H) / 2));
+  const mask = Buffer.from(`<svg width="${W}" height="${H}"><rect x="0" y="0" width="${W}" height="${H}" rx="${r}" ry="${r}"/></svg>`);
+  const out = await base.composite([{ input: mask, blend: "dest-in" }]).png().toBuffer();
+  const o = await sharp(out).metadata();
+  return result(out, "png", o.width, o.height);
+}
+
+/** Overlay a text watermark (SVG) in a corner. */
+export async function watermark(
+  input: Buffer,
+  opts: { text?: string; opacity?: number; position?: string; quality?: number } = {},
+): Promise<OpResult> {
+  const base = sharp(input, SAFE_SHARP).rotate();
+  const meta = await base.metadata();
+  const W = meta.width ?? 800;
+  const H = meta.height ?? 600;
+  const text = (opts.text ?? "SammaPix").slice(0, 120).replace(/[<>&]/g, "");
+  const opacity = clamp(opts.opacity ?? 0.5, 0, 1);
+  const fontSize = Math.max(14, Math.round(W / 22));
+  const pad = Math.round(fontSize * 0.6);
+  const pos = (opts.position ?? "bottom-right").toLowerCase();
+  const anchor = pos.includes("left") ? "start" : pos.includes("center") ? "middle" : "end";
+  const x = pos.includes("left") ? pad : pos.includes("center") ? W / 2 : W - pad;
+  const y = pos.includes("top") ? fontSize + pad : pos.includes("middle") ? H / 2 : H - pad;
+  const svg = Buffer.from(
+    `<svg width="${W}" height="${H}"><text x="${x}" y="${y}" font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="bold" fill="white" fill-opacity="${opacity}" stroke="black" stroke-opacity="${opacity * 0.4}" stroke-width="1" text-anchor="${anchor}">${text}</text></svg>`,
+  );
+  const fmt = (meta.format ?? "jpeg") as string;
+  const out = await encode(base.composite([{ input: svg }]), fmt, clamp(opts.quality ?? 90, 1, 100));
+  const o = await sharp(out).metadata();
+  return result(out, normalizeFmt(fmt), o.width, o.height);
+}
+
 // ── helpers ──────────────────────────────────────────────────────────────
 
 export class ApiOpError extends Error {}
+
+/** Encode `img` in its source format and return an OpResult (DRY for the ops above). */
+async function finalize(img: sharp.Sharp, _input: Buffer, fmt: string, quality: number): Promise<OpResult> {
+  const out = await encode(img, fmt, clamp(quality, 1, 100));
+  const o = await sharp(out).metadata();
+  return result(out, normalizeFmt(fmt), o.width, o.height);
+}
+
+/** Parse "#rrggbb" / "#rgb" to an sharp RGBA colour. */
+function hexToRgb(hex: string): { r: number; g: number; b: number; alpha: number } {
+  let h = (hex || "").replace("#", "").trim();
+  if (h.length === 3) h = h.split("").map((c) => c + c).join("");
+  if (!/^[0-9a-fA-F]{6}$/.test(h)) return { r: 255, g: 255, b: 255, alpha: 1 };
+  return { r: parseInt(h.slice(0, 2), 16), g: parseInt(h.slice(2, 4), 16), b: parseInt(h.slice(4, 6), 16), alpha: 1 };
+}
 
 function clamp(n: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, n));
