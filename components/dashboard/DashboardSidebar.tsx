@@ -76,6 +76,7 @@ import {
   Split,
   Calculator,
   Workflow,
+  Bot,
 } from "lucide-react";
 import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
