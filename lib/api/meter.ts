@@ -68,3 +68,22 @@ export async function refund(email: string, op: ApiOp): Promise<void> {
 export async function balance(email: string): Promise<number> {
   return getCreditBalance(email);
 }
+
+/** Charge an arbitrary number of credits (used by the pipeline: 1 per step). */
+export async function chargeUnits(
+  email: string,
+  units: number,
+): Promise<{ ok: boolean; cost: number; remaining: number }> {
+  const cost = Math.max(0, Math.round(units));
+  if (cost === 0) return { ok: true, cost: 0, remaining: await getCreditBalance(email) };
+  const res = await deductCredit(email, cost);
+  return { ok: res.success, cost, remaining: res.remaining };
+}
+
+/** Refund an arbitrary number of credits. */
+export async function refundUnits(email: string, units: number): Promise<void> {
+  const cost = Math.max(0, Math.round(units));
+  if (cost === 0) return;
+  const { addCredits } = await import("@/lib/credits");
+  await addCredits(email, cost);
+}
