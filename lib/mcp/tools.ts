@@ -15,6 +15,7 @@ import * as pdf from "@/lib/server-ops/pdf";
 import * as img from "@/lib/server-ops/image";
 import { assertFileSize } from "@/lib/api/limits";
 import { OP_COST } from "@/lib/api/meter";
+import { fetchRemoteFile } from "@/lib/api/fetch-image";
 
 export interface McpToolResult {
   /** base64 of the produced file (absent for metadata). */
@@ -35,9 +36,14 @@ export interface McpTool {
 
 // ── helpers ──────────────────────────────────────────────────────────────
 
-function decodeImage(args: Record<string, unknown>): Buffer {
+/** Acquire the source image from base64 or a URL (SSRF-safe). */
+async function acquireImage(args: Record<string, unknown>): Promise<Buffer> {
+  const url = args.imageUrl;
+  if (typeof url === "string" && url) {
+    return fetchRemoteFile(url); // validates size + blocks internal hosts
+  }
   const b64 = args.imageBase64;
-  if (typeof b64 !== "string" || !b64) throw new img.ApiOpError('"imageBase64" is required (base64 or data URL)');
+  if (typeof b64 !== "string" || !b64) throw new img.ApiOpError('provide "imageBase64" or "imageUrl"');
   const raw = b64.includes(",") ? b64.split(",")[1] : b64;
   const buf = Buffer.from(raw, "base64");
   if (buf.length < 10) throw new img.ApiOpError("imageBase64 is not a valid image");
@@ -46,7 +52,8 @@ function decodeImage(args: Record<string, unknown>): Buffer {
 }
 
 const IMG_INPUT = {
-  imageBase64: { type: "string", description: "Source image as base64 (raw or data URL). Max 20MB." },
+  imageBase64: { type: "string", description: "Source image as base64 (raw or data URL). Max 20MB. Use this OR imageUrl." },
+  imageUrl: { type: "string", description: "Public URL of the source image (fetched securely). Use this OR imageBase64." },
 };
 const QUALITY = { quality: { type: "number", minimum: 1, maximum: 100, description: "Output quality 1-100 (optional)." } };
 
@@ -55,7 +62,7 @@ function imageResult(r: img.OpResult): McpToolResult {
 }
 
 async function runImg(op: ImageOp, args: Record<string, unknown>): Promise<McpToolResult> {
-  return imageResult(await runImageOp(op, decodeImage(args), args));
+  return imageResult(await runImageOp(op, await acquireImage(args), args));
 }
 
 const RO = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
@@ -67,7 +74,7 @@ export const MCP_TOOLS: McpTool[] = [
   {
     name: "sammapix_compress",
     description: "Compress an image to reduce file size while keeping its format. Returns the compressed image (base64).",
-    inputSchema: { type: "object", properties: { ...IMG_INPUT, ...QUALITY, maxWidthOrHeight: { type: "number", description: "Optionally cap the longest side (px)." } }, required: ["imageBase64"] },
+    inputSchema: { type: "object", properties: { ...IMG_INPUT, ...QUALITY, maxWidthOrHeight: { type: "number", description: "Optionally cap the longest side (px)." } }, required: [] },
     annotations: RW,
     cost: () => OP_COST.compress,
     run: (a) => runImg("compress", a),
@@ -75,7 +82,7 @@ export const MCP_TOOLS: McpTool[] = [
   {
     name: "sammapix_resize",
     description: "Resize an image to a target width and/or height. Never upscales beyond 8000px. Returns the resized image (base64).",
-    inputSchema: { type: "object", properties: { ...IMG_INPUT, width: { type: "number" }, height: { type: "number" }, fit: { type: "string", enum: ["cover", "contain", "inside", "outside", "fill"], description: "How to fit (default inside)." }, ...QUALITY }, required: ["imageBase64"] },
+    inputSchema: { type: "object", properties: { ...IMG_INPUT, width: { type: "number" }, height: { type: "number" }, fit: { type: "string", enum: ["cover", "contain", "inside", "outside", "fill"], description: "How to fit (default inside)." }, ...QUALITY }, required: [] },
     annotations: RW,
     cost: () => OP_COST.resize,
     run: (a) => runImg("resize", a),
@@ -83,7 +90,7 @@ export const MCP_TOOLS: McpTool[] = [
   {
     name: "sammapix_crop",
     description: "Crop an image to a pixel rectangle or a centered aspect ratio (e.g. '16:9'). Returns the cropped image (base64).",
-    inputSchema: { type: "object", properties: { ...IMG_INPUT, ratio: { type: "string", description: "Aspect ratio like '16:9' or '1:1' (centered crop)." }, left: { type: "number" }, top: { type: "number" }, width: { type: "number" }, height: { type: "number" }, ...QUALITY }, required: ["imageBase64"] },
+    inputSchema: { type: "object", properties: { ...IMG_INPUT, ratio: { type: "string", description: "Aspect ratio like '16:9' or '1:1' (centered crop)." }, left: { type: "number" }, top: { type: "number" }, width: { type: "number" }, height: { type: "number" }, ...QUALITY }, required: [] },
     annotations: RW,
     cost: () => OP_COST.crop,
     run: (a) => runImg("crop", a),
@@ -91,7 +98,7 @@ export const MCP_TOOLS: McpTool[] = [
   {
     name: "sammapix_convert",
     description: "Convert an image to another format: webp, avif, jpeg or png. Returns the converted image (base64).",
-    inputSchema: { type: "object", properties: { ...IMG_INPUT, format: { type: "string", enum: ["webp", "avif", "jpeg", "png"], description: "Target format." }, ...QUALITY }, required: ["imageBase64", "format"] },
+    inputSchema: { type: "object", properties: { ...IMG_INPUT, format: { type: "string", enum: ["webp", "avif", "jpeg", "png"], description: "Target format." }, ...QUALITY }, required: ["format"] },
     annotations: RW,
     cost: () => OP_COST.convert,
     run: (a) => runImg("convert", a),
@@ -99,7 +106,7 @@ export const MCP_TOOLS: McpTool[] = [
   {
     name: "sammapix_rotate",
     description: "Rotate an image by a fixed angle, or auto-orient from EXIF when no angle is given. Returns the rotated image (base64).",
-    inputSchema: { type: "object", properties: { ...IMG_INPUT, angle: { type: "number", description: "Degrees clockwise. Omit to auto-orient from EXIF." }, ...QUALITY }, required: ["imageBase64"] },
+    inputSchema: { type: "object", properties: { ...IMG_INPUT, angle: { type: "number", description: "Degrees clockwise. Omit to auto-orient from EXIF." }, ...QUALITY }, required: [] },
     annotations: RW,
     cost: () => OP_COST.rotate,
     run: (a) => runImg("rotate", a),
@@ -107,10 +114,10 @@ export const MCP_TOOLS: McpTool[] = [
   {
     name: "sammapix_get_metadata",
     description: "Read an image's metadata (format, dimensions, color space, EXIF orientation). Returns JSON, no image.",
-    inputSchema: { type: "object", properties: { ...IMG_INPUT }, required: ["imageBase64"] },
+    inputSchema: { type: "object", properties: { ...IMG_INPUT }, required: [] },
     annotations: RO,
     cost: () => OP_COST.metadata,
-    run: async (a) => ({ info: await img.metadata(decodeImage(a)) }),
+    run: async (a) => ({ info: await img.metadata(await acquireImage(a)) }),
   },
   {
     name: "sammapix_pipeline",
@@ -126,7 +133,7 @@ export const MCP_TOOLS: McpTool[] = [
           items: { type: "object", properties: { op: { type: "string", enum: ["compress", "resize", "crop", "convert", "rotate"] }, params: { type: "object" } }, required: ["op"] },
         },
       },
-      required: ["imageBase64", "steps"],
+      required: ["steps"],
     },
     annotations: RW,
     cost: (a) => pipelineCost((Array.isArray(a.steps) ? a.steps : []) as PipelineStep[]),
@@ -136,7 +143,7 @@ export const MCP_TOOLS: McpTool[] = [
       for (const s of steps as { op?: unknown }[]) {
         if (!s || typeof s.op !== "string" || !isImageOp(s.op)) throw new img.ApiOpError(`invalid pipeline step "${s?.op}"`);
       }
-      const { result } = await runPipeline(decodeImage(a), steps as { op: string; params?: Record<string, unknown> }[]);
+      const { result } = await runPipeline(await acquireImage(a), steps as { op: string; params?: Record<string, unknown> }[]);
       return imageResult(result);
     },
   },

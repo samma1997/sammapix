@@ -19,6 +19,7 @@ import * as pdf from "@/lib/server-ops/pdf";
 import { isImageOp, runImageOp, type ImageOp } from "@/lib/server-ops/run";
 import { assertFileSize, contentLengthExceeded, PayloadTooLarge } from "@/lib/api/limits";
 import { rateLimit, clientIp, IP_LIMIT, KEY_LIMIT } from "@/lib/api/ratelimit";
+import { fetchRemoteFile, UnsafeUrlError } from "@/lib/api/fetch-image";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -53,8 +54,15 @@ async function readSingle(req: NextRequest): Promise<{ buffer: Buffer; params: R
     return { buffer, params };
   }
   const body = (await req.json()) as Record<string, unknown>;
+  // URL input (agents usually have a link) — fetched with SSRF protection.
+  const url = (body.url ?? body.imageUrl) as string | undefined;
+  if (typeof url === "string" && url) {
+    const buffer = await fetchRemoteFile(url);
+    const { url: _u, imageUrl: _iu, image: _img, ...params } = body;
+    return { buffer, params };
+  }
   const image = body.image as string;
-  if (!image) throw new Error('missing "image" (base64 or data URL)');
+  if (!image) throw new Error('provide "image" (base64/dataURL) or "url"');
   const b64 = image.includes(",") ? image.split(",")[1] : image;
   const buffer = Buffer.from(b64, "base64");
   if (buffer.length < 10) throw new Error("invalid base64 image");
