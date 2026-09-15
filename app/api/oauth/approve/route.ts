@@ -1,15 +1,16 @@
 /**
- * Consent approval — POST /api/oauth/approve
+ * Consent decision — POST /api/oauth/approve   body: { nonce, decision }
  *
- * Called by the consent screen once the (Google-authenticated) user approves.
- * Re-validates everything server-side, mints a single-use PKCE authorization
- * code, grants the one-time free credits, and returns the redirect URL the
- * browser should navigate to (redirect_uri?code=...&state=...).
+ * The consent screen echoes only the nonce (never security params). We load the
+ * server-side authorization request, verify the approving user is the one who
+ * initiated it, and on approval mint a single-use PKCE code + seed free credits.
+ *
+ * CSRF: same-origin only (Origin check) on top of NextAuth's SameSite cookies.
  */
 import { NextRequest } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
-import { getClient, issueCode } from "@/lib/oauth/store";
+import { consumeAuthRequest, issueCode } from "@/lib/oauth/store";
 import { grantApiFreeCreditsOnce } from "@/lib/credits";
 import { FREE_API_CREDITS } from "@/lib/api/limits";
 import { APP_URL } from "@/lib/constants";
@@ -17,40 +18,61 @@ import { APP_URL } from "@/lib/constants";
 export const runtime = "nodejs";
 
 const MCP_RESOURCE = `${APP_URL}/api/mcp`;
+const ALLOWED_SCOPES = new Set(["mcp"]);
+
+function sameOrigin(req: NextRequest): boolean {
+  const origin = req.headers.get("origin");
+  if (!origin) return true; // non-CORS same-origin fetch may omit Origin
+  try {
+    return new URL(origin).host === req.nextUrl.host;
+  } catch {
+    return false;
+  }
+}
 
 export async function POST(req: NextRequest) {
+  if (!sameOrigin(req)) return Response.json({ error: "invalid_origin" }, { status: 403 });
+
   const session = await getServerSession(authOptions);
   const email = session?.user?.email;
   if (!email) return Response.json({ error: "not_authenticated" }, { status: 401 });
 
-  const body = (await req.json().catch(() => ({}))) as Record<string, string>;
-  const { client_id, redirect_uri, code_challenge, code_challenge_method, state, scope, resource } = body;
+  const body = (await req.json().catch(() => ({}))) as { nonce?: string; decision?: string };
+  const stored = body.nonce ? await consumeAuthRequest(body.nonce) : null; // single-use
+  if (!stored) return Response.json({ error: "invalid_request", error_description: "expired or invalid consent request" }, { status: 400 });
 
-  if (code_challenge_method !== "S256" || !code_challenge) {
-    return Response.json({ error: "invalid_request", error_description: "PKCE S256 required" }, { status: 400 });
-  }
-  const client = client_id ? await getClient(client_id) : null;
-  if (!client) return Response.json({ error: "invalid_client" }, { status: 400 });
-  if (!redirect_uri || !client.redirect_uris.includes(redirect_uri)) {
-    return Response.json({ error: "invalid_request", error_description: "redirect_uri mismatch" }, { status: 400 });
-  }
-  // Bind the token audience to OUR mcp resource (reject tokens for other resources).
-  const aud = resource && resource.replace(/\/$/, "") === MCP_RESOURCE.replace(/\/$/, "") ? resource : MCP_RESOURCE;
+  // The user approving MUST be the user who initiated the request.
+  if (stored.email !== email) return Response.json({ error: "invalid_request", error_description: "session mismatch" }, { status: 400 });
 
-  // First authorization for this account seeds the free tier.
-  await grantApiFreeCreditsOnce(email, FREE_API_CREDITS);
+  const url = new URL(stored.redirectUri);
+  if (stored.state) url.searchParams.set("state", stored.state);
+
+  if (body.decision !== "approve") {
+    url.searchParams.set("error", "access_denied");
+    return Response.json({ redirect: url.toString() });
+  }
+
+  // Scope: only known scopes are granted.
+  const granted = (stored.scope || "mcp").split(" ").filter((s) => ALLOWED_SCOPES.has(s));
+  if (granted.length === 0) {
+    url.searchParams.set("error", "invalid_scope");
+    return Response.json({ redirect: url.toString() });
+  }
+
+  // Bind the token audience to OUR mcp resource.
+  const aud = stored.resource && stored.resource.replace(/\/$/, "") === MCP_RESOURCE.replace(/\/$/, "") ? stored.resource : MCP_RESOURCE;
+
+  await grantApiFreeCreditsOnce(email, FREE_API_CREDITS); // free tier on first authorize
 
   const code = await issueCode({
     email,
-    clientId: client_id,
-    redirectUri: redirect_uri,
-    codeChallenge: code_challenge,
+    clientId: stored.clientId,
+    redirectUri: stored.redirectUri,
+    codeChallenge: stored.codeChallenge,
     resource: aud,
-    scope: scope || "mcp",
+    scope: granted.join(" "),
   });
 
-  const url = new URL(redirect_uri);
   url.searchParams.set("code", code);
-  if (state) url.searchParams.set("state", state);
   return Response.json({ redirect: url.toString() });
 }

@@ -4,21 +4,21 @@ import React, { useState } from "react";
 import { Bot, ShieldCheck, Zap, Image as ImageIcon } from "lucide-react";
 
 interface Props {
-  params: { client_id: string; redirect_uri: string; code_challenge: string; code_challenge_method: string; state: string; scope: string; resource: string };
+  nonce: string;
   clientName: string;
   userEmail: string;
 }
 
-export default function ConsentScreen({ params, clientName, userEmail }: Props) {
+export default function ConsentScreen({ nonce, clientName, userEmail }: Props) {
   const [busy, setBusy] = useState<"approve" | "deny" | null>(null);
 
-  const approve = async () => {
-    setBusy("approve");
+  const decide = async (decision: "approve" | "deny") => {
+    setBusy(decision);
     try {
       const res = await fetch("/api/oauth/approve", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(params),
+        body: JSON.stringify({ nonce, decision }),
       });
       const data = await res.json();
       if (data?.redirect) window.location.href = data.redirect;
@@ -31,13 +31,8 @@ export default function ConsentScreen({ params, clientName, userEmail }: Props) 
     }
   };
 
-  const deny = () => {
-    setBusy("deny");
-    const url = new URL(params.redirect_uri);
-    url.searchParams.set("error", "access_denied");
-    if (params.state) url.searchParams.set("state", params.state);
-    window.location.href = url.toString();
-  };
+  const approve = () => decide("approve");
+  const deny = () => decide("deny");
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#FAFAFA] dark:bg-[#191919] px-4 py-10">

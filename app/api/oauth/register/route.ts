@@ -4,7 +4,7 @@
  */
 import { NextRequest } from "next/server";
 import { registerClient } from "@/lib/oauth/store";
-import { rateLimit, clientIp, IP_LIMIT } from "@/lib/api/ratelimit";
+import { rateLimit, clientIp } from "@/lib/api/ratelimit";
 
 export const runtime = "nodejs";
 
@@ -19,8 +19,8 @@ export function OPTIONS() {
 }
 
 export async function POST(req: NextRequest) {
-  // Rate-limit registration to prevent client-spam.
-  const rl = await rateLimit("oauth-reg", clientIp(req.headers), IP_LIMIT.limit, IP_LIMIT.windowSec);
+  // Registration is unauthenticated, so cap it tightly per IP (10/hour).
+  const rl = await rateLimit("oauth-reg", clientIp(req.headers), 10, 3600);
   if (!rl.ok) return Response.json({ error: "rate_limited" }, { status: 429, headers: CORS });
 
   let body: { redirect_uris?: unknown; client_name?: unknown };

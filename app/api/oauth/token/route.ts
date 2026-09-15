@@ -50,10 +50,11 @@ export async function POST(req: NextRequest) {
   // ── authorization_code ──────────────────────────────────────────────────
   if (p.grant_type === "authorization_code") {
     if (!p.code) return err("invalid_request", "missing code");
+    if (!p.client_id) return err("invalid_request", "missing client_id");
     if (!p.code_verifier) return err("invalid_request", "missing code_verifier (PKCE)");
     const data = await consumeCode(p.code); // single-use
     if (!data) return err("invalid_grant", "code is invalid or expired");
-    if (p.client_id && p.client_id !== data.clientId) return err("invalid_grant", "client mismatch");
+    if (p.client_id !== data.clientId) return err("invalid_grant", "client mismatch");
     if (!p.redirect_uri || p.redirect_uri !== data.redirectUri) return err("invalid_grant", "redirect_uri mismatch");
     if (!verifyPkce(p.code_verifier, data.codeChallenge)) return err("invalid_grant", "PKCE verification failed");
 
@@ -64,7 +65,8 @@ export async function POST(req: NextRequest) {
   // ── refresh_token (rotated) ───────────────────────────────────────────────
   if (p.grant_type === "refresh_token") {
     if (!p.refresh_token) return err("invalid_request", "missing refresh_token");
-    const tokens = await rotateRefresh(p.refresh_token);
+    if (!p.client_id) return err("invalid_request", "missing client_id");
+    const tokens = await rotateRefresh(p.refresh_token, p.client_id);
     if (!tokens) return err("invalid_grant", "refresh_token is invalid or expired");
     return Response.json(tokens, { headers: { ...CORS, "cache-control": "no-store" } });
   }

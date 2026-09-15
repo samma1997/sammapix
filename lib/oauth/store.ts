@@ -53,6 +53,16 @@ async function del(key: string) {
   else mem.delete(key);
 }
 
+/** Atomic read-and-delete (single-use): closes the code/refresh replay race. */
+async function getdel(key: string): Promise<string | null> {
+  if (REDIS_URL && REDIS_TOKEN) return redis<string | null>(["GETDEL", key]);
+  const e = mem.get(key);
+  if (!e) return null;
+  mem.delete(key);
+  if (e.exp && e.exp < Date.now()) return null;
+  return e.v;
+}
+
 const sha = (s: string) => createHash("sha256").update(s).digest("hex");
 const rand = (n = 32) => randomBytes(n).toString("base64url");
 
@@ -71,6 +81,7 @@ export interface OAuthClient {
 export async function registerClient(input: { redirect_uris: string[]; client_name?: string }): Promise<OAuthClient> {
   const redirect_uris = (input.redirect_uris ?? []).filter((u) => typeof u === "string" && u);
   if (redirect_uris.length === 0) throw new Error("redirect_uris is required");
+  if (redirect_uris.length > 5) throw new Error("max 5 redirect_uris per client");
   for (const u of redirect_uris) {
     let url: URL;
     try { url = new URL(u); } catch { throw new Error(`invalid redirect_uri: ${u}`); }
@@ -112,13 +123,36 @@ export async function issueCode(data: CodeData): Promise<string> {
   return code;
 }
 
-/** Consume a code (single-use): read then delete. Returns null if missing. */
+/** Consume a code (single-use, atomic GETDEL): returns null if missing/replayed. */
 export async function consumeCode(code: string): Promise<CodeData | null> {
-  const key = `oauth:code:${sha(code)}`;
-  const raw = await get(key);
-  if (!raw) return null;
-  await del(key);
-  return JSON.parse(raw) as CodeData;
+  const raw = await getdel(`oauth:code:${sha(code)}`);
+  return raw ? (JSON.parse(raw) as CodeData) : null;
+}
+
+// ── Pending authorization requests (server-side, keyed by nonce) ────────────
+// The consent screen only echoes a nonce, never security params, so a browser-
+// side attacker (XSS/extension) cannot substitute code_challenge/redirect_uri.
+
+export interface AuthRequest {
+  clientId: string;
+  redirectUri: string;
+  codeChallenge: string;
+  resource: string;
+  scope: string;
+  state: string;
+  email: string; // the user who initiated (bound to prevent cross-session use)
+}
+
+export async function saveAuthRequest(req: AuthRequest): Promise<string> {
+  const nonce = rand(18);
+  await setEx(`oauth:authreq:${sha(nonce)}`, JSON.stringify(req), 600); // 10 min
+  return nonce;
+}
+
+export async function consumeAuthRequest(nonce: string): Promise<AuthRequest | null> {
+  if (!nonce) return null;
+  const raw = await getdel(`oauth:authreq:${sha(nonce)}`);
+  return raw ? (JSON.parse(raw) as AuthRequest) : null;
 }
 
 /** PKCE S256 verification. */
@@ -163,12 +197,20 @@ export async function resolveAccessToken(token: string): Promise<TokenData | nul
   return raw ? (JSON.parse(raw) as TokenData) : null;
 }
 
-/** Rotate a refresh token (public-client rotation): invalidate old, issue new. */
-export async function rotateRefresh(refreshToken: string): Promise<IssuedTokens | null> {
+/** Rotate a refresh token (public-client rotation): invalidate old, issue new.
+ *  Atomic GETDEL closes the replay race; client_id must match the bound client. */
+export async function rotateRefresh(refreshToken: string, clientId?: string): Promise<IssuedTokens | null> {
   if (!refreshToken.startsWith("mcp_rt_")) return null;
-  const key = `oauth:refresh:${sha(refreshToken)}`;
-  const raw = await get(key);
+  const raw = await getdel(`oauth:refresh:${sha(refreshToken)}`); // old refresh dies here
   if (!raw) return null;
-  await del(key); // rotation: old refresh is now dead
-  return issueTokens(JSON.parse(raw) as TokenData);
+  const data = JSON.parse(raw) as TokenData;
+  if (clientId && data.clientId !== clientId) return null; // stolen-token cross-client use
+  return issueTokens(data);
+}
+
+/** Revoke a token (RFC 7009). Returns true if a matching token was deleted. */
+export async function revokeToken(token: string): Promise<boolean> {
+  if (token.startsWith("mcp_at_")) { await del(`oauth:access:${sha(token)}`); return true; }
+  if (token.startsWith("mcp_rt_")) { await del(`oauth:refresh:${sha(token)}`); return true; }
+  return false;
 }

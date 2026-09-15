@@ -8,7 +8,7 @@
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
-import { getClient } from "@/lib/oauth/store";
+import { getClient, saveAuthRequest } from "@/lib/oauth/store";
 import { APP_URL } from "@/lib/constants";
 import ConsentScreen from "@/components/oauth/ConsentScreen";
 
@@ -58,9 +58,21 @@ export default async function AuthorizePage({ searchParams }: { searchParams: Pr
     redirect(`/api/auth/signin?callbackUrl=${encodeURIComponent(callbackUrl)}`);
   }
 
+  // Persist the VALIDATED request server-side; the consent screen echoes only a
+  // nonce, so a browser-side attacker cannot swap code_challenge/redirect_uri.
+  const nonce = await saveAuthRequest({
+    clientId: params.client_id,
+    redirectUri: params.redirect_uri,
+    codeChallenge: params.code_challenge,
+    resource: params.resource,
+    scope: params.scope,
+    state: params.state,
+    email: session!.user!.email!,
+  });
+
   return (
     <ConsentScreen
-      params={params}
+      nonce={nonce}
       clientName={client.client_name || "An AI application"}
       userEmail={session!.user!.email!}
     />

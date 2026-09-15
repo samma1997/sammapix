@@ -282,7 +282,9 @@ export async function middleware(request: NextRequest, event: NextFetchEvent) {
 
   // OAuth/MCP discovery metadata must be reachable by non-browser clients
   // (MCP clients, OAuth libraries) — never bot-block or rate-limit these.
-  if (pathname.startsWith("/.well-known/")) {
+  // /oauth/* is the user-facing consent flow: bot-blocking it would break
+  // legitimate authorizations, so let it through too.
+  if (pathname.startsWith("/.well-known/") || pathname.startsWith("/oauth/")) {
     return NextResponse.next();
   }
 

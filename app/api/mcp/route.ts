@@ -150,8 +150,9 @@ export async function POST(req: NextRequest) {
     return Response.json(rpcError(null, -32700, "parse error"), { status: 400 });
   }
 
-  // Support JSON-RPC batches
+  // Support JSON-RPC batches (bounded, to avoid mass concurrent billing writes)
   if (Array.isArray(body)) {
+    if (body.length > 20) return Response.json(rpcError(null, -32600, "batch too large (max 20)"), { status: 400 });
     const out = (await Promise.all(body.map((m) => dispatch(email, m as Rpc)))).filter(Boolean);
     return Response.json(out);
   }

@@ -51,18 +51,24 @@ export async function rateLimit(
   const windowStart = now - (now % windowSec);
   const key = `rl:${bucket}:${id}:${windowStart}`;
 
+  // SET NX EX is idempotent and always attaches a TTL (avoids a TTL-less key
+  // that could lock a bucket forever if a bare EXPIRE call failed).
+  await redis(["SET", key, "0", "EX", String(windowSec), "NX"]);
   const count = (await redis<number>(["INCR", key])) ?? 1;
-  if (count === 1) await redis(["EXPIRE", key, windowSec]);
 
   const remaining = Math.max(0, limit - count);
   const retryAfter = windowSec - (now % windowSec);
   return { ok: count <= limit, limit, remaining, retryAfter };
 }
 
-/** Best-effort client IP from proxy headers (Vercel sets x-forwarded-for). */
+/** Trusted client IP. Vercel's x-vercel-forwarded-for holds the REAL client IP
+ *  and cannot be spoofed by the client; x-forwarded-for CAN be (a client can
+ *  prepend fake entries), so we take the RIGHTMOST entry Vercel appended. */
 export function clientIp(headers: Headers): string {
+  const vercel = headers.get("x-vercel-forwarded-for");
+  if (vercel) return vercel.split(",")[0].trim();
   const xff = headers.get("x-forwarded-for");
-  if (xff) return xff.split(",")[0].trim();
+  if (xff) return xff.split(",").at(-1)!.trim();
   return headers.get("x-real-ip") ?? "unknown";
 }
 
