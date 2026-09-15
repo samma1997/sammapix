@@ -9,7 +9,7 @@
  * account's website credits and API credits are one wallet.
  */
 
-import { deductCredit, getCreditBalance } from "@/lib/credits";
+import { deductCreditsAtomic, getCreditBalance } from "@/lib/credits";
 
 export type ApiOp =
   | "compress"
@@ -52,7 +52,7 @@ export async function charge(
   op: ApiOp,
 ): Promise<{ ok: boolean; cost: number; remaining: number }> {
   const cost = costOf(op);
-  const res = await deductCredit(email, cost);
+  const res = await deductCreditsAtomic(email, cost);
   return { ok: res.success, cost, remaining: res.remaining };
 }
 
@@ -76,7 +76,7 @@ export async function chargeUnits(
 ): Promise<{ ok: boolean; cost: number; remaining: number }> {
   const cost = Math.max(0, Math.round(units));
   if (cost === 0) return { ok: true, cost: 0, remaining: await getCreditBalance(email) };
-  const res = await deductCredit(email, cost);
+  const res = await deductCreditsAtomic(email, cost);
   return { ok: res.success, cost, remaining: res.remaining };
 }
 

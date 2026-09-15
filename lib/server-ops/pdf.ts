@@ -8,6 +8,7 @@
 
 import { PDFDocument } from "pdf-lib";
 import { ApiOpError } from "@/lib/server-ops/image";
+import { MAX_PDF_FILES, MAX_PDF_PAGES } from "@/lib/api/limits";
 
 export interface PdfResult {
   buffer: Buffer;
@@ -45,7 +46,9 @@ export async function pdfCompress(input: Buffer): Promise<PdfResult> {
 /** Merge multiple PDFs (in order) into a single document. */
 export async function pdfMerge(inputs: Buffer[]): Promise<PdfResult> {
   if (inputs.length < 2) throw new ApiOpError("pdf-merge needs at least 2 files");
+  if (inputs.length > MAX_PDF_FILES) throw new ApiOpError(`pdf-merge accepts at most ${MAX_PDF_FILES} files`);
   const out = await PDFDocument.create();
+  let totalPages = 0;
   for (const [i, buf] of inputs.entries()) {
     let src: PDFDocument;
     try {
@@ -53,6 +56,8 @@ export async function pdfMerge(inputs: Buffer[]): Promise<PdfResult> {
     } catch {
       throw new ApiOpError(`file ${i + 1} is not a valid PDF`);
     }
+    totalPages += src.getPageCount();
+    if (totalPages > MAX_PDF_PAGES) throw new ApiOpError(`merged PDF would exceed ${MAX_PDF_PAGES} pages`);
     const pages = await out.copyPages(src, src.getPageIndices());
     pages.forEach((p) => out.addPage(p));
   }

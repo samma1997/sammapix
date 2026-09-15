@@ -11,11 +11,14 @@
  */
 
 import { NextRequest } from "next/server";
+import { createHash } from "crypto";
 import { extractKey, resolveApiKey } from "@/lib/api/keys";
 import { charge, refund, type ApiOp } from "@/lib/api/meter";
 import * as img from "@/lib/server-ops/image";
 import * as pdf from "@/lib/server-ops/pdf";
 import { isImageOp, runImageOp, type ImageOp } from "@/lib/server-ops/run";
+import { assertFileSize, contentLengthExceeded, PayloadTooLarge } from "@/lib/api/limits";
+import { rateLimit, clientIp, IP_LIMIT, KEY_LIMIT } from "@/lib/api/ratelimit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -40,6 +43,7 @@ async function readSingle(req: NextRequest): Promise<{ buffer: Buffer; params: R
     const form = await req.formData();
     const file = form.get("file");
     if (!(file instanceof File)) throw new Error('missing "file" field');
+    assertFileSize(file.size);
     const buffer = Buffer.from(await file.arrayBuffer());
     const params: Record<string, unknown> = {};
     for (const [k, v] of form.entries()) {
@@ -52,14 +56,18 @@ async function readSingle(req: NextRequest): Promise<{ buffer: Buffer; params: R
   const image = body.image as string;
   if (!image) throw new Error('missing "image" (base64 or data URL)');
   const b64 = image.includes(",") ? image.split(",")[1] : image;
+  const buffer = Buffer.from(b64, "base64");
+  if (buffer.length < 10) throw new Error("invalid base64 image");
+  assertFileSize(buffer.length);
   const { image: _drop, ...params } = body;
-  return { buffer: Buffer.from(b64, "base64"), params };
+  return { buffer, params };
 }
 
 /** Read many files (multipart, repeated "file" fields) for merge ops. */
 async function readMany(req: NextRequest): Promise<Buffer[]> {
   const form = await req.formData();
   const files = form.getAll("file").filter((f): f is File => f instanceof File);
+  files.forEach((f) => assertFileSize(f.size));
   return Promise.all(files.map(async (f) => Buffer.from(await f.arrayBuffer())));
 }
 
@@ -67,9 +75,17 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
   const { op } = await ctx.params;
 
   if (!SUPPORTED.includes(op as ApiOp)) {
-    return json({ error: "unknown_op", op, supported: SUPPORTED }, 404);
+    return json({ error: "unknown_op" }, 404);
   }
   const apiOp = op as ApiOp;
+
+  // Early payload guard (before reading the body)
+  if (contentLengthExceeded(req.headers)) return json({ error: "payload_too_large" }, 413);
+
+  // Rate limit per-IP (anti-DoS floor, applies before auth)
+  const ip = clientIp(req.headers);
+  const ipRL = await rateLimit("ip", ip, IP_LIMIT.limit, IP_LIMIT.windowSec);
+  if (!ipRL.ok) return json({ error: "rate_limited" }, 429, { "retry-after": String(ipRL.retryAfter) });
 
   // Auth
   const key = extractKey(req.headers);
@@ -77,8 +93,40 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
   const email = await resolveApiKey(key);
   if (!email) return json({ error: "invalid_api_key" }, 401);
 
-  // Charge (before running; refund on failure)
-  const bill = await charge(email, apiOp);
+  // Rate limit per-key (trusted but must not saturate the fleet)
+  const keyId = createHash("sha256").update(key).digest("hex").slice(0, 16);
+  const keyRL = await rateLimit("key", keyId, KEY_LIMIT.limit, KEY_LIMIT.windowSec);
+  if (!keyRL.ok) return json({ error: "rate_limited" }, 429, { "retry-after": String(keyRL.retryAfter) });
+
+  // ── Read + validate input BEFORE charging (never bill on bad/oversized input) ──
+  let inputBuffer: Buffer;
+  let inputBuffers: Buffer[] = [];
+  let params: Record<string, unknown> = {};
+  try {
+    if (apiOp === "pdf-merge") {
+      inputBuffers = await readMany(req);
+      inputBuffer = inputBuffers[0] ?? Buffer.alloc(0);
+    } else {
+      const s = await readSingle(req);
+      inputBuffer = s.buffer;
+      params = s.params;
+    }
+  } catch (e) {
+    const status =
+      e instanceof PayloadTooLarge || contentLengthExceeded(req.headers) ||
+      Number(req.headers.get("content-length") ?? 0) > 20 * 1024 * 1024
+        ? 413
+        : 400;
+    return json({ error: status === 413 ? "payload_too_large" : "bad_input", detail: (e as Error).message }, status);
+  }
+
+  // Charge (after input is valid; refund on op failure)
+  let bill: Awaited<ReturnType<typeof charge>>;
+  try {
+    bill = await charge(email, apiOp);
+  } catch {
+    return json({ error: "billing_unavailable" }, 503);
+  }
   if (!bill.ok) {
     return json({ error: "insufficient_credits", cost: bill.cost, remaining: bill.remaining, op: apiOp }, 402);
   }
@@ -88,13 +136,11 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
   try {
     // ── PDF merge (multiple files) ──────────────────────────────────────────
     if (apiOp === "pdf-merge") {
-      const buffers = await readMany(req);
-      const out = await pdf.pdfMerge(buffers);
+      const out = await pdf.pdfMerge(inputBuffers);
       return binary(out.buffer, out.contentType, { ...billHeaders, "x-output-pages": String(out.info.pages), "x-output-bytes": String(out.info.bytes) });
     }
 
-    // ── Single-file ops ─────────────────────────────────────────────────────
-    const { buffer, params } = await readSingle(req);
+    const buffer = inputBuffer;
 
     if (apiOp === "pdf-compress") {
       const out = await pdf.pdfCompress(buffer);
@@ -120,7 +166,11 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
     throw new Error("unreachable");
   } catch (e) {
     await refund(email, apiOp);
-    return json({ error: "op_failed", op: apiOp, detail: (e as Error).message }, 422, { "x-credits-refunded": String(bill.cost) });
+    // Only surface safe, user-facing errors; hide internal detail.
+    const userFacing = e instanceof img.ApiOpError || e instanceof PayloadTooLarge;
+    const status = e instanceof PayloadTooLarge ? 413 : userFacing ? 422 : 500;
+    const detail = userFacing ? (e as Error).message : "processing_failed";
+    return json({ error: "op_failed", op: apiOp, detail }, status, { "x-credits-refunded": String(bill.cost) });
   }
 }
 

@@ -12,6 +12,7 @@
  */
 
 import { createHash, randomBytes } from "crypto";
+import { MAX_API_KEYS_PER_ACCOUNT } from "@/lib/api/limits";
 
 const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -45,6 +46,13 @@ export interface ApiKeyMeta {
   createdAt: number;
   label: string;
   lastUsedAt?: number;
+  hash?: string; // internal: sha256 of the key, needed for revoke. Never expose.
+}
+
+/** Public view of a key: strips the internal hash. */
+export function publicMeta(m: ApiKeyMeta): Omit<ApiKeyMeta, "hash"> {
+  const { hash: _h, ...rest } = m;
+  return rest;
 }
 
 /**
@@ -55,21 +63,23 @@ export async function createApiKey(
   email: string,
   label = "default",
 ): Promise<{ key: string; meta: ApiKeyMeta }> {
+  // Cap keys per account (prevents unbounded metadata growth / abuse).
+  const existing = await listApiKeys(email);
+  if (existing.length >= MAX_API_KEYS_PER_ACCOUNT) {
+    throw new Error(`max ${MAX_API_KEYS_PER_ACCOUNT} API keys per account — revoke one first`);
+  }
+
   const key = `sk_live_${randomBytes(24).toString("hex")}`;
   const hash = hashKey(key);
-  const meta: ApiKeyMeta = { id: key.slice(0, 12), createdAt: Date.now(), label };
+  const meta: ApiKeyMeta = { id: key.slice(0, 12), createdAt: Date.now(), label, hash };
 
   if (REDIS_URL && REDIS_TOKEN) {
     await redisExec(["SET", `apikey:${hash}`, email]);
-    const raw = await redisExec<string>(["GET", `apikeys:${email}`]);
-    const list: ApiKeyMeta[] = raw ? JSON.parse(raw) : [];
-    list.push(meta);
+    const list = [...existing, meta];
     await redisExec(["SET", `apikeys:${email}`, JSON.stringify(list)]);
   } else {
     memHash.set(hash, email);
-    const list: ApiKeyMeta[] = memList.has(email) ? JSON.parse(memList.get(email)!) : [];
-    list.push(meta);
-    memList.set(email, JSON.stringify(list));
+    memList.set(email, JSON.stringify([...existing, meta]));
   }
   return { key, meta };
 }
@@ -92,6 +102,23 @@ export async function listApiKeys(email: string): Promise<ApiKeyMeta[]> {
     return raw ? JSON.parse(raw) : [];
   }
   return memList.has(email) ? JSON.parse(memList.get(email)!) : [];
+}
+
+/** Revoke a key by its public id (first 12 chars). Returns true if removed. */
+export async function revokeApiKey(email: string, id: string): Promise<boolean> {
+  const list = await listApiKeys(email);
+  const target = list.find((m) => m.id === id);
+  if (!target) return false;
+  const remaining = list.filter((m) => m.id !== id);
+
+  if (REDIS_URL && REDIS_TOKEN) {
+    if (target.hash) await redisExec(["DEL", `apikey:${target.hash}`]);
+    await redisExec(["SET", `apikeys:${email}`, JSON.stringify(remaining)]);
+  } else {
+    if (target.hash) memHash.delete(target.hash);
+    memList.set(email, JSON.stringify(remaining));
+  }
+  return true;
 }
 
 /** Extract the bearer/x-api-key value from request headers. */

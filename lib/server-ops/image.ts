@@ -10,6 +10,7 @@
  */
 
 import sharp from "sharp";
+import { SAFE_SHARP, clampDim } from "@/lib/api/limits";
 
 export type OutFormat = "jpeg" | "png" | "webp" | "avif";
 
@@ -43,7 +44,7 @@ export async function compress(
   opts: { quality?: number; maxWidthOrHeight?: number } = {},
 ): Promise<OpResult> {
   const quality = clamp(opts.quality ?? 72, 1, 100);
-  let img = sharp(input, { failOn: "none" }).rotate(); // auto-orient
+  let img = sharp(input, SAFE_SHARP).rotate(); // auto-orient
   const meta = await img.metadata();
   if (opts.maxWidthOrHeight && (meta.width || meta.height)) {
     img = img.resize({
@@ -65,13 +66,16 @@ export async function resize(
   opts: { width?: number; height?: number; fit?: string; quality?: number },
 ): Promise<OpResult> {
   if (!opts.width && !opts.height) throw new ApiOpError("resize requires width and/or height");
-  const img = sharp(input, { failOn: "none" }).rotate().resize({
-    width: opts.width,
-    height: opts.height,
+  const w = clampDim(opts.width);
+  const h = clampDim(opts.height);
+  const img = sharp(input, SAFE_SHARP).rotate().resize({
+    width: w,
+    height: h,
     fit: (opts.fit as keyof sharp.FitEnum) ?? "inside",
-    withoutEnlargement: false,
+    // Never upscale a tiny input into a giant buffer (upscale-bomb defense).
+    withoutEnlargement: true,
   });
-  const meta = await sharp(input).metadata();
+  const meta = await sharp(input, SAFE_SHARP).metadata();
   const fmt = (meta.format ?? "jpeg") as string;
   const out = await encode(img, fmt, clamp(opts.quality ?? 82, 1, 100));
   const o = await sharp(out).metadata();
@@ -83,15 +87,19 @@ export async function crop(
   input: Buffer,
   opts: { left?: number; top?: number; width?: number; height?: number; ratio?: string; quality?: number },
 ): Promise<OpResult> {
-  const base = sharp(input, { failOn: "none" }).rotate();
+  const base = sharp(input, SAFE_SHARP).rotate();
   const meta = await base.metadata();
   const W = meta.width ?? 0;
   const H = meta.height ?? 0;
   let region: { left: number; top: number; width: number; height: number };
 
   if (opts.ratio) {
-    const [rw, rh] = opts.ratio.split(/[:x/-]/).map(Number);
-    if (!rw || !rh) throw new ApiOpError(`invalid ratio "${opts.ratio}"`);
+    // Strict format only (W:H or WxH or W-H), digits up to 5 — no control chars.
+    if (!/^\d{1,5}[:x-]\d{1,5}$/.test(opts.ratio)) {
+      throw new ApiOpError("ratio must be W:H, WxH or W-H (e.g. 16:9)");
+    }
+    const [rw, rh] = opts.ratio.split(/[:x-]/).map(Number);
+    if (!rw || !rh) throw new ApiOpError("ratio numbers must be positive");
     let cw = W;
     let ch = Math.round((W * rh) / rw);
     if (ch > H) {
@@ -121,7 +129,7 @@ export async function convert(
 ): Promise<OpResult> {
   const fmt = opts.format;
   if (!["jpeg", "png", "webp", "avif"].includes(fmt)) throw new ApiOpError(`unsupported format "${fmt}"`);
-  const img = sharp(input, { failOn: "none" }).rotate();
+  const img = sharp(input, SAFE_SHARP).rotate();
   const out = await encode(img, fmt, clamp(opts.quality ?? 82, 1, 100));
   const o = await sharp(out).metadata();
   return result(out, fmt, o.width, o.height);
@@ -129,11 +137,11 @@ export async function convert(
 
 /** Rotate by a fixed angle, or auto-orient from EXIF when angle is omitted. */
 export async function rotate(input: Buffer, opts: { angle?: number; quality?: number } = {}): Promise<OpResult> {
-  const meta = await sharp(input).metadata();
+  const meta = await sharp(input, SAFE_SHARP).metadata();
   const img =
     opts.angle == null
-      ? sharp(input, { failOn: "none" }).rotate()
-      : sharp(input, { failOn: "none" }).rotate(opts.angle);
+      ? sharp(input, SAFE_SHARP).rotate()
+      : sharp(input, SAFE_SHARP).rotate(opts.angle);
   const fmt = (meta.format ?? "jpeg") as string;
   const out = await encode(img, fmt, clamp(opts.quality ?? 90, 1, 100));
   const o = await sharp(out).metadata();
@@ -142,7 +150,7 @@ export async function rotate(input: Buffer, opts: { angle?: number; quality?: nu
 
 /** Read metadata (dimensions, format, EXIF summary). Returns JSON, no image. */
 export async function metadata(input: Buffer): Promise<Record<string, unknown>> {
-  const m = await sharp(input).metadata();
+  const m = await sharp(input, SAFE_SHARP).metadata();
   return {
     format: m.format,
     width: m.width,
@@ -172,7 +180,8 @@ function normalizeFmt(fmt: string): string {
 async function encode(img: sharp.Sharp, fmt: string, quality: number): Promise<Buffer> {
   switch (normalizeFmt(fmt)) {
     case "png":
-      return img.png({ compressionLevel: 9 }).toBuffer();
+      // Level 6 is the balanced default; 9 lets an attacker burn CPU cheaply.
+      return img.png({ compressionLevel: 6 }).toBuffer();
     case "webp":
       return img.webp({ quality }).toBuffer();
     case "avif":

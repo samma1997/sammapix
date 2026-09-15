@@ -7,6 +7,7 @@
  */
 
 import { getInt, redisConfigured } from "@/lib/redis";
+import { createHash } from "crypto";
 
 // ---------------------------------------------------------------------------
 // Package definitions
@@ -84,7 +85,9 @@ export async function addCredits(email: string, amount: number): Promise<number>
   if (redisConfigured) {
     const newValue = await redisExec<number>(["INCRBY", key, amount]);
     if (newValue !== null) {
-      console.log(`[credits] +${amount} credits for ${email} → balance: ${newValue}`);
+      // Do not log PII (email) — hash it for a non-identifying audit line.
+      const tag = createHash("sha256").update(email).digest("hex").slice(0, 8);
+      console.log(`[credits] +${amount} for ${tag}… → balance: ${newValue}`);
       return newValue;
     }
     // Redis call failed- fall through to memory fallback
@@ -156,6 +159,49 @@ export async function deductCredit(
   const newBalance = current - count;
   memoryStore.set(key, newBalance);
   return { success: true, remaining: newBalance };
+}
+
+/**
+ * Atomic multi-credit deduction via a Lua script (Upstash EVAL).
+ *
+ * Unlike deductCredit's DECRBY-then-rollback (which has a concurrency race),
+ * this reads-checks-decrements in a single atomic Redis operation, so parallel
+ * API requests can never over-spend or free-ride. Used by the API meter.
+ *
+ * Returns billed=false WITHOUT deducting when the balance is insufficient.
+ * When Redis is configured but the call fails, throws (never silently falls to
+ * the per-instance memory store, which would corrupt billing across instances).
+ */
+const DEDUCT_LUA =
+  "local bal = tonumber(redis.call('GET', KEYS[1])) or 0 " +
+  "local cost = tonumber(ARGV[1]) " +
+  "if bal < cost then return {0, bal} end " +
+  "redis.call('DECRBY', KEYS[1], cost) " +
+  "return {1, bal - cost}";
+
+export async function deductCreditsAtomic(
+  email: string,
+  count: number,
+): Promise<{ success: boolean; remaining: number }> {
+  const cost = Math.max(0, Math.round(count));
+  const key = creditKey(email);
+  if (cost === 0) return { success: true, remaining: await getCreditBalance(email) };
+
+  if (redisConfigured) {
+    const res = await redisExec<[number, number]>(["EVAL", DEDUCT_LUA, "1", key, String(cost)]);
+    if (res === null) {
+      // Redis configured but unreachable: fail closed, do NOT use memory.
+      throw new Error("billing_unavailable");
+    }
+    return { success: res[0] === 1, remaining: res[1] };
+  }
+
+  // Local dev only (no Redis): in-memory, not concurrency-safe by design.
+  const current = memoryStore.get(key) ?? 0;
+  if (current < cost) return { success: false, remaining: current };
+  const updated = current - cost;
+  memoryStore.set(key, updated);
+  return { success: true, remaining: updated };
 }
 
 /**
