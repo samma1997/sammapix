@@ -17,6 +17,7 @@ import { NextRequest } from "next/server";
 import { createHash } from "crypto";
 import { APP_URL } from "@/lib/constants";
 import { extractKey, resolveApiKey } from "@/lib/api/keys";
+import { resolveAccessToken } from "@/lib/oauth/store";
 import { chargeUnits, refundUnits } from "@/lib/api/meter";
 import { rateLimit, clientIp, IP_LIMIT } from "@/lib/api/ratelimit";
 import { MCP_TOOLS, findTool } from "@/lib/mcp/tools";
@@ -29,6 +30,26 @@ export const maxDuration = 120;
 const PROTOCOL_VERSION = "2025-06-18";
 const SERVER_INFO = { name: "sammapix", version: "1.0.0", title: "SammaPix Image & File Tools" };
 const TOPUP_URL = `${APP_URL}/dashboard/upgrade`;
+const MCP_RESOURCE = `${APP_URL}/api/mcp`;
+const PRM_URL = `${APP_URL}/.well-known/oauth-protected-resource`;
+
+/**
+ * Resolve the caller's account from either an OAuth access token (audience-
+ * bound to this MCP server) or a raw API key. Returns the email or null.
+ */
+async function resolveIdentity(headers: Headers): Promise<string | null> {
+  const token = extractKey(headers);
+  if (!token) return null;
+  if (token.startsWith("mcp_at_")) {
+    const data = await resolveAccessToken(token);
+    if (!data) return null;
+    // Audience validation: token MUST be issued for this MCP server.
+    if (data.resource.replace(/\/$/, "") !== MCP_RESOURCE.replace(/\/$/, "")) return null;
+    return data.email;
+  }
+  if (token.startsWith("sk_")) return resolveApiKey(token);
+  return null;
+}
 
 type Rpc = { jsonrpc: "2.0"; id?: string | number | null; method: string; params?: Record<string, unknown> };
 
@@ -44,22 +65,12 @@ function toolList() {
   return MCP_TOOLS.map((t) => ({ name: t.name, description: t.description, inputSchema: t.inputSchema, annotations: t.annotations }));
 }
 
-async function handleCall(req: NextRequest, id: unknown, params: Record<string, unknown> | undefined) {
+async function handleCall(email: string, id: unknown, params: Record<string, unknown> | undefined) {
   const name = params?.name;
   const args = (params?.arguments ?? {}) as Record<string, unknown>;
   if (typeof name !== "string") return rpcError(id, -32602, "missing tool name");
   const tool = findTool(name);
   if (!tool) return rpcError(id, -32602, `unknown tool: ${name}`);
-
-  // Auth (required for tool execution / billing)
-  const key = extractKey(req.headers);
-  const email = key ? await resolveApiKey(key) : null;
-  if (!email) {
-    return rpcResult(id, {
-      isError: true,
-      content: [{ type: "text", text: `Authentication required. Get a free SammaPix API key (50 free credits) at ${APP_URL}/dashboard/api and pass it as a Bearer token.` }],
-    });
-  }
 
   // Cost + charge (refund on failure)
   let cost: number;
@@ -97,7 +108,7 @@ async function handleCall(req: NextRequest, id: unknown, params: Record<string, 
   }
 }
 
-async function dispatch(req: NextRequest, msg: Rpc): Promise<object | null> {
+async function dispatch(email: string, msg: Rpc): Promise<object | null> {
   switch (msg.method) {
     case "initialize":
       return rpcResult(msg.id, { protocolVersion: PROTOCOL_VERSION, capabilities: { tools: { listChanged: false } }, serverInfo: SERVER_INFO });
@@ -109,7 +120,7 @@ async function dispatch(req: NextRequest, msg: Rpc): Promise<object | null> {
     case "tools/list":
       return rpcResult(msg.id, { tools: toolList() });
     case "tools/call":
-      return handleCall(req, msg.id, msg.params);
+      return handleCall(email, msg.id, msg.params);
     default:
       return rpcError(msg.id, -32601, `method not found: ${msg.method}`);
   }
@@ -122,6 +133,16 @@ export async function POST(req: NextRequest) {
     return Response.json(rpcError(null, -32000, "rate limited"), { status: 429, headers: { "retry-after": String(ipRL.retryAfter) } });
   }
 
+  // Authentication: OAuth access token or API key. No valid credential ->
+  // 401 + WWW-Authenticate so MCP clients start the OAuth discovery flow.
+  const email = await resolveIdentity(req.headers);
+  if (!email) {
+    return Response.json(rpcError(null, -32001, "authentication required"), {
+      status: 401,
+      headers: { "WWW-Authenticate": `Bearer resource_metadata="${PRM_URL}"` },
+    });
+  }
+
   let body: unknown;
   try {
     body = await req.json();
@@ -131,10 +152,10 @@ export async function POST(req: NextRequest) {
 
   // Support JSON-RPC batches
   if (Array.isArray(body)) {
-    const out = (await Promise.all(body.map((m) => dispatch(req, m as Rpc)))).filter(Boolean);
+    const out = (await Promise.all(body.map((m) => dispatch(email, m as Rpc)))).filter(Boolean);
     return Response.json(out);
   }
-  const res = await dispatch(req, body as Rpc);
+  const res = await dispatch(email, body as Rpc);
   if (res === null) return new Response(null, { status: 202 }); // notification
   return Response.json(res);
 }
