@@ -280,6 +280,14 @@ export async function middleware(request: NextRequest, event: NextFetchEvent) {
     return NextResponse.next();
   }
 
+  // OAuth/MCP discovery metadata must be reachable by non-browser clients
+  // (MCP clients, OAuth libraries) — never bot-block or rate-limit these.
+  // /oauth/* is the user-facing consent flow: bot-blocking it would break
+  // legitimate authorizations, so let it through too.
+  if (pathname.startsWith("/.well-known/") || pathname.startsWith("/oauth/")) {
+    return NextResponse.next();
+  }
+
   // ── Static assets bypass bot/rate-limit checks ──────────────────────────────
   // Files served from /public (wasm modules, web-worker scripts, images, fonts…)
   // must never be rate-limited or bot-blocked, or in-browser tools break.

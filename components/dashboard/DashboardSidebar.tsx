@@ -76,6 +76,7 @@ import {
   Split,
   Calculator,
   Workflow,
+  Bot,
 } from "lucide-react";
 import { ADMIN_EMAILS } from "@/lib/constants";
 import SidebarReferralBadge from "@/components/referral/SidebarReferralBadge";
@@ -658,6 +659,16 @@ export default function DashboardSidebar({
         >
           <Coins className="h-4 w-4 shrink-0" strokeWidth={1.5} />
           Credits
+        </Link>
+
+        {/* API & MCP for agents */}
+        <Link
+          href="/dashboard/api"
+          onClick={() => setMobileOpen(false)}
+          className={linkClasses("/dashboard/api")}
+        >
+          <Bot className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+          API &amp; MCP
         </Link>
       </div>
 

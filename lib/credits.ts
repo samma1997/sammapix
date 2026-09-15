@@ -7,15 +7,16 @@
  */
 
 import { getInt, redisConfigured } from "@/lib/redis";
+import { createHash } from "crypto";
 
 // ---------------------------------------------------------------------------
 // Package definitions
 // ---------------------------------------------------------------------------
 
 export const CREDIT_PACKAGES = [
-  { id: "credits_100", name: "Starter", credits: 100, price: 599 },   // $5.99
-  { id: "credits_500", name: "Standard", credits: 500, price: 1199 },  // $11.99
-  { id: "credits_2000", name: "Mega", credits: 2000, price: 3499 },   // $34.99
+  { id: "credits_1000", name: "Starter", credits: 1000, price: 500 },     // $5.00  → $0.005/op
+  { id: "credits_5000", name: "Standard", credits: 5000, price: 2000 },   // $20.00 → $0.004/op
+  { id: "credits_25000", name: "Scale", credits: 25000, price: 7900 },    // $79.00 → $0.00316/op
 ] as const;
 
 export type CreditPackageId = (typeof CREDIT_PACKAGES)[number]["id"];
@@ -84,7 +85,9 @@ export async function addCredits(email: string, amount: number): Promise<number>
   if (redisConfigured) {
     const newValue = await redisExec<number>(["INCRBY", key, amount]);
     if (newValue !== null) {
-      console.log(`[credits] +${amount} credits for ${email} → balance: ${newValue}`);
+      // Do not log PII (email) — hash it for a non-identifying audit line.
+      const tag = createHash("sha256").update(email).digest("hex").slice(0, 8);
+      console.log(`[credits] +${amount} for ${tag}… → balance: ${newValue}`);
       return newValue;
     }
     // Redis call failed- fall through to memory fallback
@@ -116,6 +119,26 @@ export async function grantSignupBonusOnce(
   }
 
   // Memory fallback (dev)
+  if (memoryStore.get(marker) === 1) return false;
+  memoryStore.set(marker, 1);
+  await addCredits(email, amount);
+  return true;
+}
+
+/**
+ * One-time API free-tier grant: when an account creates its first API key,
+ * seed it with free credits so a dev/agent can try the API without paying.
+ * Marker (SET NX) ensures it is granted exactly once per account.
+ */
+export async function grantApiFreeCreditsOnce(email: string, amount: number): Promise<boolean> {
+  const marker = `credits:api_freetier:${email}`;
+
+  if (redisConfigured) {
+    const set = await redisExec<string | null>(["SET", marker, "1", "NX"]);
+    if (set !== "OK") return false;
+    await addCredits(email, amount);
+    return true;
+  }
   if (memoryStore.get(marker) === 1) return false;
   memoryStore.set(marker, 1);
   await addCredits(email, amount);
@@ -156,6 +179,49 @@ export async function deductCredit(
   const newBalance = current - count;
   memoryStore.set(key, newBalance);
   return { success: true, remaining: newBalance };
+}
+
+/**
+ * Atomic multi-credit deduction via a Lua script (Upstash EVAL).
+ *
+ * Unlike deductCredit's DECRBY-then-rollback (which has a concurrency race),
+ * this reads-checks-decrements in a single atomic Redis operation, so parallel
+ * API requests can never over-spend or free-ride. Used by the API meter.
+ *
+ * Returns billed=false WITHOUT deducting when the balance is insufficient.
+ * When Redis is configured but the call fails, throws (never silently falls to
+ * the per-instance memory store, which would corrupt billing across instances).
+ */
+const DEDUCT_LUA =
+  "local bal = tonumber(redis.call('GET', KEYS[1])) or 0 " +
+  "local cost = tonumber(ARGV[1]) " +
+  "if bal < cost then return {0, bal} end " +
+  "redis.call('DECRBY', KEYS[1], cost) " +
+  "return {1, bal - cost}";
+
+export async function deductCreditsAtomic(
+  email: string,
+  count: number,
+): Promise<{ success: boolean; remaining: number }> {
+  const cost = Math.max(0, Math.round(count));
+  const key = creditKey(email);
+  if (cost === 0) return { success: true, remaining: await getCreditBalance(email) };
+
+  if (redisConfigured) {
+    const res = await redisExec<[number, number]>(["EVAL", DEDUCT_LUA, "1", key, String(cost)]);
+    if (res === null) {
+      // Redis configured but unreachable: fail closed, do NOT use memory.
+      throw new Error("billing_unavailable");
+    }
+    return { success: res[0] === 1, remaining: res[1] };
+  }
+
+  // Local dev only (no Redis): in-memory, not concurrency-safe by design.
+  const current = memoryStore.get(key) ?? 0;
+  if (current < cost) return { success: false, remaining: current };
+  const updated = current - cost;
+  memoryStore.set(key, updated);
+  return { success: true, remaining: updated };
 }
 
 /**

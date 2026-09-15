@@ -74,6 +74,14 @@ const nextConfig = {
   },
   async headers() {
     return [
+      // OAuth consent pages must never be framed (clickjacking on approval).
+      {
+        source: "/oauth/:path*",
+        headers: [
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "Content-Security-Policy", value: "frame-ancestors 'none'" },
+        ],
+      },
       // Static assets — immutable cache for hashed files
       {
         source: "/_next/static/:path*",

@@ -66,6 +66,7 @@ const RESIZE_SOCIAL_LINKS = [
 ];
 
 const COMPANY_LINKS = [
+  { href: "/for-ai-agents", label: "For AI Agents" },
   { href: "/pricing", label: "Pricing" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
