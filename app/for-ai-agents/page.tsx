@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Bot, Zap, ShieldCheck, Boxes, Link2, Gauge, ArrowRight, Image as ImageIcon,
-  FileText, Crop, RefreshCw, Layers, Coins, Lock,
-} from "lucide-react";
+import { Bot, Zap, ArrowRight, Lock, Sparkles } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
 import ConnectSnippets from "@/components/agents/ConnectSnippets";
+import Reveal from "@/components/agents/Reveal";
+import HeroVisual from "@/components/agents/HeroVisual";
+import ConnectionFlow from "@/components/agents/ConnectionFlow";
+import PipelineFlow from "@/components/agents/PipelineFlow";
+import ZeroRetentionVisual from "@/components/agents/ZeroRetentionVisual";
+import { ValueGrid, ToolGrid } from "@/components/agents/AgentCards";
 
 const TITLE = "SammaPix for AI Agents — Image & File Tools via MCP & API";
 const DESC =
@@ -101,28 +104,6 @@ function jsonLd() {
   return [app, faq, breadcrumb];
 }
 
-const VALUES = [
-  { icon: Link2, title: "Chain ops in one call", body: "The pipeline tool runs compress → convert → resize in a single request. Fewer round-trips, far fewer tokens, no intermediate files for the agent to juggle." },
-  { icon: ShieldCheck, title: "Zero-retention", body: "Files are processed in memory and discarded instantly. Nothing stored, logged, or used for training — safe for private photos and documents." },
-  { icon: Boxes, title: "One toolbox, many ops", body: "Compress, convert, resize, crop, rotate, read metadata and compress PDFs — a single MCP server instead of stitching together many services." },
-  { icon: Coins, title: "Pay-per-use, prepaid", body: "1 credit per op (1/step for pipelines), 50 free to start. You never front the compute — usage is prepaid, failed ops are refunded." },
-];
-
-const TOOLS = [
-  { icon: Gauge, name: "Compress", desc: "Shrink images, keep the format" },
-  { icon: RefreshCw, name: "Convert", desc: "webp · avif · jpeg · png" },
-  { icon: ImageIcon, name: "Resize", desc: "Exact width/height, safe caps" },
-  { icon: Crop, name: "Crop", desc: "Pixels or aspect ratio (16:9…)" },
-  { icon: Layers, name: "Pipeline", desc: "Chain steps in one call" },
-  { icon: FileText, name: "PDF compress", desc: "Slim PDFs, strip metadata" },
-];
-
-const STEPS = [
-  { n: 1, t: "Add the MCP server", d: "Drop the SammaPix MCP URL into your agent (Claude, Cursor, …). It discovers the tools automatically." },
-  { n: 2, t: "Sign in with Google", d: "On first use the agent opens a link — you approve access in one click. No API key to copy. You get 50 free credits." },
-  { n: 3, t: "Let the agent work", d: "Ask it to optimise, convert or prepare images. It calls the tools; credits are spent per operation." },
-];
-
 export default function ForAiAgentsPage() {
   return (
     <main className="min-h-screen bg-white dark:bg-[#191919]">
@@ -131,140 +112,210 @@ export default function ForAiAgentsPage() {
       ))}
 
       {/* Hero */}
-      <section className="px-4 sm:px-6 pt-16 pb-12 max-w-4xl mx-auto text-center">
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-[#E5E5E5] dark:border-[#2A2A2A] px-3 py-1 text-xs text-[#737373] mb-5">
-          <Bot className="h-3.5 w-3.5 text-[#6366F1]" strokeWidth={1.5} /> Model Context Protocol · OAuth 2.1
+      <section className="relative overflow-hidden px-4 sm:px-6 pt-16 pb-16">
+        {/* subtle grid backdrop */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.035] dark:opacity-[0.06]"
+          aria-hidden
+          style={{
+            backgroundImage:
+              "linear-gradient(#6366F1 1px, transparent 1px), linear-gradient(90deg, #6366F1 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+            maskImage: "radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 75%)",
+            WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 30%, #000 40%, transparent 75%)",
+          }}
+        />
+
+        <div className="relative mx-auto max-w-4xl text-center">
+          <Reveal y={14}>
+            <div className="mb-5 inline-flex items-center gap-1.5 rounded-full border border-[#E5E5E5] bg-white/60 px-3 py-1 text-xs text-[#737373] backdrop-blur dark:border-[#2A2A2A] dark:bg-[#1E1E1E]/60">
+              <Bot className="h-3.5 w-3.5 text-[#6366F1]" strokeWidth={1.5} /> Model Context Protocol · OAuth 2.1
+            </div>
+          </Reveal>
+          <Reveal y={18} delay={60}>
+            <h1 className="mb-5 text-3xl font-bold tracking-tight text-[#171717] dark:text-[#E5E5E5] sm:text-5xl">
+              Image &amp; file tools your AI agent can actually run
+            </h1>
+          </Reveal>
+          <Reveal y={18} delay={120}>
+            <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-[#737373] dark:text-[#A3A3A3] sm:text-lg">
+              SammaPix gives AI agents real image and PDF processing over MCP: compress, convert, resize, crop, and chain operations in a single call. Connect in seconds, no API key to paste. Zero-retention, pay-per-use.
+            </p>
+          </Reveal>
+          <Reveal y={18} delay={180}>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="/dashboard/api" className="inline-flex items-center gap-2 rounded-lg bg-[#171717] px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#262626] dark:bg-[#E5E5E5] dark:text-[#171717] dark:hover:bg-white">
+                Get started free <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+              </Link>
+              <a href="#connect" className="inline-flex items-center gap-2 rounded-lg border border-[#E5E5E5] px-5 py-2.5 text-sm text-[#525252] transition-colors hover:border-[#A3A3A3] hover:text-[#171717] dark:border-[#2A2A2A] dark:text-[#A3A3A3] dark:hover:text-[#E5E5E5]">
+                How to connect
+              </a>
+            </div>
+          </Reveal>
+          <Reveal y={14} delay={240}>
+            <p className="mt-4 text-xs text-[#A3A3A3]">50 free credits · works with Claude, Cursor &amp; any MCP client</p>
+          </Reveal>
+
+          <Reveal y={26} delay={280}>
+            <div className="mt-14">
+              <HeroVisual />
+            </div>
+          </Reveal>
         </div>
-        <h1 className="text-3xl sm:text-5xl font-bold text-[#171717] dark:text-[#E5E5E5] tracking-tight mb-5">
-          Image &amp; file tools your AI agent can actually run
-        </h1>
-        <p className="text-base sm:text-lg text-[#737373] dark:text-[#A3A3A3] max-w-2xl mx-auto mb-8 leading-relaxed">
-          SammaPix gives AI agents real image and PDF processing over MCP: compress, convert, resize, crop, and chain operations in a single call. Connect in seconds, no API key to paste. Zero-retention, pay-per-use.
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-3">
-          <Link href="/dashboard/api" className="inline-flex items-center gap-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-lg px-5 py-2.5 text-sm font-medium hover:bg-[#262626] dark:hover:bg-white transition-colors">
-            Get started free <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-          </Link>
-          <a href="#connect" className="inline-flex items-center gap-2 border border-[#E5E5E5] dark:border-[#2A2A2A] text-[#525252] dark:text-[#A3A3A3] rounded-lg px-5 py-2.5 text-sm hover:border-[#A3A3A3] hover:text-[#171717] dark:hover:text-[#E5E5E5] transition-colors">
-            How to connect
-          </a>
-        </div>
-        <p className="text-xs text-[#A3A3A3] mt-4">50 free credits · works with Claude, Cursor &amp; any MCP client</p>
       </section>
 
       {/* Value props */}
-      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {VALUES.map((v) => (
-            <div key={v.title} className="p-6 rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E]">
-              <v.icon className="h-5 w-5 text-[#6366F1] mb-3" strokeWidth={1.5} />
-              <h2 className="text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">{v.title}</h2>
-              <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{v.body}</p>
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <div className="mb-8 text-center">
+              <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">Built for agents, not humans clicking buttons</h2>
+              <p className="mt-2 text-sm text-[#737373] dark:text-[#A3A3A3]">Deterministic tools, one connection, priced by the operation.</p>
             </div>
-          ))}
+          </Reveal>
+          <ValueGrid />
+        </div>
+      </section>
+
+      {/* Connection flow (OAuth, no key) */}
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <div className="mb-3 flex items-center justify-center gap-2">
+              <Sparkles className="h-5 w-5 text-[#6366F1]" strokeWidth={1.5} />
+              <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">Connect from the chat — no API key</h2>
+            </div>
+            <p className="mx-auto mb-10 max-w-xl text-center text-sm leading-relaxed text-[#737373] dark:text-[#A3A3A3]">
+              The agent hits a SammaPix tool, opens a link, and you sign in with Google. Approve once and it&rsquo;s connected — the token is handed back automatically over OAuth 2.1. Nothing to copy, nothing to store.
+            </p>
+          </Reveal>
+          <Reveal y={24}>
+            <ConnectionFlow />
+          </Reveal>
         </div>
       </section>
 
       {/* Tools */}
-      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] text-center mb-2">The tools your agent gets</h2>
-          <p className="text-sm text-[#737373] text-center mb-8">Deterministic, fast, and priced per operation.</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {TOOLS.map((t) => (
-              <div key={t.name} className="p-4 rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E]">
-                <t.icon className="h-4 w-4 text-[#525252] mb-2" strokeWidth={1.5} />
-                <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">{t.name}</p>
-                <p className="text-xs text-[#A3A3A3] mt-0.5">{t.desc}</p>
-              </div>
-            ))}
-          </div>
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <h2 className="mb-2 text-center text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">The tools your agent gets</h2>
+            <p className="mb-8 text-center text-sm text-[#737373] dark:text-[#A3A3A3]">Eight deterministic ops behind one MCP server. Send a file, get a file.</p>
+          </Reveal>
+          <ToolGrid />
         </div>
       </section>
 
       {/* Pipeline spotlight */}
-      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-3xl mx-auto text-center">
-          <Zap className="h-6 w-6 text-[#6366F1] mx-auto mb-3" strokeWidth={1.5} />
-          <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-3">One call instead of five</h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed mb-6 max-w-xl mx-auto">
-            Preparing 500 product photos usually means chaining compress, convert, resize and rename per image — dozens of tool calls and tokens per file. With the SammaPix <strong className="text-[#171717] dark:text-[#E5E5E5]">pipeline</strong> tool the agent sends one request with the whole chain and gets the finished file back. Fewer round-trips, fewer tokens, no intermediate files.
-          </p>
-        </div>
-      </section>
-
-      {/* How to connect */}
-      <section id="connect" className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] text-center mb-8">Connect in three steps</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-            {STEPS.map((s) => (
-              <div key={s.n} className="p-5 rounded-xl border border-[#E5E5E5] dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E]">
-                <div className="h-7 w-7 rounded-full bg-[#6366F1]/10 text-[#6366F1] flex items-center justify-center text-xs font-semibold mb-3">{s.n}</div>
-                <p className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1">{s.t}</p>
-                <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{s.d}</p>
-              </div>
-            ))}
-          </div>
-          <ConnectSnippets appUrl={APP_URL} />
-        </div>
-      </section>
-
-      {/* Privacy */}
-      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-3xl mx-auto flex items-start gap-4">
-          <Lock className="h-6 w-6 text-[#6366F1] flex-shrink-0 mt-1" strokeWidth={1.5} />
-          <div>
-            <h2 className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">Zero-retention by design</h2>
-            <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">
-              Files sent to the API and MCP are processed entirely in memory and discarded the moment the request finishes. Nothing is stored, nothing is logged, nothing is used to train models. Your agent can safely handle private photos, contracts and scans.
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-3xl">
+          <Reveal>
+            <div className="mb-3 flex items-center justify-center gap-2">
+              <Zap className="h-5 w-5 text-[#6366F1]" strokeWidth={1.5} />
+              <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">One call instead of five</h2>
+            </div>
+            <p className="mx-auto mb-10 max-w-xl text-center text-sm leading-relaxed text-[#737373] dark:text-[#A3A3A3]">
+              Preparing product photos usually means chaining compress, convert and resize per image — dozens of tool calls and tokens per file. With the <strong className="text-[#171717] dark:text-[#E5E5E5]">pipeline</strong> tool the agent sends one request describing the whole chain and gets only the finished file back. Fewer round-trips, fewer tokens, no intermediate files.
             </p>
-          </div>
+          </Reveal>
+          <Reveal y={24}>
+            <div className="rounded-2xl border border-[#E5E5E5] bg-white p-6 dark:border-[#2A2A2A] dark:bg-[#1E1E1E] sm:p-10">
+              <PipelineFlow />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* How to connect (snippets) */}
+      <section id="connect" className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-3xl">
+          <Reveal>
+            <h2 className="mb-2 text-center text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">Drop it into your client</h2>
+            <p className="mb-8 text-center text-sm text-[#737373] dark:text-[#A3A3A3]">
+              Add the MCP URL and the tools appear automatically. Prefer raw HTTP? Grab a key and call the REST API.
+            </p>
+          </Reveal>
+          <Reveal y={20}>
+            <ConnectSnippets appUrl={APP_URL} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Zero-retention */}
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto grid max-w-3xl grid-cols-1 items-center gap-8 sm:grid-cols-2">
+          <Reveal>
+            <div className="flex items-start gap-4">
+              <Lock className="mt-1 h-6 w-6 flex-shrink-0 text-[#6366F1]" strokeWidth={1.5} />
+              <div>
+                <h2 className="mb-2 text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">Zero-retention by design</h2>
+                <p className="text-sm leading-relaxed text-[#737373] dark:text-[#A3A3A3]">
+                  Files sent to the API and MCP are processed entirely in memory and discarded the moment the request finishes. Nothing is stored, nothing is logged, nothing is used to train models. Your agent can safely handle private photos, contracts and scans.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+          <Reveal y={18} delay={80}>
+            <div className="rounded-2xl border border-[#E5E5E5] bg-[#FAFAFA] dark:border-[#2A2A2A] dark:bg-[#161616]">
+              <ZeroRetentionVisual />
+              <p className="pb-4 text-center text-[11px] text-[#A3A3A3]">Received · processed in memory · discarded</p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Pricing */}
-      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">Simple, prepaid pricing</h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6">1 credit per operation · 1 credit per pipeline step · failed ops refunded automatically.</p>
-          <div className="inline-flex flex-wrap items-center justify-center gap-3">
-            <div className="rounded-lg border border-[#6366F1]/30 bg-[#6366F1]/5 px-5 py-3">
-              <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">50 credits</p>
-              <p className="text-xs text-[#6366F1]">free to start</p>
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-3xl text-center">
+          <Reveal>
+            <h2 className="mb-2 text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">Simple, prepaid pricing</h2>
+            <p className="mb-6 text-sm text-[#737373] dark:text-[#A3A3A3]">1 credit per operation · 1 credit per pipeline step · failed ops refunded automatically.</p>
+          </Reveal>
+          <Reveal y={18} delay={80}>
+            <div className="inline-flex flex-wrap items-center justify-center gap-3">
+              <div className="rounded-lg border border-[#6366F1]/30 bg-[#6366F1]/5 px-5 py-3">
+                <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">50 credits</p>
+                <p className="text-xs text-[#6366F1]">free to start</p>
+              </div>
+              <Link href="/dashboard/credits" className="rounded-lg border border-[#E5E5E5] px-5 py-3 transition-colors hover:border-[#A3A3A3] dark:border-[#2A2A2A]">
+                <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">Top up anytime</p>
+                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">from $5.99</p>
+              </Link>
             </div>
-            <Link href="/dashboard/credits" className="rounded-lg border border-[#E5E5E5] dark:border-[#2A2A2A] px-5 py-3 hover:border-[#A3A3A3] transition-colors">
-              <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">Top up anytime</p>
-              <p className="text-xs text-[#737373]">from $5.99</p>
-            </Link>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="px-4 sm:px-6 py-12 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5] mb-6 text-center">Frequently asked questions</h2>
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-2xl">
+          <Reveal>
+            <h2 className="mb-6 text-center text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">Frequently asked questions</h2>
+          </Reveal>
           <div className="space-y-0">
             {FAQ.map((f, i) => (
-              <div key={i} className="py-5 border-b border-[#E5E5E5] dark:border-[#2A2A2A] last:border-0">
-                <h3 className="text-sm font-semibold text-[#171717] dark:text-[#E5E5E5] mb-1.5">{f.q}</h3>
-                <p className="text-sm text-[#737373] dark:text-[#A3A3A3] leading-relaxed">{f.a}</p>
-              </div>
+              <Reveal key={i} delay={i * 50} y={14}>
+                <div className="border-b border-[#E5E5E5] py-5 last:border-0 dark:border-[#2A2A2A]">
+                  <h3 className="mb-1.5 text-sm font-semibold text-[#171717] dark:text-[#E5E5E5]">{f.q}</h3>
+                  <p className="text-sm leading-relaxed text-[#737373] dark:text-[#A3A3A3]">{f.a}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="px-4 sm:px-6 py-16 border-t border-[#E5E5E5] dark:border-[#2A2A2A]">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-[#171717] dark:text-[#E5E5E5] mb-3">Give your agent superpowers</h2>
-          <p className="text-sm text-[#737373] dark:text-[#A3A3A3] mb-6">Connect the SammaPix MCP server and start with 50 free credits.</p>
-          <Link href="/dashboard/api" className="inline-flex items-center gap-2 bg-[#171717] dark:bg-[#E5E5E5] text-white dark:text-[#171717] rounded-lg px-6 py-3 text-sm font-medium hover:bg-[#262626] dark:hover:bg-white transition-colors">
-            Get your key &amp; connect <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
-          </Link>
-        </div>
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <Reveal>
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="mb-3 text-2xl font-bold text-[#171717] dark:text-[#E5E5E5]">Give your agent superpowers</h2>
+            <p className="mb-6 text-sm text-[#737373] dark:text-[#A3A3A3]">Connect the SammaPix MCP server and start with 50 free credits.</p>
+            <Link href="/dashboard/api" className="inline-flex items-center gap-2 rounded-lg bg-[#171717] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#262626] dark:bg-[#E5E5E5] dark:text-[#171717] dark:hover:bg-white">
+              Get your key &amp; connect <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
+            </Link>
+          </div>
+        </Reveal>
       </section>
     </main>
   );
