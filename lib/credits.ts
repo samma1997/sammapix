@@ -14,9 +14,9 @@ import { createHash } from "crypto";
 // ---------------------------------------------------------------------------
 
 export const CREDIT_PACKAGES = [
-  { id: "credits_100", name: "Starter", credits: 100, price: 599 },   // $5.99
-  { id: "credits_500", name: "Standard", credits: 500, price: 1199 },  // $11.99
-  { id: "credits_2000", name: "Mega", credits: 2000, price: 3499 },   // $34.99
+  { id: "credits_1000", name: "Starter", credits: 1000, price: 500 },     // $5.00  → $0.005/op
+  { id: "credits_5000", name: "Standard", credits: 5000, price: 2000 },   // $20.00 → $0.004/op
+  { id: "credits_25000", name: "Scale", credits: 25000, price: 7900 },    // $79.00 → $0.00316/op
 ] as const;
 
 export type CreditPackageId = (typeof CREDIT_PACKAGES)[number]["id"];

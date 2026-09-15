@@ -12,7 +12,7 @@ import { ValueGrid, ToolGrid } from "@/components/agents/AgentCards";
 
 const TITLE = "SammaPix for AI Agents — Image & File Tools via MCP & API";
 const DESC =
-  "Give your AI agent real image and PDF processing: compress, convert, resize, crop and chain operations in one call. Connect over MCP (OAuth, no API key to paste) or REST. Zero-retention, pay-per-use, 50 free credits.";
+  "Give your AI agent real image and PDF processing: compress, convert, resize, crop and chain operations in one call. Connect over MCP (OAuth, no API key to paste) or REST. Zero-retention, pay-per-use, 25 free ops every day.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -48,7 +48,7 @@ const FAQ = [
   },
   {
     q: "How does an agent connect — do I need an API key?",
-    a: "No key to paste. The MCP server uses OAuth 2.1: your agent opens a link, you sign in with Google and approve access, and the agent receives a token automatically. You get 50 free credits on your first authorization. If you prefer a raw integration, you can also generate an API key and call the REST API.",
+    a: "No key to paste. The MCP server uses OAuth 2.1: your agent opens a link, you sign in with Google and approve access, and the agent receives a token automatically. You get 25 free operations every day, plus 50 credits on your first authorization. If you prefer a raw integration, you can also generate an API key and call the REST API.",
   },
   {
     q: "What is the pipeline tool and why does it save tokens?",
@@ -60,7 +60,7 @@ const FAQ = [
   },
   {
     q: "How is it priced?",
-    a: "Pay-per-use with prepaid credits. Most operations cost 1 credit; a pipeline costs 1 credit per step. Your first authorization includes 50 free credits, and credits are shared across the SammaPix website and the API/MCP. A failed operation is refunded automatically.",
+    a: "Every account gets 25 free operations per day. Beyond that it is pay-per-use with prepaid credits: 1 credit = 1 operation (a pipeline is 1 per step), from about $0.003 per op. Credits are shared across the SammaPix website and the API/MCP, and a failed operation is refunded automatically.",
   },
   {
     q: "Which AI clients does it work with?",
@@ -77,7 +77,7 @@ function jsonLd() {
     url: `${APP_URL}/for-ai-agents`,
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Web / MCP",
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "50 free credits, then pay-per-use" },
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD", description: "25 free operations per day, then pay-per-use" },
     creator: { "@type": "Organization", name: "SammaPix", url: APP_URL },
     featureList: [
       "MCP server for AI agents (OAuth 2.1)",
@@ -153,7 +153,7 @@ export default function ForAiAgentsPage() {
             </div>
           </Reveal>
           <Reveal y={14} delay={240}>
-            <p className="mt-4 text-xs text-[#A3A3A3]">50 free credits · works with Claude, Cursor &amp; any MCP client</p>
+            <p className="mt-4 text-xs text-[#A3A3A3]">25 free ops/day + 50 to start · works with Claude, Cursor &amp; any MCP client</p>
           </Reveal>
 
           <Reveal y={26} delay={280}>
@@ -277,8 +277,8 @@ export default function ForAiAgentsPage() {
             {[
               {
                 icon: Coins,
-                title: "Lowest cost",
-                points: ["Pay only per operation — from ~$0.017", "No subscription, no per-seat, no minimums", "50 free credits to start", "Failed operations refunded automatically"],
+                title: "Fair, simple cost",
+                points: ["1 credit = 1 operation, from ~$0.003 — no bandwidth surprises", "No subscription, no per-seat, no minimums", "25 free ops/day + 50 to start", "Failed operations refunded automatically"],
               },
               {
                 icon: ShieldCheck,
@@ -319,10 +319,10 @@ export default function ForAiAgentsPage() {
           </Reveal>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
             {[
-              { name: "Free", price: "$0", unit: "50 credits included", per: "on first connect", cta: "Start free", href: "/dashboard/api", highlight: false, badge: "" },
-              { name: "Starter", price: "$5.99", unit: "100 credits", per: "≈ $0.06 / op", cta: "Buy", href: "/dashboard/credits", highlight: false, badge: "" },
-              { name: "Standard", price: "$11.99", unit: "500 credits", per: "≈ $0.024 / op", cta: "Buy", href: "/dashboard/credits", highlight: true, badge: "Most popular" },
-              { name: "Scale", price: "$34.99", unit: "2,000 credits", per: "≈ $0.017 / op", cta: "Buy", href: "/dashboard/credits", highlight: false, badge: "Best value" },
+              { name: "Free", price: "$0", unit: "25 ops/day + 50 to start", per: "no card", cta: "Start free", href: "/dashboard/api", highlight: false, badge: "" },
+              { name: "Starter", price: "$5", unit: "1,000 credits", per: "≈ $0.005 / op", cta: "Buy", href: "/dashboard/credits", highlight: false, badge: "" },
+              { name: "Standard", price: "$20", unit: "5,000 credits", per: "≈ $0.004 / op", cta: "Buy", href: "/dashboard/credits", highlight: true, badge: "Most popular" },
+              { name: "Scale", price: "$79", unit: "25,000 credits", per: "≈ $0.0032 / op", cta: "Buy", href: "/dashboard/credits", highlight: false, badge: "Best value" },
             ].map((t, i) => (
               <Reveal key={t.name} y={18} delay={i * 60}>
                 <div className={`relative flex h-full flex-col rounded-xl border p-5 ${t.highlight ? "border-[#6366F1] bg-[#6366F1]/[0.04] dark:bg-[#6366F1]/10" : "border-[#E5E5E5] bg-white dark:border-[#2A2A2A] dark:bg-[#1E1E1E]"}`}>
@@ -370,7 +370,7 @@ export default function ForAiAgentsPage() {
         <Reveal>
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="mb-3 text-2xl font-bold text-[#171717] dark:text-[#E5E5E5]">Give your agent superpowers</h2>
-            <p className="mb-6 text-sm text-[#737373] dark:text-[#A3A3A3]">Connect the SammaPix MCP server and start with 50 free credits.</p>
+            <p className="mb-6 text-sm text-[#737373] dark:text-[#A3A3A3]">Connect the SammaPix MCP server and get 25 free operations every day.</p>
             <Link href="/dashboard/api" className="inline-flex items-center gap-2 rounded-lg bg-[#171717] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-[#262626] dark:bg-[#E5E5E5] dark:text-[#171717] dark:hover:bg-white">
               Get your key &amp; connect <ArrowRight className="h-4 w-4" strokeWidth={1.5} />
             </Link>

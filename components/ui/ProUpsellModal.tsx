@@ -294,7 +294,7 @@ export default function ProUpsellModal({
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ packageId: "credits_100", ...(isIt ? { currency: "eur" } : {}) }),
+        body: JSON.stringify({ packageId: "credits_1000", ...(isIt ? { currency: "eur" } : {}) }),
       });
       const data = (await res.json()) as { url?: string; error?: string };
       if (data.url) {

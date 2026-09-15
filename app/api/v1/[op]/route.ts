@@ -13,7 +13,7 @@
 import { NextRequest } from "next/server";
 import { createHash } from "crypto";
 import { extractKey, resolveApiKey } from "@/lib/api/keys";
-import { charge, refund, type ApiOp } from "@/lib/api/meter";
+import { charge, refundBill, type ApiOp } from "@/lib/api/meter";
 import * as img from "@/lib/server-ops/image";
 import * as pdf from "@/lib/server-ops/pdf";
 import { isImageOp, runImageOp, type ImageOp } from "@/lib/server-ops/run";
@@ -173,7 +173,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
 
     throw new Error("unreachable");
   } catch (e) {
-    await refund(email, apiOp);
+    await refundBill(email, bill);
     // Only surface safe, user-facing errors; hide internal detail.
     const userFacing = e instanceof img.ApiOpError || e instanceof PayloadTooLarge;
     const status = e instanceof PayloadTooLarge ? 413 : userFacing ? 422 : 500;

@@ -138,7 +138,7 @@ export default function ApiKeysPage() {
         {keys.length === 0 ? (
           <div className="rounded-lg border border-dashed border-[#E5E5E5] dark:border-[#2A2A2A] p-6 text-center text-sm text-[#A3A3A3]">
             <Key className="h-5 w-5 mx-auto mb-2 text-[#A3A3A3]" strokeWidth={1.5} />
-            No keys yet. Generate one to get <span className="text-[#16a34a] font-medium">50 free credits</span> and start calling the API.
+            No keys yet. Generate one to get <span className="text-[#16a34a] font-medium">50 free credits + 25 free ops/day</span> and start calling the API.
           </div>
         ) : (
           <div className="space-y-2">

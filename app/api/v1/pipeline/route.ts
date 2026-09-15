@@ -20,7 +20,7 @@
 import { NextRequest } from "next/server";
 import { createHash } from "crypto";
 import { extractKey, resolveApiKey } from "@/lib/api/keys";
-import { chargeUnits, refundUnits } from "@/lib/api/meter";
+import { chargeUnits, refundBill } from "@/lib/api/meter";
 import { runPipeline, pipelineCost, isImageOp, type PipelineStep } from "@/lib/server-ops/run";
 import { ApiOpError } from "@/lib/server-ops/image";
 import { assertFileSize, contentLengthExceeded, PayloadTooLarge, MAX_PIPELINE_STEPS } from "@/lib/api/limits";
@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (e) {
-    await refundUnits(email, cost);
+    await refundBill(email, bill);
     const userFacing = e instanceof ApiOpError;
     const status = userFacing ? 422 : 500;
     const detail = userFacing ? (e as Error).message : "processing_failed";

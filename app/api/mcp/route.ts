@@ -18,7 +18,7 @@ import { createHash } from "crypto";
 import { APP_URL } from "@/lib/constants";
 import { extractKey, resolveApiKey } from "@/lib/api/keys";
 import { resolveAccessToken } from "@/lib/oauth/store";
-import { chargeUnits, refundUnits } from "@/lib/api/meter";
+import { chargeUnits, refundBill } from "@/lib/api/meter";
 import { rateLimit, clientIp, IP_LIMIT } from "@/lib/api/ratelimit";
 import { MCP_TOOLS, findTool } from "@/lib/mcp/tools";
 import { ApiOpError } from "@/lib/server-ops/image";
@@ -101,7 +101,7 @@ async function handleCall(email: string, id: unknown, params: Record<string, unk
     content.push({ type: "text", text: `${name} ok · ${JSON.stringify(out.info)} · ${bill.remaining} credits left` });
     return rpcResult(id, { content, structuredContent: { ...out.info, creditsCost: cost, creditsRemaining: bill.remaining } });
   } catch (e) {
-    await refundUnits(email, cost);
+    await refundBill(email, bill);
     const userFacing = e instanceof ApiOpError || e instanceof PayloadTooLarge;
     const msg = userFacing ? (e as Error).message : "processing failed";
     return rpcResult(id, { isError: true, content: [{ type: "text", text: `${name} failed: ${msg} (credits refunded)` }] });
