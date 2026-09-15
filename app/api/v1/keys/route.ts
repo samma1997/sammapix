@@ -14,7 +14,8 @@ import { NextRequest } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/options";
 import { createApiKey, listApiKeys, revokeApiKey, publicMeta } from "@/lib/api/keys";
-import { addCredits } from "@/lib/credits";
+import { addCredits, grantApiFreeCreditsOnce } from "@/lib/credits";
+import { FREE_API_CREDITS } from "@/lib/api/limits";
 
 export const runtime = "nodejs";
 
@@ -45,11 +46,14 @@ export async function POST(req: NextRequest) {
 
   try {
     const { key, meta } = await createApiKey(email, label);
-    if (viaDev) await addCredits(email, 200); // seed test credits in local dev only
+    // Free tier: seed free credits once per account so the API is testable.
+    const granted = await grantApiFreeCreditsOnce(email, FREE_API_CREDITS);
+    if (viaDev) await addCredits(email, 200); // extra test credits in local dev only
     return Response.json({
       ok: true,
       key, // shown ONCE — store it now, it is not retrievable later
       meta: publicMeta(meta),
+      freeCreditsGranted: granted ? FREE_API_CREDITS : 0,
       note: "Store this key now. Only its hash is saved; it cannot be shown again.",
     });
   } catch (e) {

@@ -126,6 +126,26 @@ export async function grantSignupBonusOnce(
 }
 
 /**
+ * One-time API free-tier grant: when an account creates its first API key,
+ * seed it with free credits so a dev/agent can try the API without paying.
+ * Marker (SET NX) ensures it is granted exactly once per account.
+ */
+export async function grantApiFreeCreditsOnce(email: string, amount: number): Promise<boolean> {
+  const marker = `credits:api_freetier:${email}`;
+
+  if (redisConfigured) {
+    const set = await redisExec<string | null>(["SET", marker, "1", "NX"]);
+    if (set !== "OK") return false;
+    await addCredits(email, amount);
+    return true;
+  }
+  if (memoryStore.get(marker) === 1) return false;
+  memoryStore.set(marker, 1);
+  await addCredits(email, amount);
+  return true;
+}
+
+/**
  * Deducts `count` credits from a user's balance (default: 1).
  * Returns `{ success: true, remaining }` when deduction succeeds.
  * Returns `{ success: false, remaining }` when balance is insufficient.

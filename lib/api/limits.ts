@@ -17,6 +17,7 @@ export const MAX_PDF_FILES = 20; // per pdf-merge request
 export const MAX_PDF_PAGES = 500; // total pages in a merged PDF
 export const MAX_PIPELINE_STEPS = 12;
 export const MAX_API_KEYS_PER_ACCOUNT = 10;
+export const FREE_API_CREDITS = 50; // one-time free tier to try the API
 
 /** sharp init options applied to EVERY decode (decompression-bomb defense). */
 export const SAFE_SHARP: SharpOptions = {
