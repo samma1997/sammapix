@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Bot, Zap, ArrowRight, Lock, Sparkles } from "lucide-react";
+import { Bot, Zap, ArrowRight, Lock, Sparkles, Coins, ShieldCheck, Plug, Check } from "lucide-react";
 import { APP_URL } from "@/lib/constants";
 import ConnectSnippets from "@/components/agents/ConnectSnippets";
 import Reveal from "@/components/agents/Reveal";
@@ -264,24 +264,84 @@ export default function ForAiAgentsPage() {
         </div>
       </section>
 
+      {/* Why it's the best API — positioning for agents */}
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <h2 className="mb-2 text-center text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">The best image API for agents</h2>
+            <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-[#737373] dark:text-[#A3A3A3]">
+              Cheapest to run, safest by default, and it plugs into anything. No subscription, no per-seat, no lock-in.
+            </p>
+          </Reveal>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            {[
+              {
+                icon: Coins,
+                title: "Lowest cost",
+                points: ["Pay only per operation — from ~$0.017", "No subscription, no per-seat, no minimums", "50 free credits to start", "Failed operations refunded automatically"],
+              },
+              {
+                icon: ShieldCheck,
+                title: "Most secure",
+                points: ["Zero-retention: files never stored or logged", "Never used to train any model", "OAuth 2.1 + PKCE, audience-bound tokens", "Revoke access anytime"],
+              },
+              {
+                icon: Plug,
+                title: "Integrate anywhere",
+                points: ["MCP: Claude, Cursor & any agent", "REST API from any language", "Send a file or just a URL", "One endpoint, base64 or multipart"],
+              },
+            ].map((c) => (
+              <div key={c.title} className="rounded-xl border border-[#E5E5E5] bg-white p-6 dark:border-[#2A2A2A] dark:bg-[#1E1E1E]">
+                <c.icon className="mb-3 h-5 w-5 text-[#6366F1]" strokeWidth={1.5} />
+                <h3 className="mb-3 text-base font-semibold text-[#171717] dark:text-[#E5E5E5]">{c.title}</h3>
+                <ul className="space-y-2">
+                  {c.points.map((p) => (
+                    <li key={p} className="flex items-start gap-2 text-sm text-[#737373] dark:text-[#A3A3A3]">
+                      <Check className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 text-[#6366F1]" strokeWidth={2} />
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
       <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-4xl">
           <Reveal>
-            <h2 className="mb-2 text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">Simple, prepaid pricing</h2>
-            <p className="mb-6 text-sm text-[#737373] dark:text-[#A3A3A3]">1 credit per operation · 1 credit per pipeline step · failed ops refunded automatically.</p>
+            <h2 className="mb-2 text-center text-2xl font-semibold text-[#171717] dark:text-[#E5E5E5]">Transparent, prepaid pricing</h2>
+            <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-[#737373] dark:text-[#A3A3A3]">
+              1 credit per operation (1 per step in a pipeline). Buy credits once, spend them across the API, MCP and the website. The more you buy, the less each operation costs.
+            </p>
           </Reveal>
-          <Reveal y={18} delay={80}>
-            <div className="inline-flex flex-wrap items-center justify-center gap-3">
-              <div className="rounded-lg border border-[#6366F1]/30 bg-[#6366F1]/5 px-5 py-3">
-                <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">50 credits</p>
-                <p className="text-xs text-[#6366F1]">free to start</p>
-              </div>
-              <Link href="/dashboard/credits" className="rounded-lg border border-[#E5E5E5] px-5 py-3 transition-colors hover:border-[#A3A3A3] dark:border-[#2A2A2A]">
-                <p className="text-lg font-semibold text-[#171717] dark:text-[#E5E5E5]">Top up anytime</p>
-                <p className="text-xs text-[#737373] dark:text-[#A3A3A3]">from $5.99</p>
-              </Link>
-            </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-4">
+            {[
+              { name: "Free", price: "$0", unit: "50 credits included", per: "on first connect", cta: "Start free", href: "/dashboard/api", highlight: false, badge: "" },
+              { name: "Starter", price: "$5.99", unit: "100 credits", per: "≈ $0.06 / op", cta: "Buy", href: "/dashboard/credits", highlight: false, badge: "" },
+              { name: "Standard", price: "$11.99", unit: "500 credits", per: "≈ $0.024 / op", cta: "Buy", href: "/dashboard/credits", highlight: true, badge: "Most popular" },
+              { name: "Scale", price: "$34.99", unit: "2,000 credits", per: "≈ $0.017 / op", cta: "Buy", href: "/dashboard/credits", highlight: false, badge: "Best value" },
+            ].map((t, i) => (
+              <Reveal key={t.name} y={18} delay={i * 60}>
+                <div className={`relative flex h-full flex-col rounded-xl border p-5 ${t.highlight ? "border-[#6366F1] bg-[#6366F1]/[0.04] dark:bg-[#6366F1]/10" : "border-[#E5E5E5] bg-white dark:border-[#2A2A2A] dark:bg-[#1E1E1E]"}`}>
+                  {t.badge && (
+                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#6366F1] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">{t.badge}</span>
+                  )}
+                  <p className="text-xs font-medium uppercase tracking-wide text-[#A3A3A3]">{t.name}</p>
+                  <p className="mt-1 text-2xl font-bold text-[#171717] dark:text-[#E5E5E5]">{t.price}</p>
+                  <p className="mt-1 text-sm text-[#171717] dark:text-[#E5E5E5]">{t.unit}</p>
+                  <p className="mb-4 text-xs text-[#6366F1]">{t.per}</p>
+                  <Link href={t.href} className={`mt-auto inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium transition-colors ${t.highlight ? "bg-[#6366F1] text-white hover:bg-[#4f46e5]" : "border border-[#E5E5E5] text-[#525252] hover:border-[#A3A3A3] hover:text-[#171717] dark:border-[#2A2A2A] dark:text-[#A3A3A3] dark:hover:text-[#E5E5E5]"}`}>
+                    {t.cta}
+                  </Link>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <p className="mt-6 text-center text-xs text-[#A3A3A3]">No expiry games · failed operations are refunded · cancel anytime (there's nothing to cancel — it's prepaid).</p>
           </Reveal>
         </div>
       </section>
