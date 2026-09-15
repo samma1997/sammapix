@@ -1,124 +1,97 @@
 "use client";
 
-import React from "react";
-import { Image as ImageIcon, Gauge, RefreshCw, Maximize2, CheckCircle2 } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Image as ImageIcon, Gauge, RefreshCw, Maximize2, CheckCircle2, ChevronRight } from "lucide-react";
 
 const NODES = [
   { icon: ImageIcon, label: "Source", sub: "photo.jpg" },
   { icon: Gauge, label: "Compress", sub: "step 1" },
-  { icon: RefreshCw, label: "Convert", sub: "→ webp" },
+  { icon: RefreshCw, label: "Convert", sub: "to webp" },
   { icon: Maximize2, label: "Resize", sub: "1200px" },
   { icon: CheckCircle2, label: "Output", sub: "optimized.webp", done: true },
 ];
 
 /**
- * Pipeline differentiator diagram: five nodes wired left→right with a packet of
- * light continuously travelling the whole chain; each node flashes as the packet
- * passes. A before/after size chip drives the token-saving message home. Pure CSS
- * + SMIL, no libraries.
+ * Pipeline differentiator — clean, minimal diagram: five nodes linked by chevrons,
+ * with a before/after size chip. No continuous motion: nodes just fade/scale in
+ * once when scrolled into view (staggered) and lift on hover. Pure CSS.
  */
 export default function PipelineFlow() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setInView(true); io.disconnect(); } },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <div className="fa-pipe relative">
+    <div ref={ref} className={`fa-pipe2 ${inView ? "fa-in" : ""}`}>
       <style dangerouslySetInnerHTML={{ __html: css }} />
 
-      {/* size chip */}
-      <div className="mb-6 flex items-center justify-center gap-3 text-sm">
-        <span className="rounded-lg border border-[#E5E5E5] bg-white px-3 py-1.5 font-mono text-[#737373] line-through dark:border-[#2A2A2A] dark:bg-[#1E1E1E]">
-          2.3 MB
-        </span>
-        <span className="fa-arrow text-[#6366F1]">→</span>
-        <span className="fa-out-chip rounded-lg border border-[#6366F1]/30 bg-[#6366F1]/5 px-3 py-1.5 font-mono font-semibold text-[#6366F1]">
-          240 KB
-        </span>
-        <span className="hidden text-xs text-[#A3A3A3] sm:inline">in one call</span>
+      {/* before / after chip */}
+      <div className="mb-8 flex items-center justify-center gap-2.5 text-sm">
+        <span className="rounded-lg border border-[#E5E5E5] bg-white px-3 py-1.5 font-mono text-[#737373] line-through dark:border-[#2A2A2A] dark:bg-[#1E1E1E]">2.3 MB</span>
+        <ChevronRight className="h-4 w-4 text-[#A3A3A3]" strokeWidth={2} />
+        <span className="rounded-lg border border-[#6366F1]/30 bg-[#6366F1]/5 px-3 py-1.5 font-mono font-semibold text-[#6366F1]">240 KB</span>
+        <span className="ml-1 hidden text-xs text-[#A3A3A3] sm:inline">in one call</span>
       </div>
 
-      {/* nodes + wires */}
-      <div className="relative grid grid-cols-5 gap-1 sm:gap-2">
-        {/* SVG wire layer */}
-        <svg
-          viewBox="0 0 1000 40"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-[22px] h-10 w-full overflow-visible"
-          aria-hidden
-        >
-          <line x1="0" y1="20" x2="1000" y2="20" stroke="#E5E5E5" strokeWidth="2" className="fa-wire-base" />
-          <line
-            x1="0" y1="20" x2="1000" y2="20"
-            stroke="#6366F1" strokeWidth="2"
-            strokeDasharray="6 10"
-            className="fa-wire-flow"
-          />
-          {/* travelling packet */}
-          <circle r="4" fill="#6366F1" className="fa-packet">
-            <animateMotion dur="3.4s" repeatCount="indefinite" path="M0,20 L1000,20" calcMode="linear" />
-          </circle>
-        </svg>
-
+      {/* nodes linked by chevrons */}
+      <div className="flex items-start justify-center gap-1 overflow-x-auto pb-2 sm:gap-2">
         {NODES.map((n, i) => (
-          <div key={n.label} className="relative z-10 flex flex-col items-center">
-            <span
-              className={`fa-pnode flex h-11 w-11 items-center justify-center rounded-xl border bg-white dark:bg-[#1E1E1E] ${
-                n.done
-                  ? "border-[#6366F1]/40 text-[#6366F1]"
-                  : "border-[#E5E5E5] text-[#737373] dark:border-[#2A2A2A] dark:text-[#A3A3A3]"
-              }`}
-              style={{ ["--d" as string]: `${(i * 3.4) / NODES.length}s` }}
-            >
-              <n.icon className="h-5 w-5" strokeWidth={1.6} />
-            </span>
-            <p className="mt-2 text-[11px] font-semibold text-[#171717] dark:text-[#E5E5E5]">{n.label}</p>
-            <p className="text-[10px] text-[#A3A3A3]">{n.sub}</p>
-          </div>
+          <React.Fragment key={n.label}>
+            <div className="fa-node flex min-w-[64px] flex-col items-center" style={{ ["--i" as string]: i }}>
+              <span
+                className={`flex h-12 w-12 items-center justify-center rounded-xl border transition-all duration-200 ${
+                  n.done
+                    ? "border-[#6366F1]/40 bg-[#6366F1]/5 text-[#6366F1]"
+                    : "border-[#E5E5E5] bg-white text-[#525252] dark:border-[#2A2A2A] dark:bg-[#1E1E1E] dark:text-[#A3A3A3]"
+                }`}
+              >
+                <n.icon className="h-5 w-5" strokeWidth={1.6} />
+              </span>
+              <p className="mt-2 text-[11px] font-semibold text-[#171717] dark:text-[#E5E5E5]">{n.label}</p>
+              <p className="text-[10px] text-[#A3A3A3]">{n.sub}</p>
+            </div>
+            {i < NODES.length - 1 && (
+              <ChevronRight className="fa-chev mt-3.5 h-4 w-4 flex-shrink-0 text-[#D4D4D4] dark:text-[#404040]" style={{ ["--i" as string]: i }} strokeWidth={2} />
+            )}
+          </React.Fragment>
         ))}
       </div>
 
-      <p className="mt-6 text-center text-xs text-[#A3A3A3]">
-        One request · one billed op per step · only the final file comes back
-      </p>
+      <p className="mt-6 text-center text-xs text-[#A3A3A3]">One request · one billed op per step · only the final file comes back</p>
     </div>
   );
 }
 
 const css = `
-.fa-wire-base { }
-:is(.dark) .fa-wire-base { stroke: #2A2A2A; }
-.fa-wire-flow {
-  opacity: 0.5;
-  animation: fa-dash 1.1s linear infinite;
+.fa-pipe2 .fa-node,
+.fa-pipe2 .fa-chev {
+  opacity: 0;
+  transform: translateY(8px);
 }
-@keyframes fa-dash { to { stroke-dashoffset: -16; } }
-
-/* nodes flash as the packet reaches them, in sync with the 3.4s motion loop */
-@keyframes fa-node-flash {
-  0%, 12%, 100% {
-    box-shadow: 0 0 0 0 rgba(99,102,241,0);
-    transform: translateY(0) scale(1);
-  }
-  6% {
-    box-shadow: 0 0 0 5px rgba(99,102,241,0.14);
-    transform: translateY(-3px) scale(1.06);
-    border-color: rgba(99,102,241,0.6);
-  }
+.fa-pipe2.fa-in .fa-node,
+.fa-pipe2.fa-in .fa-chev {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms cubic-bezier(0.32,0.72,0,1), transform 500ms cubic-bezier(0.32,0.72,0,1);
+  transition-delay: calc(var(--i) * 90ms);
 }
-.fa-pnode {
-  animation: fa-node-flash 3.4s linear infinite;
-  animation-delay: var(--d, 0s);
-  transition: border-color 300ms ease;
+.fa-pipe2 .fa-node > span { will-change: transform; }
+.fa-pipe2 .fa-node:hover > span {
+  transform: translateY(-3px);
+  border-color: rgba(99,102,241,0.5);
+  box-shadow: 0 6px 16px -6px rgba(99,102,241,0.35);
 }
-
-.fa-arrow { animation: fa-arrow-nudge 1.8s ease-in-out infinite; }
-@keyframes fa-arrow-nudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(3px); } }
-
-.fa-out-chip { animation: fa-chip-glow 3.4s ease-in-out infinite; }
-@keyframes fa-chip-glow {
-  0%, 70%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0); }
-  85% { box-shadow: 0 0 0 4px rgba(99,102,241,0.12); }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .fa-wire-flow, .fa-pnode, .fa-arrow, .fa-out-chip { animation: none !important; }
-  .fa-packet { display: none; }
+  .fa-pipe2 .fa-node, .fa-pipe2 .fa-chev { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 `;
