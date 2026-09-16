@@ -10,7 +10,7 @@
  * tool quickly.
  */
 
-import { runImageOp, runPipeline, pipelineCost, isImageOp, type ImageOp, type PipelineStep } from "@/lib/server-ops/run";
+import { runImageOp, runPipeline, pipelineCost, isImageOp, IMAGE_OPS, type ImageOp, type PipelineStep } from "@/lib/server-ops/run";
 import * as pdf from "@/lib/server-ops/pdf";
 import * as img from "@/lib/server-ops/image";
 import { assertFileSize } from "@/lib/api/limits";
@@ -146,7 +146,7 @@ export const MCP_TOOLS: McpTool[] = [
   {
     name: "sammapix_pipeline",
     description:
-      "Run a CHAIN of image operations in ONE call (the output of each step feeds the next), so you avoid multiple round-trips and intermediate files. Steps are objects like {\"op\":\"resize\",\"params\":{\"width\":1200}}. Chainable ops: compress, resize, crop, convert, rotate. Returns the final image (base64). Costs 1 credit per step.",
+      `Run a CHAIN of image operations in ONE call (the output of each step feeds the next), so you avoid multiple round-trips and intermediate files. Steps are objects like {"op":"resize","params":{"width":1200}}. Chainable ops: ${IMAGE_OPS.join(", ")}. Returns the final image (base64). Costs 1 credit per step.`,
     inputSchema: {
       type: "object",
       properties: {
@@ -154,7 +154,7 @@ export const MCP_TOOLS: McpTool[] = [
         steps: {
           type: "array",
           description: "Ordered list of {op, params}. Max 12.",
-          items: { type: "object", properties: { op: { type: "string", enum: ["compress", "resize", "crop", "convert", "rotate"] }, params: { type: "object" } }, required: ["op"] },
+          items: { type: "object", properties: { op: { type: "string", enum: [...IMAGE_OPS] }, params: { type: "object" } }, required: ["op"] },
         },
       },
       required: ["steps"],
