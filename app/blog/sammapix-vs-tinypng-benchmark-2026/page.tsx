@@ -633,6 +633,12 @@ export default function SammaPixVsTinyPNGPage() {
               images per day, work with modern formats, or handle any
               sensitive content at all, SammaPix is the better tool in 2026.
             </p>
+            <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+              Building an AI agent or automation instead of clicking a UI? SammaPix also runs as an{" "}
+              <Link href="/blog/image-api-for-ai-agents-comparison-2026" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">image API and MCP server for AI agents</Link>{" "}
+              — compare it with Cloudinary and TinyPNG&apos;s APIs, or learn to{" "}
+              <Link href="/blog/image-pipelines-for-ai-agents" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">chain operations in one pipeline call</Link>.
+            </p>
 
             <hr className="my-8 border-gray-100 dark:border-[#2A2A2A]" />
 
