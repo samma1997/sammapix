@@ -224,6 +224,8 @@ export const APP_DESCRIPTION =
 export const BLOG_SLUGS = [
   "image-api-for-ai-agents-comparison-2026",
   "image-pipelines-for-ai-agents",
+  "best-image-mcp-servers-2026",
+  "give-your-ai-agent-image-tools",
   "avif-vs-webp-vs-jpeg-benchmark-2026",
   "what-are-content-credentials-c2pa",
   "how-to-check-if-image-is-ai-generated",

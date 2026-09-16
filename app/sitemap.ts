@@ -338,8 +338,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // VS comparison pages (12 total)
+  // VS comparison pages (14 total)
   const vsPages: MetadataRoute.Sitemap = [
+    "/vs/cloudinary",
+    "/vs/imgix",
     "/vs/tinypng",
     "/vs/squoosh",
     "/vs/imageoptim",

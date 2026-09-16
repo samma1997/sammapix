@@ -1,5 +1,33 @@
 [
   {
+    "slug": "best-image-mcp-servers-2026",
+    "title": "Best Image MCP Servers for AI Agents (2026)",
+    "description": "A practical, honest roundup of the best image (and PDF) MCP servers for AI agents in 2026 — what each one does, how it is priced, and when to pick it.",
+    "keywords": [
+      "best image mcp servers",
+      "image mcp server 2026",
+      "mcp server for images",
+      "ai agent image tools",
+      "mcp image processing"
+    ],
+    "publishedDate": "2026-09-16",
+    "url": "/blog/best-image-mcp-servers-2026"
+  },
+  {
+    "slug": "give-your-ai-agent-image-tools",
+    "title": "How to Give Your AI Agent Image Tools (Claude, Cursor, ChatGPT) — 2026",
+    "description": "Step-by-step: connect image and PDF tools to Claude, Cursor and other AI agents over MCP, or call them via REST. Copy-paste config, first prompts to t",
+    "keywords": [
+      "give ai agent image tools",
+      "add image tools to claude",
+      "cursor mcp image server",
+      "connect mcp server claude",
+      "chatgpt image processing api"
+    ],
+    "publishedDate": "2026-09-16",
+    "url": "/blog/give-your-ai-agent-image-tools"
+  },
+  {
     "slug": "image-api-for-ai-agents-comparison-2026",
     "title": "Image Processing API for AI Agents: SammaPix vs Cloudinary vs TinyPNG (2026)",
     "description": "An honest comparison of image (and PDF) processing options for AI agents in 2026: SammaPix MCP, Cloudinary, TinyPNG, remove.bg and calling Gemini dire",
