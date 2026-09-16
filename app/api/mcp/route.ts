@@ -62,7 +62,13 @@ function rpcError(id: unknown, code: number, message: string, data?: unknown) {
 
 // Public tool list (schema only, no internal handlers).
 function toolList() {
-  return MCP_TOOLS.map((t) => ({ name: t.name, description: t.description, inputSchema: t.inputSchema, annotations: t.annotations }));
+  return MCP_TOOLS.map((t) => ({
+    name: t.name,
+    description: t.description,
+    inputSchema: t.inputSchema,
+    ...(t.outputSchema ? { outputSchema: t.outputSchema } : {}),
+    annotations: t.annotations,
+  }));
 }
 
 async function handleCall(email: string, id: unknown, params: Record<string, unknown> | undefined) {

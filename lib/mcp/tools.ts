@@ -10,9 +10,10 @@
  * tool quickly.
  */
 
-import { runImageOp, runPipeline, pipelineCost, isImageOp, IMAGE_OPS, type ImageOp, type PipelineStep } from "@/lib/server-ops/run";
+import { runImageOp, runPipeline, pipelineCost, isImageOp, optimizeForWeb, IMAGE_OPS, type ImageOp, type PipelineStep } from "@/lib/server-ops/run";
 import * as pdf from "@/lib/server-ops/pdf";
 import * as img from "@/lib/server-ops/image";
+import * as ai from "@/lib/server-ops/ai";
 import { assertFileSize } from "@/lib/api/limits";
 import { OP_COST } from "@/lib/api/meter";
 import { fetchRemoteFile } from "@/lib/api/fetch-image";
@@ -29,6 +30,7 @@ export interface McpTool {
   name: string;
   description: string;
   inputSchema: Record<string, unknown>;
+  outputSchema?: Record<string, unknown>;
   annotations: { readOnlyHint: boolean; destructiveHint: boolean; idempotentHint: boolean; openWorldHint: boolean };
   cost: (args: Record<string, unknown>) => number;
   run: (args: Record<string, unknown>) => Promise<McpToolResult>;
@@ -67,6 +69,16 @@ async function runImg(op: ImageOp, args: Record<string, unknown>): Promise<McpTo
 
 const RO = { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false };
 const RW = { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: false };
+// AI vision tools: read-only (no image mutation) but non-deterministic + external provider.
+const AI = { readOnlyHint: true, destructiveHint: false, idempotentHint: false, openWorldHint: true };
+
+function numArg(v: unknown): number | undefined {
+  const n = Number(v);
+  return v != null && v !== "" && !Number.isNaN(n) ? n : undefined;
+}
+function strArg(v: unknown): string | undefined {
+  return typeof v === "string" && v ? v : undefined;
+}
 
 /** Compact factory for a chainable image tool (base64 or imageUrl in, image out). */
 function imageTool(name: string, op: ImageOp, description: string, extraProps: Record<string, unknown>): McpTool {
@@ -241,6 +253,74 @@ export const MCP_TOOLS: McpTool[] = [
       });
       return pdfResult(await pdf.imagesToPdf(bufs));
     },
+  },
+
+  // ── workflow / intent tool (deterministic, one call) ────────────────────────
+  {
+    name: "sammapix_optimize_for_web",
+    description:
+      "Prepare an image for the web in ONE call: caps the longest side, converts to a modern format and encodes at a sensible quality. Use this instead of chaining resize+convert+compress when you just want a web-ready image. Defaults: 1920px, webp, quality 80. Returns the optimized image (base64).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        ...IMG_INPUT,
+        maxDimension: { type: "number", description: "Longest side cap in px (default 1920)." },
+        format: { type: "string", enum: ["webp", "avif", "jpeg", "png"], description: "Target format (default webp)." },
+        quality: { type: "number", minimum: 1, maximum: 100, description: "Output quality (default 80)." },
+      },
+      required: [],
+    },
+    outputSchema: { type: "object", properties: { format: { type: "string" }, width: { type: "number" }, height: { type: "number" }, bytes: { type: "number" } } },
+    annotations: RW,
+    cost: () => OP_COST["optimize-web"],
+    run: async (a) => imageResult(await optimizeForWeb(await acquireImage(a), { maxDimension: numArg(a.maxDimension), format: strArg(a.format), quality: numArg(a.quality) })),
+  },
+
+  // ── AI-native vision tools (Gemini, vision -> text) ─────────────────────────
+  {
+    name: "sammapix_describe",
+    description: "Describe what is in an image (a factual caption). Use to understand an image before deciding what to do with it. Returns text, no image.",
+    inputSchema: { type: "object", properties: { ...IMG_INPUT, detail: { type: "string", enum: ["short", "normal"], description: "'short' = one sentence, 'normal' = 2-4 sentences (default)." } }, required: [] },
+    outputSchema: { type: "object", properties: { description: { type: "string" } }, required: ["description"] },
+    annotations: AI,
+    cost: () => OP_COST.describe,
+    run: async (a) => ({ info: await ai.describeImage(await acquireImage(a), { detail: strArg(a.detail) }) }),
+  },
+  {
+    name: "sammapix_alt_text",
+    description: "Generate concise accessibility alt text for an image (under 125 chars, screen-reader friendly). Returns text, no image.",
+    inputSchema: { type: "object", properties: { ...IMG_INPUT }, required: [] },
+    outputSchema: { type: "object", properties: { altText: { type: "string" } }, required: ["altText"] },
+    annotations: AI,
+    cost: () => OP_COST["alt-text"],
+    run: async (a) => ({ info: await ai.altText(await acquireImage(a)) }),
+  },
+  {
+    name: "sammapix_suggest_filename",
+    description: "Suggest an SEO-friendly, kebab-case file name based on the image content (with the right extension). Useful when saving or publishing images. Returns text, no image.",
+    inputSchema: { type: "object", properties: { ...IMG_INPUT }, required: [] },
+    outputSchema: { type: "object", properties: { filename: { type: "string" }, base: { type: "string" }, ext: { type: "string" } }, required: ["filename"] },
+    annotations: AI,
+    cost: () => OP_COST["suggest-filename"],
+    run: async (a) => ({ info: await ai.suggestFilename(await acquireImage(a)) }),
+  },
+  {
+    name: "sammapix_extract_text",
+    description: "Extract readable text from an image (OCR), preserving line breaks. Returns text, no image.",
+    inputSchema: { type: "object", properties: { ...IMG_INPUT }, required: [] },
+    outputSchema: { type: "object", properties: { text: { type: "string" } }, required: ["text"] },
+    annotations: AI,
+    cost: () => OP_COST.ocr,
+    run: async (a) => ({ info: await ai.extractText(await acquireImage(a)) }),
+  },
+  {
+    name: "sammapix_tags",
+    description: "Generate descriptive keyword tags for an image (subjects, scene, style, colors). Useful for cataloguing or SEO. Returns an array of tags, no image.",
+    inputSchema: { type: "object", properties: { ...IMG_INPUT, max: { type: "number", minimum: 3, maximum: 20, description: "How many tags (default 10)." } }, required: [] },
+    outputSchema: { type: "object", properties: { tags: { type: "array", items: { type: "string" } } }, required: ["tags"] },
+    annotations: AI,
+    cost: () => OP_COST.tags,
+    run: async (a) => ({ info: await ai.imageTags(await acquireImage(a), { max: numArg(a.max) }) }),
   },
 ];
 
