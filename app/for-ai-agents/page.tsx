@@ -60,7 +60,7 @@ const FAQ = [
   },
   {
     q: "How is it priced?",
-    a: "Every account gets 25 free operations per day. Beyond that it is pay-per-use with prepaid credits: 1 credit per operation (a pipeline is 1 per step), or 2 credits for AI vision ops (describe, alt text, OCR, tags, filename). From about $0.003 per credit. Credits are shared across the SammaPix website and the API/MCP, and a failed operation is refunded automatically.",
+    a: "Free accounts get 25 free operations per day; Pro subscribers get a much larger daily allowance (500/day) so they can use the API/MCP without hitting the wall. Beyond that it is pay-per-use with prepaid credits: 1 credit per operation (a pipeline is 1 per step), or 2 credits for AI vision ops (describe, alt text, OCR, tags, filename). From about $0.003 per credit. Credits are shared across the SammaPix website and the API/MCP, and a failed operation is refunded automatically.",
   },
   {
     q: "Which AI clients does it work with?",

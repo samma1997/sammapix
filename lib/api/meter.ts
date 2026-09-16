@@ -11,7 +11,8 @@
  */
 
 import { deductCreditsAtomic, getCreditBalance, addCredits } from "@/lib/credits";
-import { consumeDailyFree, restoreDailyFree } from "@/lib/api/daily";
+import { consumeDailyFree, restoreDailyFree, FREE_API_OPS_PER_DAY, PRO_API_OPS_PER_DAY } from "@/lib/api/daily";
+import { getUserPlanCached } from "@/lib/user-plan";
 
 export type ApiOp =
   | "compress" | "resize" | "crop" | "convert" | "rotate" | "metadata"
@@ -48,12 +49,16 @@ export interface Bill {
   creditsCharged: number; // ops charged to credits
 }
 
-/** Bill `cost` units: daily-free first, credits for the remainder. */
+/** Bill `cost` units: daily-free first, credits for the remainder.
+ *  Pro subscribers get a much larger daily-free bucket (see PRO_API_OPS_PER_DAY),
+ *  so they can use the API/MCP without hitting the credit wall in normal use. */
 async function billUnits(email: string, cost: number): Promise<Bill> {
   const c = Math.max(0, Math.round(cost));
   if (c === 0) return { ok: true, cost: 0, remaining: await getCreditBalance(email), freeUsed: 0, creditsCharged: 0 };
 
-  const free = await consumeDailyFree(email, c);
+  const plan = await getUserPlanCached(email);
+  const dailyLimit = plan === "pro" ? PRO_API_OPS_PER_DAY : FREE_API_OPS_PER_DAY;
+  const free = await consumeDailyFree(email, c, dailyLimit);
   const toCharge = c - free;
   if (toCharge === 0) {
     return { ok: true, cost: c, remaining: await getCreditBalance(email), freeUsed: free, creditsCharged: 0 };
