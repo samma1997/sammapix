@@ -110,3 +110,20 @@ export async function runPipeline(input: Buffer, steps: PipelineStep[]): Promise
 export function pipelineCost(steps: PipelineStep[]): number {
   return Array.isArray(steps) ? steps.length : 0;
 }
+
+/**
+ * Intent-level shortcut: prepare an image for the web in ONE call, so an agent
+ * doesn't have to know resize/convert/quality knobs. Caps the longest side,
+ * converts to a modern format and encodes at a sensible quality.
+ * Defaults: 1920px cap, webp, quality 80.
+ */
+export async function optimizeForWeb(
+  input: Buffer,
+  p: { maxDimension?: number; format?: string; quality?: number } = {},
+): Promise<img.OpResult> {
+  const maxDimension = num(p.maxDimension) ?? 1920;
+  const format = (str(p.format) ?? "webp") as img.OutFormat;
+  const quality = num(p.quality) ?? 80;
+  const resized = await img.resize(input, { width: maxDimension, height: maxDimension, fit: "inside", quality });
+  return img.convert(resized.buffer, { format, quality });
+}

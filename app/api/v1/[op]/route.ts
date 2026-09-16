@@ -16,7 +16,8 @@ import { extractKey, resolveApiKey } from "@/lib/api/keys";
 import { charge, refundBill, type ApiOp } from "@/lib/api/meter";
 import * as img from "@/lib/server-ops/image";
 import * as pdf from "@/lib/server-ops/pdf";
-import { isImageOp, runImageOp, type ImageOp } from "@/lib/server-ops/run";
+import * as ai from "@/lib/server-ops/ai";
+import { isImageOp, runImageOp, optimizeForWeb, type ImageOp } from "@/lib/server-ops/run";
 import { assertFileSize, contentLengthExceeded, PayloadTooLarge } from "@/lib/api/limits";
 import { rateLimit, clientIp, IP_LIMIT, KEY_LIMIT } from "@/lib/api/ratelimit";
 import { fetchRemoteFile, UnsafeUrlError } from "@/lib/api/fetch-image";
@@ -27,7 +28,9 @@ export const maxDuration = 60;
 const SUPPORTED: ApiOp[] = [
   "compress", "resize", "crop", "convert", "rotate", "metadata",
   "flip", "grayscale", "blur", "adjust", "tint", "negate", "flatten", "border", "round", "watermark",
+  "optimize-web",
   "pdf-compress", "pdf-merge", "pdf-split", "pdf-rotate", "image-to-pdf", "pdf-info",
+  "describe", "alt-text", "suggest-filename", "ocr", "tags",
 ];
 // Ops that accept multiple files (repeated "file" fields)
 const MULTI_FILE: ApiOp[] = ["pdf-merge", "image-to-pdf"];
@@ -166,6 +169,19 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
       const meta = await img.metadata(buffer);
       return json({ ok: true, op: apiOp, metadata: meta }, 200, billHeaders);
     }
+
+    // ── Workflow / intent op (image out) ────────────────────────────────────
+    if (apiOp === "optimize-web") {
+      const out = await optimizeForWeb(buffer, { maxDimension: num(params.maxDimension), format: str(params.format), quality: num(params.quality) });
+      return binary(out.buffer, out.contentType, { ...billHeaders, "x-output-format": out.info.format, "x-output-bytes": String(out.info.bytes) });
+    }
+
+    // ── AI vision ops (JSON out) ────────────────────────────────────────────
+    if (apiOp === "describe") return json({ ok: true, op: apiOp, ...(await ai.describeImage(buffer, { detail: str(params.detail) })) }, 200, billHeaders);
+    if (apiOp === "alt-text") return json({ ok: true, op: apiOp, ...(await ai.altText(buffer)) }, 200, billHeaders);
+    if (apiOp === "suggest-filename") return json({ ok: true, op: apiOp, ...(await ai.suggestFilename(buffer)) }, 200, billHeaders);
+    if (apiOp === "ocr") return json({ ok: true, op: apiOp, ...(await ai.extractText(buffer)) }, 200, billHeaders);
+    if (apiOp === "tags") return json({ ok: true, op: apiOp, ...(await ai.imageTags(buffer, { max: num(params.max) })) }, 200, billHeaders);
 
     if (isImageOp(apiOp)) {
       const out = await runImageOp(apiOp as ImageOp, buffer, params);
