@@ -3,10 +3,12 @@
  * Consumed by MCP clients to discover our authorization endpoints.
  */
 import { APP_URL } from "@/lib/constants";
+import { logDiscovery } from "@/lib/api/discovery-log";
 
 export const runtime = "nodejs";
 
-export async function GET() {
+export async function GET(req: Request) {
+  await logDiscovery("oauth-as", req.headers.get("user-agent"));
   return Response.json(
     {
       issuer: APP_URL,

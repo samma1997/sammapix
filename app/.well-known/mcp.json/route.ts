@@ -3,10 +3,12 @@
  * (Smithery, Claude, Cursor) auto-discover the SammaPix remote MCP server.
  */
 import { APP_URL } from "@/lib/constants";
+import { logDiscovery } from "@/lib/api/discovery-log";
 
 export const runtime = "nodejs";
 
-export async function GET() {
+export async function GET(req: Request) {
+  await logDiscovery("mcp-json", req.headers.get("user-agent"));
   return Response.json(
     {
       $schema: "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
