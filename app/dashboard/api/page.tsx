@@ -181,7 +181,7 @@ export default function ApiKeysPage() {
           <Zap className="h-3.5 w-3.5 text-[#6366F1]" strokeWidth={1.5} />
           {tab === "mcp"
             ? "Add this to your agent's MCP config. The agent discovers 20+ tools including a pipeline that chains operations in one call."
-            : "Every op costs credits (1 for most, 1/step for pipelines). A failed op is refunded automatically."}
+            : "Every op costs credits (1 for most, 2 for AI vision ops, 1/step for pipelines). A failed op is refunded automatically."}
         </p>
       </section>
 

@@ -21,7 +21,7 @@ const VALUES: { icon: LucideIcon; title: string; body: string }[] = [
   { icon: Link2, title: "Chain ops in one call", body: "The pipeline tool runs compress → convert → resize in a single request. Fewer round-trips, far fewer tokens, no intermediate files for the agent to juggle." },
   { icon: ShieldCheck, title: "Zero-retention", body: "Files are processed in memory and discarded instantly. Nothing stored, logged, or used for training — safe for private photos and documents." },
   { icon: Boxes, title: "One toolbox, many ops", body: "Compress, convert, resize, crop, rotate, read metadata and compress PDFs — a single MCP server instead of stitching together many services." },
-  { icon: Coins, title: "Pay-per-use, prepaid", body: "1 credit per op (1/step for pipelines), 50 free to start. You never front the compute — usage is prepaid, failed ops are refunded." },
+  { icon: Coins, title: "Pay-per-use, prepaid", body: "1 credit per op (2 for AI vision, 1/step for pipelines), 50 free to start plus 25 free ops a day. Usage is prepaid, failed ops are refunded." },
 ];
 
 const TOOLS: { icon: LucideIcon; name: string; desc: string }[] = [

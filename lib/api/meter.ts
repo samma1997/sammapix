@@ -29,8 +29,10 @@ export const OP_COST: Record<ApiOp, number> = {
   flip: 1, grayscale: 1, blur: 1, adjust: 1, tint: 1, negate: 1, flatten: 1, border: 1, round: 1, watermark: 1,
   "optimize-web": 2,
   "pdf-compress": 1, "pdf-merge": 2, "pdf-split": 1, "pdf-rotate": 1, "image-to-pdf": 2, "pdf-info": 1,
-  // AI vision ops (Gemini): a couple cents' worth at most, priced at 1 credit.
-  describe: 1, "alt-text": 1, "suggest-filename": 1, ocr: 1, tags: 1,
+  // AI vision ops (Gemini): cost us ~$0.0004-0.0016 each. Priced at 2 credits —
+  // healthy margin at any pack tier AND it halves free-tier exposure (an AI op
+  // consumes 2 units of the daily-free bucket, so ~12 free AI ops/day max).
+  describe: 2, "alt-text": 2, "suggest-filename": 2, ocr: 2, tags: 2,
   upscale: 2, enhance: 2, "remove-bg": 2,
 };
 
