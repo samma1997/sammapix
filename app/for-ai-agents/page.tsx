@@ -215,7 +215,8 @@ export default function ForAiAgentsPage() {
               <h2 className="text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">One call instead of five</h2>
             </div>
             <p className="mx-auto mb-10 max-w-xl text-center text-sm leading-relaxed text-[#737373] dark:text-[#A3A3A3]">
-              Preparing product photos usually means chaining compress, convert and resize per image — dozens of tool calls and tokens per file. With the <strong className="text-[#171717] dark:text-[#E5E5E5]">pipeline</strong> tool the agent sends one request describing the whole chain and gets only the finished file back. Fewer round-trips, fewer tokens, no intermediate files.
+              Preparing product photos usually means chaining compress, convert and resize per image — dozens of tool calls and tokens per file. With the <strong className="text-[#171717] dark:text-[#E5E5E5]">pipeline</strong> tool the agent sends one request describing the whole chain and gets only the finished file back. Fewer round-trips, fewer tokens, no intermediate files.{" "}
+              <Link href="/blog/image-pipelines-for-ai-agents" className="text-[#6366F1] hover:underline">See ready-made pipeline flows →</Link>
             </p>
           </Reveal>
           <Reveal y={24}>

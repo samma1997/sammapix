@@ -283,7 +283,10 @@ export default function ImageApiForAgentsPage() {
           tool: the agent sends one request describing the whole chain and gets back only the final file.
           In a real run, a 314&nbsp;KB screenshot went through crop&nbsp;→&nbsp;resize&nbsp;→&nbsp;WebP&nbsp;→&nbsp;compress
           and came out at 8.7&nbsp;KB (−97%) — in a single call. For agents, where tokens are the real cost,
-          that is the difference that matters.
+          that is the difference that matters.{" "}
+          <Link href="/blog/image-pipelines-for-ai-agents" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">
+            See how to build image pipelines
+          </Link>.
         </p>
 
         <h2 id="privacy" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">

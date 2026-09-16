@@ -286,7 +286,8 @@ export default function ImagePipelinesForAgentsPage() {
           drop the first tool, connect the next, and watch the image transform step by step — the same chain your
           agent runs, built with your mouse. It is the fastest way to work out the right sequence and parameters,
           then copy them into a pipeline call. Explore the tools on the{" "}
-          <Link href="/for-ai-agents" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">for-AI-agents page</Link>.
+          <Link href="/for-ai-agents" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">for-AI-agents page</Link>, or see how SammaPix stacks up against other services in our{" "}
+          <Link href="/blog/image-api-for-ai-agents-comparison-2026" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">image API comparison for agents</Link>.
         </p>
 
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
