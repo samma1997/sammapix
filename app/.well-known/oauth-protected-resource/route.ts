@@ -3,10 +3,12 @@
  * Points MCP clients at the authorization server for the /api/mcp resource.
  */
 import { APP_URL } from "@/lib/constants";
+import { logDiscovery } from "@/lib/api/discovery-log";
 
 export const runtime = "nodejs";
 
-export async function GET() {
+export async function GET(req: Request) {
+  await logDiscovery("oauth-prm", req.headers.get("user-agent"));
   return Response.json(
     {
       resource: `${APP_URL}/api/mcp`,

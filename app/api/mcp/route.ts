@@ -23,6 +23,7 @@ import { rateLimit, clientIp, IP_LIMIT } from "@/lib/api/ratelimit";
 import { MCP_TOOLS, findTool } from "@/lib/mcp/tools";
 import { ApiOpError } from "@/lib/server-ops/image";
 import { PayloadTooLarge } from "@/lib/api/limits";
+import { logDiscovery } from "@/lib/api/discovery-log";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
@@ -143,6 +144,7 @@ export async function POST(req: NextRequest) {
   // 401 + WWW-Authenticate so MCP clients start the OAuth discovery flow.
   const email = await resolveIdentity(req.headers);
   if (!email) {
+    await logDiscovery("tools-list-unauth", req.headers.get("user-agent"));
     return Response.json(rpcError(null, -32001, "authentication required"), {
       status: 401,
       headers: { "WWW-Authenticate": `Bearer resource_metadata="${PRM_URL}"` },
@@ -168,6 +170,7 @@ export async function POST(req: NextRequest) {
 }
 
 // Some MCP clients probe with GET; advertise the server.
-export async function GET() {
+export async function GET(req: NextRequest) {
+  await logDiscovery("mcp-get", req.headers.get("user-agent"));
   return Response.json({ server: SERVER_INFO, protocolVersion: PROTOCOL_VERSION, transport: "streamable-http", tools: MCP_TOOLS.length });
 }
