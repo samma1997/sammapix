@@ -420,6 +420,36 @@ export default function ForAiAgentsPage() {
         </div>
       </section>
 
+      {/* Guides & comparisons (hub -> all spokes) */}
+      <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <h2 className="mb-2 text-center text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">Guides &amp; comparisons</h2>
+            <p className="mb-8 text-center text-sm text-[#737373] dark:text-[#A3A3A3]">Everything to evaluate and connect SammaPix as your agent&apos;s image toolbox.</p>
+          </Reveal>
+          <Reveal y={18}>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {[
+                { href: "/blog/give-your-ai-agent-image-tools", t: "Give your AI agent image tools", d: "Set up Claude, Cursor or REST in minutes" },
+                { href: "/blog/image-pipelines-for-ai-agents", t: "Build image pipelines", d: "Chain operations in one call, save tokens" },
+                { href: "/blog/best-image-mcp-servers-2026", t: "Best image MCP servers 2026", d: "Honest roundup of the ecosystem" },
+                { href: "/blog/image-api-for-ai-agents-comparison-2026", t: "Image API comparison for agents", d: "SammaPix vs Cloudinary, TinyPNG, Gemini" },
+                { href: "/vs/cloudinary", t: "SammaPix vs Cloudinary", d: "Pay-as-you-go vs media CDN" },
+                { href: "/vs/imgix", t: "SammaPix vs imgix", d: "No bandwidth billing vs image CDN" },
+              ].map((g) => (
+                <Link key={g.href} href={g.href} className="group flex items-center justify-between rounded-xl border border-[#E5E5E5] bg-white p-4 transition-colors hover:border-[#6366F1]/40 dark:border-[#2A2A2A] dark:bg-[#1E1E1E]">
+                  <div>
+                    <p className="text-sm font-medium text-[#171717] dark:text-[#E5E5E5]">{g.t}</p>
+                    <p className="mt-0.5 text-xs text-[#A3A3A3]">{g.d}</p>
+                  </div>
+                  <ArrowRight className="h-4 w-4 flex-shrink-0 text-[#A3A3A3] transition-colors group-hover:text-[#6366F1]" strokeWidth={1.5} />
+                </Link>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
         <Reveal>

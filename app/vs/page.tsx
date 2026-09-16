@@ -33,6 +33,22 @@ export const metadata: Metadata = {
 
 const competitors = [
   {
+    slug: "cloudinary",
+    name: "Cloudinary",
+    tagline: "Media CDN with a monthly plan",
+    highlight:
+      "SammaPix is pay-as-you-go and MCP-native for AI agents - Cloudinary needs a plan",
+    category: "API / CDN",
+  },
+  {
+    slug: "imgix",
+    name: "imgix",
+    tagline: "Real-time image CDN",
+    highlight:
+      "SammaPix processes on demand with no bandwidth billing - imgix bills delivery",
+    category: "API / CDN",
+  },
+  {
     slug: "tinypng",
     name: "TinyPNG",
     tagline: "The most popular image compressor",
