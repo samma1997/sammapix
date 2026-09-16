@@ -200,7 +200,7 @@ export default function ForAiAgentsPage() {
         <div className="mx-auto max-w-4xl">
           <Reveal>
             <h2 className="mb-2 text-center text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">The tools your agent gets</h2>
-            <p className="mb-8 text-center text-sm text-[#737373] dark:text-[#A3A3A3]">Eight deterministic ops behind one MCP server. Send a file, get a file.</p>
+            <p className="mb-8 text-center text-sm text-[#737373] dark:text-[#A3A3A3]">20+ image &amp; PDF tools plus AI vision, behind one MCP server. Send a file, get a file.</p>
           </Reveal>
           <ToolGrid />
         </div>
@@ -222,6 +222,60 @@ export default function ForAiAgentsPage() {
             <div className="rounded-2xl border border-[#E5E5E5] bg-white p-6 dark:border-[#2A2A2A] dark:bg-[#1E1E1E] sm:p-10">
               <PipelineFlow />
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Honest comparison */}
+      <section id="compare" className="border-t border-[#E5E5E5] px-4 py-16 dark:border-[#2A2A2A] sm:px-6">
+        <div className="mx-auto max-w-4xl">
+          <Reveal>
+            <h2 className="mb-2 text-center text-xl font-semibold text-[#171717] dark:text-[#E5E5E5]">How SammaPix compares</h2>
+            <p className="mx-auto mb-8 max-w-xl text-center text-sm leading-relaxed text-[#737373] dark:text-[#A3A3A3]">
+              An honest comparison. No single service is cheapest at everything, so here is exactly where each one wins and where SammaPix does.
+            </p>
+          </Reveal>
+          <Reveal y={20}>
+            <div className="overflow-x-auto rounded-2xl border border-[#E5E5E5] dark:border-[#2A2A2A]">
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr className="bg-[#FAFAFA] dark:bg-[#161616]">
+                    <th className="px-3 py-2.5 text-left text-xs font-semibold text-[#737373] dark:text-[#A3A3A3]"> </th>
+                    <th className="px-3 py-2.5 text-left text-xs font-semibold text-[#6366F1]">SammaPix</th>
+                    <th className="px-3 py-2.5 text-left text-xs font-semibold text-[#737373] dark:text-[#A3A3A3]">Cloudinary</th>
+                    <th className="px-3 py-2.5 text-left text-xs font-semibold text-[#737373] dark:text-[#A3A3A3]">TinyPNG</th>
+                    <th className="px-3 py-2.5 text-left text-xs font-semibold text-[#737373] dark:text-[#A3A3A3]">Gemini direct</th>
+                  </tr>
+                </thead>
+                <tbody className="text-[#171717] dark:text-[#E5E5E5]">
+                  {[
+                    ["Scope", "Image + PDF + AI vision", "Image/video CDN", "Compression", "AI vision only"],
+                    ["Connect", "OAuth, no key to paste", "API key", "API key", "API key + your code"],
+                    ["Pricing", "Pay-as-you-go", "$89+/mo plan", "Pay-as-you-go", "Pay-as-you-go"],
+                    ["Per op", "$0.003–0.005", "~$0.0004*", "$0.009 (→$0.002)", "~$0.0008 (DIY)"],
+                    ["Pipeline (chain in 1 call)", "Yes", "No", "No", "No"],
+                    ["PDF tools", "Yes", "Limited", "No", "No"],
+                    ["AI vision (describe/OCR/tags)", "Yes", "Add-on", "No", "Yes"],
+                    ["Zero-retention", "Yes", "Stores assets", "Uploads files", "Depends on your setup"],
+                    ["MCP-native", "Yes", "No", "No", "No"],
+                  ].map((row, i) => (
+                    <tr key={i} className="border-t border-[#F0F0F0] dark:border-[#232323]">
+                      <td className="px-3 py-2.5 text-xs font-medium text-[#737373] dark:text-[#A3A3A3]">{row[0]}</td>
+                      <td className="px-3 py-2.5 font-medium">{row[1]}</td>
+                      <td className="px-3 py-2.5 text-[#737373] dark:text-[#A3A3A3]">{row[2]}</td>
+                      <td className="px-3 py-2.5 text-[#737373] dark:text-[#A3A3A3]">{row[3]}</td>
+                      <td className="px-3 py-2.5 text-[#737373] dark:text-[#A3A3A3]">{row[4]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
+          <Reveal>
+            <p className="mx-auto mt-4 max-w-2xl text-center text-xs leading-relaxed text-[#A3A3A3]">
+              * Cloudinary&apos;s per-transform price is lower but requires a monthly plan and is pooled with storage and bandwidth. TinyPNG is cheapest for pure compression at very high volume. SammaPix wins when an agent needs a bit of everything, on demand, with no setup — see the{" "}
+              <Link href="/blog/image-api-for-ai-agents-comparison-2026" className="text-[#6366F1] hover:underline">full comparison</Link>.
+            </p>
           </Reveal>
         </div>
       </section>
