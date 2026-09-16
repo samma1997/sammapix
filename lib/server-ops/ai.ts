@@ -38,7 +38,10 @@ async function toJpegPart(input: Buffer): Promise<{ inlineData: { data: string; 
 }
 
 async function ask(input: Buffer, prompt: string, maxOutputTokens = 512): Promise<string> {
-  const model = client().getGenerativeModel({ model: GEMINI_MODEL, generationConfig: { maxOutputTokens, temperature: 0.4 } });
+  // Disable "thinking" (default-on for 2.5 flash): these are short, deterministic
+  // tasks, and thinking would eat the output-token budget, truncating answers.
+  const generationConfig = { maxOutputTokens, temperature: 0.4, thinkingConfig: { thinkingBudget: 0 } } as Record<string, unknown>;
+  const model = client().getGenerativeModel({ model: GEMINI_MODEL, generationConfig });
   const part = await toJpegPart(input);
   let text: string;
   try {
