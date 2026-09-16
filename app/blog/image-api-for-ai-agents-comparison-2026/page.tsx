@@ -310,6 +310,12 @@ export default function ImageApiForAgentsPage() {
           <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Pick TinyPNG</strong> when your only job is compressing images at very high volume.</li>
           <li><strong className="text-gray-900 dark:text-[#E5E5E5]">Pick Gemini direct</strong> when you only need AI vision and you are comfortable building and maintaining the integration.</li>
         </ul>
+        <p className="text-sm text-gray-600 dark:text-[#A3A3A3] leading-relaxed mb-3">
+          Want the head-to-head detail? See{" "}
+          <Link href="/vs/cloudinary" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">SammaPix vs Cloudinary</Link>{" "}and{" "}
+          <Link href="/vs/imgix" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">SammaPix vs imgix</Link>, or the{" "}
+          <Link href="/blog/best-image-mcp-servers-2026" className="text-gray-900 dark:text-[#E5E5E5] underline underline-offset-2">best image MCP servers</Link> roundup.
+        </p>
 
         <h2 id="connect" className="text-xl font-semibold text-gray-900 dark:text-[#E5E5E5] mt-10 mb-3 tracking-tight">
           How to connect an agent to SammaPix
