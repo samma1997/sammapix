@@ -13,7 +13,7 @@ export async function GET() {
       name: "sammapix",
       title: "SammaPix — Image & PDF tools for AI agents",
       description:
-        "Agent-native image & PDF processing: compress, convert, resize, crop, rotate, read metadata, chain operations in one call (pipeline), and compress PDFs. Remote MCP over HTTP with OAuth 2.1 (no API key to paste). Zero-retention.",
+        "Agent-native image & PDF processing with 20+ tools: compress, convert, resize, crop, rotate, flip, adjust, grayscale, blur, tint, negate, border, round, watermark, read metadata; compress/merge/split/rotate PDFs, images-to-PDF, PDF info; and chain any image operations in one call (pipeline). Remote MCP over HTTP with OAuth 2.1 (no API key to paste). Zero-retention, pay-per-use, 25 free ops/day.",
       version: "1.0.0",
       remotes: [{ type: "streamable-http", url: `${APP_URL}/api/mcp` }],
       authentication: { required: true, schemes: ["oauth2"] },

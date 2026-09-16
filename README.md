@@ -31,6 +31,30 @@ Built for content creators, developers, and anyone who works with images at scal
 
 ---
 
+## For AI agents (MCP server)
+
+SammaPix is also a **remote MCP server** so AI agents (Claude, Cursor, and any MCP-compatible client) can run real image & PDF processing directly — no local install.
+
+- **Endpoint:** `https://www.sammapix.com/api/mcp` (Streamable HTTP)
+- **Auth:** OAuth 2.1 — no API key to paste. Or generate a key for REST.
+- **20+ tools:** compress, convert, resize, crop, rotate, flip, adjust, grayscale, blur, tint, negate, border, round, watermark, metadata · PDF compress/merge/split/rotate, image-to-PDF, PDF info
+- **Pipeline:** chain multiple image ops in **one call** — fewer round-trips, far fewer tokens for the agent
+- **Zero-retention:** files processed in memory and discarded. Pay-per-use, 25 free ops/day.
+
+Add it to your agent:
+
+```json
+{
+  "mcpServers": {
+    "sammapix": { "url": "https://www.sammapix.com/api/mcp" }
+  }
+}
+```
+
+Full docs, benefits, and REST examples: **[sammapix.com/for-ai-agents](https://www.sammapix.com/for-ai-agents)**
+
+---
+
 ## Tools
 
 ### Optimize
