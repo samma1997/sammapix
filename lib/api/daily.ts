@@ -13,6 +13,11 @@ const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 export const FREE_API_OPS_PER_DAY = 25;
+// Pro subscribers get a much larger daily bucket so they can use the API/MCP
+// "without problems". Still capped (not unlimited) so a runaway agent can't turn
+// a $9 sub into unbounded Gemini spend: 500 units/day = ~250 AI ops/day max
+// (AI op = 2 units), worst-case ~$6/mo of Gemini, safely under the $9 sub.
+export const PRO_API_OPS_PER_DAY = 500;
 
 const mem = new Map<string, { v: number; exp: number }>();
 
@@ -49,19 +54,20 @@ const GRANT_LUA =
  * Consume up to `want` operations from today's free bucket.
  * Returns how many were granted for free (0..want).
  */
-export async function consumeDailyFree(email: string, want: number): Promise<number> {
+export async function consumeDailyFree(email: string, want: number, limit: number = FREE_API_OPS_PER_DAY): Promise<number> {
   const w = Math.max(0, Math.round(want));
   if (w === 0) return 0;
+  const cap = Math.max(0, Math.round(limit));
   const key = dayKey(email);
   if (REDIS_URL && REDIS_TOKEN) {
-    const g = await redis<number>(["EVAL", GRANT_LUA, "1", key, String(FREE_API_OPS_PER_DAY), String(w)]);
+    const g = await redis<number>(["EVAL", GRANT_LUA, "1", key, String(cap), String(w)]);
     return g ?? 0;
   }
   // dev fallback
   const now = Date.now();
   const e = mem.get(key);
   const cur = e && e.exp > now ? e.v : 0;
-  const grant = Math.min(w, Math.max(0, FREE_API_OPS_PER_DAY - cur));
+  const grant = Math.min(w, Math.max(0, cap - cur));
   if (grant > 0) mem.set(key, { v: cur + grant, exp: now + 93600 * 1000 });
   return grant;
 }
@@ -80,7 +86,7 @@ export async function restoreDailyFree(email: string, amount: number): Promise<v
 }
 
 /** How many free ops remain today (for display). */
-export async function dailyFreeRemaining(email: string): Promise<number> {
+export async function dailyFreeRemaining(email: string, limit: number = FREE_API_OPS_PER_DAY): Promise<number> {
   const key = dayKey(email);
   let cur = 0;
   if (REDIS_URL && REDIS_TOKEN) {
@@ -89,5 +95,5 @@ export async function dailyFreeRemaining(email: string): Promise<number> {
     const e = mem.get(key);
     cur = e && e.exp > Date.now() ? e.v : 0;
   }
-  return Math.max(0, FREE_API_OPS_PER_DAY - cur);
+  return Math.max(0, limit - cur);
 }

@@ -8,6 +8,7 @@
  */
 import { stripe } from "@/lib/stripe";
 import { hasActiveDayPass } from "@/lib/day-pass";
+import { exec } from "@/lib/redis";
 
 export async function getUserPlan(email: string | null | undefined): Promise<"free" | "pro"> {
   if (!email) return "free";
@@ -47,6 +48,29 @@ export async function getUserPlan(email: string | null | undefined): Promise<"fr
     console.error("[getUserPlan] Stripe check failed:", err);
     return "free";
   }
+}
+
+/**
+ * Plan lookup with a short Redis cache, for hot paths like per-op API/MCP
+ * metering where calling Stripe on every request would be wasteful. TTL is
+ * short (10 min) so a new subscription / cancellation is reflected quickly.
+ */
+export async function getUserPlanCached(email: string | null | undefined): Promise<"free" | "pro"> {
+  if (!email) return "free";
+  const key = `apiplan:${email.toLowerCase()}`;
+  try {
+    const cached = await exec<string | null>(["GET", key]);
+    if (cached === "pro" || cached === "free") return cached;
+  } catch {
+    /* fall through to live lookup */
+  }
+  const plan = await getUserPlan(email);
+  try {
+    await exec(["SET", key, plan, "EX", "600"]);
+  } catch {
+    /* cache is best-effort */
+  }
+  return plan;
 }
 
 export async function getStripeCustomerId(email: string): Promise<string | null> {
