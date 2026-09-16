@@ -14,6 +14,20 @@
     "url": "/blog/image-api-for-ai-agents-comparison-2026"
   },
   {
+    "slug": "image-pipelines-for-ai-agents",
+    "title": "How to Build Image Pipelines for AI Agents (2026)",
+    "description": "Chain image operations in a single call so an AI agent uses fewer tokens and no intermediate files. Ready-made flows for web-optimize, thumbnails, soc",
+    "keywords": [
+      "image pipeline for ai agents",
+      "chain image operations one call",
+      "mcp pipeline tool",
+      "agent image workflow",
+      "compress convert resize one request"
+    ],
+    "publishedDate": "2026-09-16",
+    "url": "/blog/image-pipelines-for-ai-agents"
+  },
+  {
     "slug": "aspect-ratio-in-pixels-guide",
     "title": "Aspect Ratio in Pixels: 9:16, 16:9, 4:3 and More [2026]",
     "description": "Complete reference for aspect ratio pixel sizes. 9:16 = 1080x1920, 16:9 = 1920x1080, 4:3 = 1024x768. Includes per-platform sizes for Reels, TikTok, Yo",
