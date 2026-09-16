@@ -1,5 +1,19 @@
 [
   {
+    "slug": "image-api-for-ai-agents-comparison-2026",
+    "title": "Image Processing API for AI Agents: SammaPix vs Cloudinary vs TinyPNG (2026)",
+    "description": "An honest comparison of image (and PDF) processing options for AI agents in 2026: SammaPix MCP, Cloudinary, TinyPNG, remove.bg and calling Gemini dire",
+    "keywords": [
+      "image api for ai agents",
+      "image processing mcp server",
+      "mcp image tools",
+      "compress image api agent",
+      "sammapix vs cloudinary"
+    ],
+    "publishedDate": "2026-09-16",
+    "url": "/blog/image-api-for-ai-agents-comparison-2026"
+  },
+  {
     "slug": "aspect-ratio-in-pixels-guide",
     "title": "Aspect Ratio in Pixels: 9:16, 16:9, 4:3 and More [2026]",
     "description": "Complete reference for aspect ratio pixel sizes. 9:16 = 1080x1920, 16:9 = 1920x1080, 4:3 = 1024x768. Includes per-platform sizes for Reels, TikTok, Yo",
