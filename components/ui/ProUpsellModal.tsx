@@ -490,7 +490,41 @@ export default function ProUpsellModal({
           ──────────────────────────────────────────────────────────────────── */}
 
           {/* ── BRANCH 1: ANONYMOUS ──────────────────────────────────────── */}
-          {isAnonymous && (
+          {/* On the "success" value moment, one-shot visitors convert on a Day Pass,
+              not on a free registration (1,760 sign-ups -> 31 purchases). So for
+              success we lead with the Day Pass; every other trigger keeps register
+              primary because there registration is the actual unlock. */}
+          {isAnonymous && trigger === "success" && (
+            <>
+              {/* Primary: Day Pass — buy the value you just experienced, now */}
+              <button
+                onClick={handleDayPass}
+                disabled={dayPassLoading}
+                className={btnPrimary}
+                aria-label={isVideoUpsell ? "Buy a Video Day Pass — 24h full Pro access" : "Buy a Day Pass — 24h full Pro access"}
+              >
+                {dayPassLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
+                ) : (
+                  <Clock className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                )}
+                {dayPassLabel}
+              </button>
+              <p className="text-center text-[11px] text-[#737373] dark:text-[#A3A3A3] mb-4 leading-relaxed">
+                {isIt
+                  ? "Una tantum, nessun abbonamento · tutto resta nel browser"
+                  : "One-time, no subscription · everything stays in your browser"}
+              </p>
+
+              {/* Secondary: free account */}
+              <button onClick={handleRegister} className={btnSubtle}>
+                <UserPlus className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+                {isIt ? "Oppure registrati gratis" : "Or create a free account"}
+              </button>
+            </>
+          )}
+
+          {isAnonymous && trigger !== "success" && (
             <>
               {/* Primary: create free account — accent indigo, high visual weight */}
               <button
