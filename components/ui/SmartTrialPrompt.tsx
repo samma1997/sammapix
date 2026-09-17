@@ -133,13 +133,13 @@ export default function SmartTrialPrompt() {
           {/* Primary CTA */}
           <Link href="/pricing" onClick={dismiss}>
             <button className="w-full inline-flex items-center justify-center px-4 py-2.5 bg-[#171717] dark:bg-white text-white dark:text-[#171717] text-sm font-semibold rounded-md hover:bg-[#262626] dark:hover:bg-[#E5E5E5] transition-colors mb-3">
-              Try Pro free
+              Get Pro
             </button>
           </Link>
 
           {/* Fine print */}
           <p className="text-center text-[11px] text-[#A3A3A3] dark:text-[#525252] mb-4">
-            7-day free trial &middot; Cancel anytime
+            Pro from $1.99 first month &middot; Cancel anytime
           </p>
 
           {/* Secondary CTA */}

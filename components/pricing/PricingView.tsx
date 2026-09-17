@@ -526,7 +526,9 @@ export default function PricingView() {
             </ul>
 
             <CheckoutButton size="md" className="w-full gap-1 mb-3" plan={annual ? "annual" : "monthly"}>
-              {isIt ? "Inizia la prova gratuita" : "Start free trial"}
+              {annual
+                ? (isIt ? "Inizia la prova gratuita" : "Start free trial")
+                : (isIt ? "Inizia — €1,99 il primo mese" : "Start — $1.99 first month")}
             </CheckoutButton>
             <p className="text-center text-xs text-[#A3A3A3] dark:text-[#737373]">
               {isIt
