@@ -27,6 +27,11 @@ const TRIAL_DAYS = 7;
 const FOUNDING_COUPON_ID = process.env.STRIPE_FOUNDING_COUPON_ID || "";
 const FOUNDING_MAX = 200;
 
+// Intro offer (monthly): first month $1.99, then $9/mo. Replaces the free trial
+// for the monthly plan — the one-shot audience bails on free trials at $0, so we
+// charge a small amount up front ("at least they pay something"). One-time coupon.
+const INTRO_COUPON_ID = process.env.STRIPE_INTRO_COUPON_ID || "INTRO199";
+
 export async function POST(req: NextRequest) {
   if (process.env.NODE_ENV === "production") {
     const origin = req.headers.get("origin");
@@ -165,11 +170,13 @@ export async function POST(req: NextRequest) {
       // itself (customer_creation is NOT valid for mode:"subscription").
       ...(userEmail ? { customer_email: userEmail } : {}),
       // Stripe doesn't allow discounts + allow_promotion_codes together.
-      // If founding coupon is available, apply it automatically.
-      // Otherwise, let users enter promo codes manually.
-      ...(applyFoundingCoupon
-        ? { discounts: [{ coupon: FOUNDING_COUPON_ID }] }
-        : { allow_promotion_codes: true }
+      // Monthly: apply the intro coupon ($1.99 first month, then $9), no free trial.
+      // Annual: keep the founding coupon if available, else allow promo codes.
+      ...(plan === "monthly"
+        ? { discounts: [{ coupon: INTRO_COUPON_ID }] }
+        : applyFoundingCoupon
+          ? { discounts: [{ coupon: FOUNDING_COUPON_ID }] }
+          : { allow_promotion_codes: true }
       ),
       // {CHECKOUT_SESSION_ID} is replaced by Stripe — lets /auth/complete log in the user automatically.
       success_url: `${appUrl}/auth/complete?session_id={CHECKOUT_SESSION_ID}&dest=%2Fdashboard%3Fupgraded%3Dtrue`,
@@ -177,7 +184,8 @@ export async function POST(req: NextRequest) {
       metadata: {
         userId: userEmail ?? "",
         plan,
-        founding_member: applyFoundingCoupon ? "true" : "false",
+        founding_member: plan !== "monthly" && applyFoundingCoupon ? "true" : "false",
+        intro_offer: plan === "monthly" ? "true" : "false",
         ...(source ? { source } : {}),
         ...(entry ? { entry } : {}),
         // Pass _ga cookie so the webhook can fire GA4 purchase event
@@ -185,7 +193,9 @@ export async function POST(req: NextRequest) {
         ...(ga ? { ga_cookie: ga } : {}),
       },
       subscription_data: {
-        trial_period_days: TRIAL_DAYS,
+        // Monthly: no free trial — the intro coupon charges $1.99 today instead.
+        // Annual: keep the 7-day free trial.
+        ...(plan === "monthly" ? {} : { trial_period_days: TRIAL_DAYS }),
         // Persist source on the subscription itself so we can later see where
         // each trial/paying customer originated from.
         metadata: { userId: userEmail ?? "", ...(source ? { source } : {}), ...(entry ? { entry } : {}) },

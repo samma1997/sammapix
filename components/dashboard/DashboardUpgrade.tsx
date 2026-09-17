@@ -240,7 +240,7 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
               </p>
             )}
             <p className="mt-2 text-sm text-[#6366F1] font-medium">
-              7 days free trial · no charge during trial
+              {annual ? "7 days free trial · no charge during trial" : "$1.99 first month, then $9/mo · cancel anytime"}
             </p>
           </div>
 
@@ -276,13 +276,11 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
             ) : (
               <Sparkles className="h-4 w-4" strokeWidth={1.5} />
             )}
-            {isFounding
-              ? (annual
+            {annual
+              ? (isFounding
                   ? `Lock $${annualFinal}/year forever — Start free trial`
-                  : `Lock $${monthlyFinal}/month forever — Start free trial`)
-              : (annual
-                  ? "Start 7-day free trial — $65/year"
-                  : "Start 7-day free trial — $9/month")
+                  : "Start 7-day free trial — $65/year")
+              : "Start now — $1.99 first month"
             }
           </button>
 
@@ -291,7 +289,9 @@ export default function DashboardUpgrade({ userEmail }: DashboardUpgradeProps) {
           )}
 
           <p className="mt-3 text-center text-xs text-[#A3A3A3]">
-            Cancel anytime &middot; 30-day money-back guarantee &middot; No charge during trial
+            {annual
+              ? "Cancel anytime · 30-day money-back guarantee · No charge during trial"
+              : "Cancel anytime · 30-day money-back guarantee"}
           </p>
         </div>
 

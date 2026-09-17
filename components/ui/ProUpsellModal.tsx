@@ -389,9 +389,7 @@ export default function ProUpsellModal({
   // Reusable CTA snippets
   const proTrialLabel = loading
     ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
-    : isFounding
-      ? (isIt ? `Blocca €${monthlyFinal}/mese per sempre, inizia la prova` : `Lock $${monthlyFinal}/mo forever — Start trial`)
-      : (isIt ? "Oppure Pro illimitato — prova gratis 7 giorni" : "Or go unlimited with Pro — 7-day free trial");
+    : (isIt ? "Oppure Pro — €1,99 il primo mese, poi $9/mese" : "Or go Pro — $1.99 first month, then $9/mo");
 
   const annualLabel = annualLoading
     ? (isIt ? "Ti porto al checkout..." : "Redirecting to checkout...")
