@@ -314,6 +314,45 @@ export const MCP_TOOLS: McpTool[] = [
     run: async (a) => ({ info: await ai.extractText(await acquireImage(a)) }),
   },
   {
+    name: "sammapix_extract_document",
+    description:
+      "Extract structured data from a receipt, invoice, ID or any document (image OR PDF) into JSON: documentType, vendor, date, currency, subtotal, tax, total, lineItems[], and a summary. Provide imageBase64, imageUrl, or pdfBase64. Zero-retention. Returns JSON, no file.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        ...IMG_INPUT,
+        pdfBase64: { type: "string", description: "Source PDF as base64 (use this OR imageBase64/imageUrl)." },
+      },
+      required: [],
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        data: {
+          type: "object",
+          properties: {
+            documentType: { type: "string" },
+            vendor: { type: "string" },
+            date: { type: "string" },
+            currency: { type: "string" },
+            subtotal: { type: "number" },
+            tax: { type: "number" },
+            total: { type: "number" },
+            lineItems: { type: "array", items: { type: "object" } },
+            summary: { type: "string" },
+          },
+        },
+      },
+      required: ["data"],
+    },
+    annotations: AI,
+    cost: () => OP_COST["extract-document"],
+    run: async (a) => {
+      const buf = (typeof a.pdfBase64 === "string" && a.pdfBase64) ? decodePdf(a) : await acquireImage(a);
+      return { info: await ai.extractDocument(buf) };
+    },
+  },
+  {
     name: "sammapix_tags",
     description: "Generate descriptive keyword tags for an image (subjects, scene, style, colors). Useful for cataloguing or SEO. Returns an array of tags, no image.",
     inputSchema: { type: "object", properties: { ...IMG_INPUT, max: { type: "number", minimum: 3, maximum: 20, description: "How many tags (default 10)." } }, required: [] },

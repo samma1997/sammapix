@@ -107,6 +107,53 @@ export async function extractText(input: Buffer): Promise<{ text: string }> {
   return { text: text.trim() };
 }
 
+/** True if the buffer looks like a PDF. */
+function isPdf(buf: Buffer): boolean {
+  return buf.length > 4 && buf.toString("latin1", 0, 5) === "%PDF-";
+}
+
+/**
+ * Extract structured data from a document (receipt, invoice, scan, or photo of
+ * one). Accepts an image OR a PDF. Uses Gemini with forced JSON output so the
+ * result is always machine-readable. Zero-retention like every other op.
+ */
+export async function extractDocument(input: Buffer): Promise<{ data: Record<string, unknown> }> {
+  const generationConfig = {
+    maxOutputTokens: 2048,
+    temperature: 0.1,
+    responseMimeType: "application/json",
+    thinkingConfig: { thinkingBudget: 0 },
+  } as Record<string, unknown>;
+  const model = client().getGenerativeModel({ model: GEMINI_MODEL, generationConfig });
+
+  const part = isPdf(input)
+    ? { inlineData: { data: input.toString("base64"), mimeType: "application/pdf" } }
+    : await toJpegPart(input);
+
+  const prompt =
+    'Extract structured data from this document and return ONLY a JSON object with these fields: ' +
+    'documentType ("receipt" | "invoice" | "id" | "other"), vendor (string), date (ISO 8601 if present), ' +
+    'currency (ISO 4217 code), subtotal (number), tax (number), total (number), ' +
+    'lineItems (array of { description, quantity, unitPrice, amount }), and summary (one short sentence). ' +
+    'Use null for any field that is not present. Do not invent values.';
+
+  let text: string;
+  try {
+    const result = await model.generateContent([prompt, part]);
+    text = result.response.text();
+  } catch (e) {
+    const m = (e as Error)?.message ?? "";
+    if (/quota|rate|429/i.test(m)) throw new ApiOpError("AI provider is rate limited, please retry shortly");
+    throw new ApiOpError("AI could not read this document");
+  }
+  try {
+    const data = JSON.parse(text) as Record<string, unknown>;
+    return { data };
+  } catch {
+    throw new ApiOpError("could not parse the extracted data");
+  }
+}
+
 /** A set of descriptive keyword tags for the image. */
 export async function imageTags(input: Buffer, opts: { max?: number } = {}): Promise<{ tags: string[] }> {
   const max = Math.min(Math.max(opts.max ?? 10, 3), 20);
