@@ -30,7 +30,7 @@ const SUPPORTED: ApiOp[] = [
   "flip", "grayscale", "blur", "adjust", "tint", "negate", "flatten", "border", "round", "watermark",
   "optimize-web",
   "pdf-compress", "pdf-merge", "pdf-split", "pdf-rotate", "image-to-pdf", "pdf-info",
-  "describe", "alt-text", "suggest-filename", "ocr", "tags",
+  "describe", "alt-text", "suggest-filename", "ocr", "tags", "extract-document",
 ];
 // Ops that accept multiple files (repeated "file" fields)
 const MULTI_FILE: ApiOp[] = ["pdf-merge", "image-to-pdf"];
@@ -182,6 +182,7 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
     if (apiOp === "suggest-filename") return json({ ok: true, op: apiOp, ...(await ai.suggestFilename(buffer)) }, 200, billHeaders);
     if (apiOp === "ocr") return json({ ok: true, op: apiOp, ...(await ai.extractText(buffer)) }, 200, billHeaders);
     if (apiOp === "tags") return json({ ok: true, op: apiOp, ...(await ai.imageTags(buffer, { max: num(params.max) })) }, 200, billHeaders);
+    if (apiOp === "extract-document") return json({ ok: true, op: apiOp, ...(await ai.extractDocument(buffer)) }, 200, billHeaders);
 
     if (isImageOp(apiOp)) {
       const out = await runImageOp(apiOp as ImageOp, buffer, params);

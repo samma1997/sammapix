@@ -19,7 +19,7 @@ export type ApiOp =
   | "flip" | "grayscale" | "blur" | "adjust" | "tint" | "negate" | "flatten" | "border" | "round" | "watermark"
   | "optimize-web"
   | "pdf-compress" | "pdf-merge" | "pdf-split" | "pdf-rotate" | "image-to-pdf" | "pdf-info"
-  | "describe" | "alt-text" | "suggest-filename" | "ocr" | "tags"
+  | "describe" | "alt-text" | "suggest-filename" | "ocr" | "tags" | "extract-document"
   | "upscale" | "enhance" | "remove-bg";
 
 /** Credit cost per successful operation. Everything is cheap for us (~$0.00001
@@ -34,6 +34,8 @@ export const OP_COST: Record<ApiOp, number> = {
   // healthy margin at any pack tier AND it halves free-tier exposure (an AI op
   // consumes 2 units of the daily-free bucket, so ~12 free AI ops/day max).
   describe: 2, "alt-text": 2, "suggest-filename": 2, ocr: 2, tags: 2,
+  // Document extraction: heavier prompt + larger JSON output (~$0.002-0.004). 3 credits.
+  "extract-document": 3,
   upscale: 2, enhance: 2, "remove-bg": 2,
 };
 
