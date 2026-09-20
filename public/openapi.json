@@ -19,7 +19,7 @@
     "/api/v1/{op}": {
       "post": {
         "summary": "Run one image or PDF operation",
-        "description": "Send a file (multipart 'file' field) or JSON ({ image: base64|dataURL } or { url }). Returns the processed file (binary) for most ops, or JSON for metadata/pdf-info/describe/alt-text/suggest-filename/ocr/tags/extract-document. Billing: 1 credit per op, 2 for AI vision ops; a failed op is refunded. Free daily tier applies first.",
+        "description": "Send a file (multipart 'file' field) or JSON ({ image: base64|dataURL } or { url }). Returns the processed file (binary) for most ops, or JSON for metadata/pdf-info/describe/alt-text/suggest-filename/ocr/tags/extract-document. Billing: 1 credit per op, 2 for AI vision ops; a failed op is refunded. Free daily tier applies first. KEYLESS FREE TRIAL: deterministic ops (compress, resize, crop, convert, rotate, flip, grayscale, blur, adjust, tint, negate, flatten, border, round, watermark, metadata, optimize-web, pdf-compress, pdf-split, pdf-rotate, pdf-info) can be called a few times/day per IP with NO API key (max 5MB) to try before signing up. AI ops always require a key.",
         "parameters": [
           {
             "name": "op",
