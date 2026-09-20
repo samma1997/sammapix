@@ -21,6 +21,7 @@ import { isImageOp, runImageOp, optimizeForWeb, type ImageOp } from "@/lib/serve
 import { assertFileSize, contentLengthExceeded, PayloadTooLarge } from "@/lib/api/limits";
 import { rateLimit, clientIp, IP_LIMIT, KEY_LIMIT } from "@/lib/api/ratelimit";
 import { fetchRemoteFile, UnsafeUrlError } from "@/lib/api/fetch-image";
+import { KEYLESS_OPS, KEYLESS_MAX_BYTES, UPGRADE_HINT, consumeKeylessFree } from "@/lib/api/freetrial";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -104,16 +105,30 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
   const ipRL = await rateLimit("ip", ip, IP_LIMIT.limit, IP_LIMIT.windowSec);
   if (!ipRL.ok) return json({ error: "rate_limited" }, 429, { "retry-after": String(ipRL.retryAfter) });
 
-  // Auth
+  // Auth — with a keyless free trial so an agent can try instantly, no account.
   const key = extractKey(req.headers);
-  if (!key) return json({ error: "missing_api_key", hint: "send Authorization: Bearer sk_live_..." }, 401);
-  const email = await resolveApiKey(key);
-  if (!email) return json({ error: "invalid_api_key" }, 401);
-
-  // Rate limit per-key (trusted but must not saturate the fleet)
-  const keyId = createHash("sha256").update(key).digest("hex").slice(0, 16);
-  const keyRL = await rateLimit("key", keyId, KEY_LIMIT.limit, KEY_LIMIT.windowSec);
-  if (!keyRL.ok) return json({ error: "rate_limited" }, 429, { "retry-after": String(keyRL.retryAfter) });
+  let email: string | null = null;
+  let keyless = false;
+  let keylessRemaining = 0;
+  if (key) {
+    email = await resolveApiKey(key);
+    if (!email) return json({ error: "invalid_api_key" }, 401);
+    // Rate limit per-key (trusted but must not saturate the fleet)
+    const keyId = createHash("sha256").update(key).digest("hex").slice(0, 16);
+    const keyRL = await rateLimit("key", keyId, KEY_LIMIT.limit, KEY_LIMIT.windowSec);
+    if (!keyRL.ok) return json({ error: "rate_limited" }, 429, { "retry-after": String(keyRL.retryAfter) });
+  } else {
+    // Keyless free trial: only cheap deterministic ops, capped per IP per day.
+    if (!KEYLESS_OPS.has(apiOp)) {
+      return json({ error: "missing_api_key", op: apiOp, hint: `This operation needs an API key. ${UPGRADE_HINT}` }, 401);
+    }
+    const fr = await consumeKeylessFree(ip);
+    if (!fr.ok) {
+      return json({ error: "free_trial_used", op: apiOp, hint: UPGRADE_HINT }, 401);
+    }
+    keyless = true;
+    keylessRemaining = fr.remaining;
+  }
 
   // ── Read + validate input BEFORE charging (never bill on bad/oversized input) ──
   let inputBuffer: Buffer;
@@ -137,18 +152,32 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
     return json({ error: status === 413 ? "payload_too_large" : "bad_input", detail: (e as Error).message }, status);
   }
 
-  // Charge (after input is valid; refund on op failure)
-  let bill: Awaited<ReturnType<typeof charge>>;
-  try {
-    bill = await charge(email, apiOp);
-  } catch {
-    return json({ error: "billing_unavailable" }, 503);
-  }
-  if (!bill.ok) {
-    return json({ error: "insufficient_credits", cost: bill.cost, remaining: bill.remaining, op: apiOp }, 402);
+  // Keyless free trial has a smaller file-size cap.
+  if (keyless && inputBuffer.length > KEYLESS_MAX_BYTES) {
+    return json({ error: "payload_too_large", op: apiOp, hint: `Keyless trial is limited to ${Math.round(KEYLESS_MAX_BYTES / 1024 / 1024)}MB per file. ${UPGRADE_HINT}` }, 413);
   }
 
-  const billHeaders = { "x-op": apiOp, "x-op-cost": String(bill.cost), "x-credits-remaining": String(bill.remaining) };
+  // Charge (paid path only; keyless runs free). Refund on op failure.
+  let bill: Awaited<ReturnType<typeof charge>> | null = null;
+  let billHeaders: Record<string, string>;
+  if (keyless) {
+    billHeaders = {
+      "x-op": apiOp,
+      "x-sammapix-free": "1",
+      "x-sammapix-free-remaining": String(keylessRemaining),
+      "x-sammapix-upgrade": UPGRADE_HINT,
+    };
+  } else {
+    try {
+      bill = await charge(email!, apiOp);
+    } catch {
+      return json({ error: "billing_unavailable" }, 503);
+    }
+    if (!bill.ok) {
+      return json({ error: "insufficient_credits", cost: bill.cost, remaining: bill.remaining, op: apiOp }, 402);
+    }
+    billHeaders = { "x-op": apiOp, "x-op-cost": String(bill.cost), "x-credits-remaining": String(bill.remaining) };
+  }
 
   try {
     const pdfHdr = (out: pdf.PdfResult) => ({ ...billHeaders, "x-output-pages": String(out.info.pages), "x-output-bytes": String(out.info.bytes) });
@@ -197,12 +226,12 @@ export async function POST(req: NextRequest, ctx: { params: Promise<{ op: string
 
     throw new Error("unreachable");
   } catch (e) {
-    await refundBill(email, bill);
+    if (bill && email) await refundBill(email, bill);
     // Only surface safe, user-facing errors; hide internal detail.
     const userFacing = e instanceof img.ApiOpError || e instanceof PayloadTooLarge;
     const status = e instanceof PayloadTooLarge ? 413 : userFacing ? 422 : 500;
     const detail = userFacing ? (e as Error).message : "processing_failed";
-    return json({ error: "op_failed", op: apiOp, detail }, status, { "x-credits-refunded": String(bill.cost) });
+    return json({ error: "op_failed", op: apiOp, detail }, status, bill ? { "x-credits-refunded": String(bill.cost) } : {});
   }
 }
 

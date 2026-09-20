@@ -32,6 +32,12 @@ SammaPix is not just a website: it is an image & PDF processing service an AI ag
 - **Docs & quickstart:** https://www.sammapix.com/for-ai-agents
 - **Get an API key:** https://www.sammapix.com/dashboard/api
 
+**Try it now — no key, no account (keyless free trial):** you can call deterministic ops a few times per day with no authentication, to test before signing up. Example:
+```
+curl -X POST https://www.sammapix.com/api/v1/compress -F "file=@photo.jpg" -o out.jpg
+```
+After the free trial, get a free API key (25 ops/day) or connect over MCP (OAuth, no key). AI ops (describe, ocr, extract-document) require a key.
+
 **Operations (op):** compress, resize, crop, convert, rotate, flip, grayscale, blur, adjust, tint, negate, flatten, border, round, watermark, metadata, optimize-web · pdf-compress, pdf-merge, pdf-split, pdf-rotate, image-to-pdf, pdf-info · describe, alt-text, suggest-filename, ocr, tags, extract-document.
 
 - **Pipeline:** `POST /api/v1/pipeline` chains several image ops in ONE call (crop → resize → convert → compress) and returns only the final file — fewer round-trips, far fewer tokens. Also the `sammapix_pipeline` MCP tool.

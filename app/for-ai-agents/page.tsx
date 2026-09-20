@@ -70,6 +70,10 @@ const FAQ = [
     q: "Is there an OpenAPI spec and machine-readable docs?",
     a: "Yes. The full REST API is described in an OpenAPI 3.1 spec at https://www.sammapix.com/openapi.json, and there is an LLM-friendly overview at https://www.sammapix.com/llms.txt. Point your agent or codegen tool at either to integrate without guesswork.",
   },
+  {
+    q: "Can an agent try it without signing up?",
+    a: "Yes. Deterministic operations (compress, convert, resize, crop, rotate, PDF compress/split/rotate and more) have a keyless free trial: a few calls per day per IP with no API key and no account, so an agent can demonstrate the result in-chat before anyone signs up. After that, grab a free API key (25 ops/day) or connect over MCP. AI vision ops require a key.",
+  },
 ];
 
 function jsonLd() {
