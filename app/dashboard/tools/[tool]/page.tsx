@@ -109,6 +109,7 @@ const PdfMergeClient = dynamic(() => import("@/components/tools/PdfMergeClient")
 const ColorPickerClient = dynamic(() => import("@/components/tools/ColorPickerClient"));
 const AiRenameClient = dynamic(() => import("@/components/tools/AiRenameClient"));
 const AltTextClient = dynamic(() => import("@/components/tools/AltTextClient"));
+const ExtractDocumentClient = dynamic(() => import("@/components/tools/ExtractDocumentClient"));
 const ExifClient = dynamic(() => import("@/components/tools/ExifClient"));
 const FilmLabClient = dynamic(() => import("@/components/tools/FilmLabClient"));
 const StampItClient = dynamic(() => import("@/components/tools/StampItClient"));
@@ -210,6 +211,7 @@ const TOOL_MAP: Record<string, React.ComponentType<any>> = {
   "color-picker": ColorPickerClient,
   "ai-rename": AiRenameClient,
   "alt-text":  AltTextClient,
+  "extract-document": ExtractDocumentClient,
   exif:        ExifClient,
   filmlab:     FilmLabClient,
   stampit:     StampItClient,
@@ -351,6 +353,7 @@ const TOOL_ICONS: Record<string, { Icon: React.FC<{ accent: string }>; accent: s
   "color-picker": { Icon: IconColorPicker, accent: "#A855F7" },
   "ai-rename": { Icon: IconAIRename,   accent: "#8B5CF6" },
   "alt-text":  { Icon: IconAIRename,   accent: "#8B5CF6" },
+  "extract-document": { Icon: IconAIRename, accent: "#6366F1" },
   exif:        { Icon: IconEXIF,       accent: "#EF4444" },
   filmlab:     { Icon: IconFilmLab,    accent: "#F59E0B" },
   stampit:     { Icon: IconStampIt,    accent: "#06B6D4" },
@@ -600,6 +603,16 @@ const TOOL_DATA: Record<string, ToolData> = {
       { title: "Copy or export", desc: "Copy all or download as CSV." },
     ],
     proTip: { text: "Perfect for WCAG compliance and SEO.", linkLabel: "See Pro features", linkHref: "/dashboard/upgrade" },
+  },
+  "extract-document": {
+    label: "Document Extractor",
+    tagline: "Extract vendor, date, total and line items from receipts & invoices.",
+    steps: [
+      { title: "Drop a document", desc: "Add a receipt, invoice or scan (image or PDF)." },
+      { title: "AI extracts", desc: "Gemini reads it into structured fields." },
+      { title: "Copy or export", desc: "Copy the JSON or download a CSV." },
+    ],
+    proTip: { text: "Works on photos and PDFs. Great for expenses and bookkeeping.", linkLabel: "For AI agents", linkHref: "/for-ai-agents" },
   },
   exif: {
     label: "EXIF Viewer",

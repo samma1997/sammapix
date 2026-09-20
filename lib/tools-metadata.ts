@@ -202,6 +202,15 @@ export const TOOLS: Record<string, ToolMeta> = {
       "image-seo-best-practices",
     ],
   },
+  "extract-document": {
+    id: "extract-document",
+    name: "Document Extractor",
+    shortDesc: "Extract data from receipts & invoices with AI",
+    slug: "/tools/extract-document",
+    category: "ai",
+    relatedTools: ["image-to-text", "alt-text", "ai-rename"],
+    relatedBlogSlugs: [],
+  },
   resizepack: {
     id: "resizepack",
     name: "Batch Resize",

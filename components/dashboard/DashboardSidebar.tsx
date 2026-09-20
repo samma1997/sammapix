@@ -200,6 +200,7 @@ const ALL_SIDEBAR_TOOLS: SidebarTool[] = [
   // ── AI ─────────────────────────────────────────────────────────────────────
   { name: "AI Rename", slug: "ai-rename", href: "/dashboard/tools/ai-rename", icon: <Zap className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "AI Alt Text", slug: "alt-text", href: "/dashboard/tools/alt-text", icon: <Globe className="h-4 w-4" strokeWidth={1.5} /> },
+  { name: "Document Extractor", slug: "extract-document", href: "/dashboard/tools/extract-document", icon: <FileText className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "AI Photo Sort", slug: "smartsort", href: "/dashboard/tools/smartsort", icon: <SortAsc className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "AI Organize", slug: "ai-organize", href: "/dashboard/tools/ai-organize", icon: <Sparkles className="h-4 w-4" strokeWidth={1.5} /> },
   { name: "Image to Text", slug: "image-to-text", href: "/dashboard/tools/image-to-text", icon: <ScanText className="h-4 w-4" strokeWidth={1.5} /> },
@@ -263,7 +264,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
   {
     label: "AI",
     icon: <Sparkles className="h-3.5 w-3.5" strokeWidth={1.5} />,
-    slugs: ["ai-rename", "alt-text", "smartsort", "ai-organize", "image-to-text", "ai-label", "ai-label-video"],
+    slugs: ["ai-rename", "alt-text", "extract-document", "smartsort", "ai-organize", "image-to-text", "ai-label", "ai-label-video"],
   },
   {
     label: "Organize & Privacy",
@@ -277,7 +278,7 @@ const TOOL_CATEGORIES: ToolCategory[] = [
 const MORE_CATEGORY_LABELS = new Set(["Archive", "Generate & Dev"]);
 
 // Tools that use AI (show badge)
-const AI_TOOL_SLUGS = new Set(["ai-rename", "alt-text", "transcribe", "smartsort", "ai-organize", "image-to-text", "passport-photo"]);
+const AI_TOOL_SLUGS = new Set(["ai-rename", "alt-text", "extract-document", "transcribe", "smartsort", "ai-organize", "image-to-text", "passport-photo"]);
 
 function getToolBySlug(slug: string): SidebarTool | undefined {
   return ALL_SIDEBAR_TOOLS.find((t) => t.slug === slug);
