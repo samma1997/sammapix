@@ -144,6 +144,41 @@ const IconAltText: React.FC<{ accent: string }> = ({ accent }) => (
   </svg>
 );
 
+const IconExtractDocument: React.FC<{ accent: string }> = ({ accent }) => (
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <style>{`
+      @keyframes dh-ed-scan { 0%, 100% { top: 25%; opacity: 0.4; } 50% { top: 70%; opacity: 1; } }
+      @keyframes dh-ed-pop { 0%, 40% { opacity: 0; transform: translateX(-3px); } 60%, 90% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; transform: translateX(-3px); } }
+      .dh-ed-f1 { animation: dh-ed-pop 2.4s ease-out 0.3s infinite; }
+      .dh-ed-f2 { animation: dh-ed-pop 2.4s ease-out 0.6s infinite; }
+      .dh-ed-f3 { animation: dh-ed-pop 2.4s ease-out 0.9s infinite; }
+    `}</style>
+    {/* Document */}
+    <rect x="2" y="4" width="22" height="30" rx="2.5" fill={accent} fillOpacity="0.1" stroke={accent} strokeWidth="1.5"/>
+    <rect x="6" y="8" width="14" height="2" rx="1" fill={accent} fillOpacity="0.4"/>
+    <rect x="6" y="12" width="10" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    <rect x="6" y="15.5" width="12" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    <rect x="6" y="19" width="8" height="1.5" rx="0.75" fill={accent} fillOpacity="0.3"/>
+    <text x="13" y="31" fontSize="5" fill={accent} textAnchor="middle" fontWeight="700" fontFamily="monospace">PDF</text>
+    {/* Arrow */}
+    <path d="M26 18 L30 18 M28 16 L30 18 L28 20" stroke={accent} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+    {/* Fields panel */}
+    <rect x="31" y="8" width="16" height="22" rx="2" fill={accent} fillOpacity="0.08" stroke={accent} strokeWidth="1.25"/>
+    <g className="dh-ed-f1">
+      <rect x="33" y="11" width="12" height="3" rx="1" fill={accent} fillOpacity="0.35"/>
+    </g>
+    <g className="dh-ed-f2">
+      <rect x="33" y="17" width="10" height="3" rx="1" fill={accent} fillOpacity="0.35"/>
+    </g>
+    <g className="dh-ed-f3">
+      <rect x="33" y="23" width="8" height="3" rx="1" fill={accent} fillOpacity="0.6"/>
+    </g>
+    {/* Total badge */}
+    <rect x="30" y="33" width="18" height="9" rx="2" fill={accent}/>
+    <text x="39" y="39.5" fontSize="5" fill="white" textAnchor="middle" fontWeight="700" fontFamily="monospace">TOTAL</text>
+  </svg>
+);
+
 const IconTranscribe: React.FC<{ accent: string }> = ({ accent }) => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <style>{`
@@ -579,6 +614,17 @@ const ALL_DASH_TOOLS: DashToolEntry[] = [
     Icon: IconAltText,
     category: ["AI"],
     keywords: ["alt text", "alt tag", "accessibility", "screen reader", "a11y", "description", "wcag", "seo alt"],
+  },
+  {
+    name: "Document Extractor",
+    slug: "extract-document",
+    href: "/dashboard/tools/extract-document",
+    tagline: "Extract data from receipts & invoices with AI — JSON & CSV export.",
+    accent: "#6366F1",
+    badges: ["Login required", "Gemini Flash"],
+    Icon: IconExtractDocument,
+    category: ["AI"],
+    keywords: ["receipt scanner", "invoice parser", "extract receipt data", "document ocr", "pdf invoice", "receipt to spreadsheet", "structured data", "line items"],
   },
   {
     name: "Transcribe",

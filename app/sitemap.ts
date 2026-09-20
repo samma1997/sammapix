@@ -130,6 +130,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/color-picker",
     "/tools/ai-rename",
     "/tools/alt-text",
+    "/tools/extract-document",
     "/tools/exif",
     "/tools/filmlab",
     "/tools/stampit",

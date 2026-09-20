@@ -119,6 +119,7 @@ const CATEGORY_SLUGS: Record<string, string[]> = {
   AI: [
     "ai-rename",
     "alt-text",
+    "extract-document",
     "smartsort",
     "ai-organize",
     "image-to-text",
