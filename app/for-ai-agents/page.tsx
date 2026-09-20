@@ -66,6 +66,10 @@ const FAQ = [
     q: "Which AI clients does it work with?",
     a: "Any MCP-compatible client — Claude Desktop, Claude, Cursor, and other agent frameworks that support remote MCP servers over HTTP. Point the client at the SammaPix MCP URL and it discovers the tools automatically.",
   },
+  {
+    q: "Is there an OpenAPI spec and machine-readable docs?",
+    a: "Yes. The full REST API is described in an OpenAPI 3.1 spec at https://www.sammapix.com/openapi.json, and there is an LLM-friendly overview at https://www.sammapix.com/llms.txt. Point your agent or codegen tool at either to integrate without guesswork.",
+  },
 ];
 
 function jsonLd() {
