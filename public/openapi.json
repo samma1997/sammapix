@@ -1,0 +1,128 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SammaPix API — Image & PDF processing for AI agents",
+    "version": "1.0.0",
+    "description": "Agent-native image and PDF processing. Deterministic ops (compress, convert, resize, crop, rotate, watermark, PDF compress/split/merge/rotate, image-to-PDF), AI vision (describe, alt text, OCR, tags, filename, document extraction) and a pipeline that chains image ops in one call. Pay-as-you-go with a free daily tier, zero-retention (files processed in memory and discarded). Also available as a remote MCP server at /api/mcp (OAuth 2.1, no API key to paste).",
+    "contact": { "name": "SammaPix", "url": "https://www.sammapix.com/for-ai-agents" }
+  },
+  "servers": [{ "url": "https://www.sammapix.com" }],
+  "security": [{ "bearerAuth": [] }],
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "summary": "Health check",
+        "security": [],
+        "responses": { "200": { "description": "OK", "content": { "application/json": { "schema": { "type": "object" } } } } }
+      }
+    },
+    "/api/v1/{op}": {
+      "post": {
+        "summary": "Run one image or PDF operation",
+        "description": "Send a file (multipart 'file' field) or JSON ({ image: base64|dataURL } or { url }). Returns the processed file (binary) for most ops, or JSON for metadata/pdf-info/describe/alt-text/suggest-filename/ocr/tags/extract-document. Billing: 1 credit per op, 2 for AI vision ops; a failed op is refunded. Free daily tier applies first.",
+        "parameters": [
+          {
+            "name": "op",
+            "in": "path",
+            "required": true,
+            "description": "The operation to run.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "compress", "resize", "crop", "convert", "rotate", "metadata",
+                "flip", "grayscale", "blur", "adjust", "tint", "negate", "flatten", "border", "round", "watermark",
+                "optimize-web",
+                "pdf-compress", "pdf-merge", "pdf-split", "pdf-rotate", "image-to-pdf", "pdf-info",
+                "describe", "alt-text", "suggest-filename", "ocr", "tags", "extract-document"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": { "type": "string", "format": "binary", "description": "The input image or PDF. For pdf-merge and image-to-pdf, repeat the 'file' field for multiple files." },
+                  "format": { "type": "string", "description": "Target format for convert/optimize-web (webp, avif, jpeg, png)." },
+                  "quality": { "type": "integer", "description": "Output quality 1-100." },
+                  "width": { "type": "integer" },
+                  "height": { "type": "integer" },
+                  "ratio": { "type": "string", "description": "Aspect ratio for crop, e.g. 16:9." },
+                  "angle": { "type": "integer", "description": "Degrees for rotate/pdf-rotate." },
+                  "pages": { "type": "string", "description": "Pages for pdf-split, e.g. 1-3,5." }
+                },
+                "required": ["file"]
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": { "type": "string", "description": "Base64 or data URL of the input image." },
+                  "url": { "type": "string", "description": "Public URL of the input image (fetched securely)." },
+                  "format": { "type": "string" },
+                  "quality": { "type": "integer" },
+                  "width": { "type": "integer" },
+                  "height": { "type": "integer" },
+                  "ratio": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Processed file (binary) or JSON result. Response headers include x-op-cost and x-credits-remaining.",
+            "content": {
+              "application/octet-stream": { "schema": { "type": "string", "format": "binary" } },
+              "application/json": { "schema": { "type": "object" } }
+            }
+          },
+          "401": { "description": "Missing or invalid API key." },
+          "402": { "description": "Insufficient credits. Body includes cost and remaining." },
+          "413": { "description": "Payload too large (max 20MB per file)." },
+          "422": { "description": "Operation failed on valid input (credits refunded)." },
+          "429": { "description": "Rate limited." }
+        }
+      }
+    },
+    "/api/v1/pipeline": {
+      "post": {
+        "summary": "Chain multiple image operations in one call",
+        "description": "Runs an ordered list of image ops (the output of each feeds the next) and returns only the final image. Saves round-trips and tokens. Billed 1 credit per step. Chainable ops: compress, resize, crop, convert, rotate, flip, grayscale, blur, adjust, tint, negate, flatten, border, round, watermark.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": { "type": "string", "format": "binary" },
+                  "steps": { "type": "string", "description": "JSON array of { op, params }, e.g. [{\"op\":\"resize\",\"params\":{\"width\":1200}},{\"op\":\"convert\",\"params\":{\"format\":\"webp\",\"quality\":80}}]. Max 12 steps." }
+                },
+                "required": ["file", "steps"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Final image (binary).", "content": { "application/octet-stream": { "schema": { "type": "string", "format": "binary" } } } },
+          "401": { "description": "Missing or invalid API key." },
+          "402": { "description": "Insufficient credits." }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "API key as 'Authorization: Bearer sk_live_...'. Generate one at https://www.sammapix.com/dashboard/api. Agents can also connect over MCP at /api/mcp with OAuth 2.1 (no key to paste)."
+      }
+    }
+  }
+}
