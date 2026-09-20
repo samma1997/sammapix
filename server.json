@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
   "name": "io.github.samma1997/sammapix",
   "title": "SammaPix — Image & PDF tools for AI agents",
-  "description": "Agent-native image & PDF processing with 20+ tools: compress, convert, resize, crop, rotate, flip, adjust, grayscale, blur, tint, negate, border, round, watermark, read metadata; compress/merge/split/rotate PDFs, images-to-PDF, PDF info; and chain any image operations in one call (pipeline). Remote MCP over HTTP with OAuth 2.1 (no API key to paste). Zero-retention, pay-per-use, 25 free ops/day.",
+  "description": "Image & PDF tools for AI agents: compress, convert, resize, PDF, AI vision, pipeline.",
   "version": "1.0.0",
   "websiteUrl": "https://www.sammapix.com/for-ai-agents",
   "repository": {
