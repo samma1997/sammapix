@@ -2,7 +2,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { growthGscDaily } from "@/lib/db/schema";
 import { fetchGSCData } from "@/lib/growth/gsc-client";
-import { inArray } from "drizzle-orm";
+import { inArray, lt } from "drizzle-orm";
+
+// Keep ~60 days of GSC history. The dashboard only reads the last 30 days, and
+// full history is re-fetchable from Google, so we cap the table to control the
+// Neon storage + network-transfer footprint (it otherwise grows unbounded).
+const RETENTION_DAYS = 60;
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -43,7 +48,11 @@ async function doSync() {
     synced += batch.length;
   }
 
-  return { synced, startDate, endDate };
+  // Retention: drop rows older than RETENTION_DAYS to keep the table bounded.
+  const cutoff = dateStr(RETENTION_DAYS);
+  await db.delete(growthGscDaily).where(lt(growthGscDaily.date, cutoff));
+
+  return { synced, startDate, endDate, retentionCutoff: cutoff };
 }
 
 // Cron calls GET — authenticate with CRON_SECRET
