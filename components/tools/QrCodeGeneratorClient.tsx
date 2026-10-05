@@ -68,7 +68,12 @@ export default function QrCodeGeneratorClient() {
   const [ecLevel, setEcLevel] = useState<ErrorCorrectionLevel>("M");
   const [fgColor, setFgColor] = useState("#000000");
   const [bgColor, setBgColor] = useState("#FFFFFF");
+  const [transparentBg, setTransparentBg] = useState(false);
   const [margin, setMargin] = useState(4);
+
+  // Light (background) color passed to the QR encoder. Fully-transparent when the
+  // "transparent background" toggle is on, so PNG/SVG export with no white fill.
+  const lightColor = transparentBg ? "#00000000" : bgColor;
 
   const [uiState, setUiState] = useState<UIState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -97,7 +102,7 @@ export default function QrCodeGeneratorClient() {
         errorCorrectionLevel: ecLevel,
         color: {
           dark: fgColor,
-          light: bgColor,
+          light: lightColor,
         },
       });
 
@@ -108,7 +113,7 @@ export default function QrCodeGeneratorClient() {
       setUiState("error");
       setErrorMsg(msg);
     }
-  }, [preset, text, wifi, email, size, ecLevel, fgColor, bgColor, margin]);
+  }, [preset, text, wifi, email, size, ecLevel, fgColor, lightColor, margin]);
 
   // Debounced regeneration on every option change
   useEffect(() => {
@@ -147,7 +152,7 @@ export default function QrCodeGeneratorClient() {
         errorCorrectionLevel: ecLevel,
         color: {
           dark: fgColor,
-          light: bgColor,
+          light: lightColor,
         },
       });
       const blob = new Blob([svgString], { type: "image/svg+xml" });
@@ -174,7 +179,7 @@ export default function QrCodeGeneratorClient() {
         type: "svg",
         margin,
         errorCorrectionLevel: ecLevel,
-        color: { dark: fgColor, light: bgColor },
+        color: { dark: fgColor, light: lightColor },
       });
       await navigator.clipboard.writeText(svgString);
       setCopied(true);
@@ -195,6 +200,7 @@ export default function QrCodeGeneratorClient() {
     setEcLevel("M");
     setFgColor("#000000");
     setBgColor("#FFFFFF");
+    setTransparentBg(false);
     setMargin(4);
     setUiState("idle");
     setErrorMsg("");
@@ -370,7 +376,7 @@ export default function QrCodeGeneratorClient() {
                   />
                 </span>
               </label>
-              <label className="flex items-center gap-2 text-xs text-gray-600 dark:text-[#aaa] cursor-pointer">
+              <label className={`flex items-center gap-2 text-xs text-gray-600 dark:text-[#aaa] cursor-pointer transition-opacity ${transparentBg ? "opacity-40 pointer-events-none" : ""}`}>
                 <span>Background</span>
                 <span
                   className="w-7 h-7 rounded-lg border-2 border-gray-200 dark:border-[#3A3A3A] inline-block cursor-pointer overflow-hidden"
@@ -380,11 +386,23 @@ export default function QrCodeGeneratorClient() {
                     type="color"
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
+                    disabled={transparentBg}
                     className="opacity-0 w-full h-full cursor-pointer"
                   />
                 </span>
               </label>
             </div>
+
+            {/* Transparent background */}
+            <label className="flex items-center gap-2 text-xs text-gray-600 dark:text-[#aaa] cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={transparentBg}
+                onChange={(e) => setTransparentBg(e.target.checked)}
+                className="rounded border-gray-300 dark:border-[#444] text-[#6366F1] accent-[#6366F1]"
+              />
+              Transparent background (PNG & SVG)
+            </label>
           </div>
 
           {/* Reset */}
@@ -400,8 +418,26 @@ export default function QrCodeGeneratorClient() {
         {/* RIGHT: Preview + Download */}
         <div className="flex flex-col gap-4">
           {/* Canvas preview */}
-          <div className="flex items-center justify-center rounded-2xl border border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] p-6 min-h-[280px]">
-            {uiState === "idle" ? (
+          <div className="relative flex items-center justify-center rounded-2xl border border-gray-200 dark:border-[#2A2A2A] bg-white dark:bg-[#1E1E1E] p-6 min-h-[280px]">
+            {/* Single, always-mounted canvas — the ref must stay stable so what we
+                draw into it survives re-renders (shown only once it has a QR). */}
+            <canvas
+              ref={canvasRef}
+              className={`max-w-full rounded-lg ${uiState === "ready" ? "" : "hidden"}`}
+              style={{
+                imageRendering: "pixelated",
+                ...(transparentBg
+                  ? {
+                      backgroundImage:
+                        "linear-gradient(45deg,#d4d4d8 25%,transparent 25%),linear-gradient(-45deg,#d4d4d8 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d4d4d8 75%),linear-gradient(-45deg,transparent 75%,#d4d4d8 75%)",
+                      backgroundSize: "16px 16px",
+                      backgroundPosition: "0 0,0 8px,8px -8px,-8px 0",
+                    }
+                  : {}),
+              }}
+            />
+
+            {uiState === "idle" && (
               <div className="flex flex-col items-center gap-3 text-center">
                 <div className="w-16 h-16 rounded-2xl bg-[#6366F1]/10 flex items-center justify-center">
                   <QrCode className="h-8 w-8 text-[#6366F1]" strokeWidth={1.5} />
@@ -410,22 +446,13 @@ export default function QrCodeGeneratorClient() {
                   Enter content to generate your QR code
                 </p>
               </div>
-            ) : uiState === "error" ? (
+            )}
+
+            {uiState === "error" && (
               <div className="flex flex-col items-center gap-3 text-center">
                 <AlertCircle className="h-8 w-8 text-red-400" />
                 <p className="text-sm text-red-500">{errorMsg}</p>
               </div>
-            ) : (
-              <canvas
-                ref={canvasRef}
-                className="max-w-full rounded-lg"
-                style={{ imageRendering: "pixelated" }}
-              />
-            )}
-
-            {/* Always-present canvas (hidden when idle/error so we can still draw into it) */}
-            {uiState !== "ready" && (
-              <canvas ref={canvasRef} className="hidden" />
             )}
           </div>
 
