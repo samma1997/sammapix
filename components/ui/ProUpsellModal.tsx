@@ -172,11 +172,6 @@ export default function ProUpsellModal({
   const [creditsLoading, setCreditsLoading] = useState(false);
   const [dayPassLoading, setDayPassLoading] = useState(false);
   const showContinue = trigger === "files" || trigger === "batch";
-  // Money moments: ZIP download + file/batch limit drive 62% of all Day Pass
-  // revenue. At these points the anonymous visitor has concrete value in hand
-  // (files to zip / over the limit) and converts on a one-time Day Pass, not a
-  // registration — so lead with the Day Pass here (clean, no subscription anchor).
-  const dayPassMoment = trigger === "zip" || trigger === "files" || trigger === "batch";
 
   // Founding deal — show $5 price + spots-left urgency in CTA.
   // Gated on real discount so stale cached responses don't show "lock $9".
@@ -497,67 +492,36 @@ export default function ProUpsellModal({
           {/* ── BRANCH 1: ANONYMOUS ──────────────────────────────────────── */}
           {isAnonymous && (
             <>
-              {dayPassMoment ? (
-                <>
-                  {/* Money moment (ZIP / file-limit): lead with the one-time Day Pass. */}
-                  <button
-                    onClick={handleDayPass}
-                    disabled={dayPassLoading}
-                    className={btnPrimary}
-                    aria-label={isVideoUpsell ? "Buy a Video Day Pass — 24h full Pro access" : "Buy a Day Pass — 24h full Pro access"}
-                  >
-                    {dayPassLoading ? (
-                      <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
-                    ) : (
-                      <Clock className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                    )}
-                    {dayPassLabel}
-                  </button>
-                  <p className="text-center text-[11px] text-[#737373] dark:text-[#A3A3A3] mb-4 leading-relaxed">
-                    {isIt
-                      ? "Una tantum, nessun abbonamento · tutto resta nel browser"
-                      : "One-time, no subscription · everything stays in your browser"}
-                  </p>
-                  {/* Secondary: free account */}
-                  <button onClick={handleRegister} className={btnSubtle}>
-                    <UserPlus className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-                    {isIt ? "Oppure registrati gratis" : "Or create a free account"}
-                  </button>
-                </>
-              ) : (
-                <>
-                  {/* Primary: create free account — accent indigo, high visual weight */}
-                  <button
-                    onClick={handleRegister}
-                    className={btnPrimary}
-                  >
-                    <UserPlus className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                    {isIt ? "Registrati gratis" : "Create a free account"}
-                  </button>
+              {/* Primary: create free account — accent indigo, high visual weight */}
+              <button
+                onClick={handleRegister}
+                className={btnPrimary}
+              >
+                <UserPlus className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                {isIt ? "Registrati gratis" : "Create a free account"}
+              </button>
 
-                  {/* Benefit line directly under primary to reinforce the value */}
-                  <p className="text-center text-[11px] text-[#737373] dark:text-[#A3A3A3] mb-4 leading-relaxed">
-                    {isIt
-                      ? `${SIGNUP_BONUS_CREDITS} crediti AI gratis + ${MAX_FILES_REGISTERED} file per batch, senza pubblicità`
-                      : `${SIGNUP_BONUS_CREDITS} free AI credits + ${MAX_FILES_REGISTERED} files per batch, no ads`}
-                  </p>
+              {/* Benefit line directly under primary to reinforce the value */}
+              <p className="text-center text-[11px] text-[#737373] dark:text-[#A3A3A3] mb-4 leading-relaxed">
+                {isIt
+                  ? `${SIGNUP_BONUS_CREDITS} crediti AI gratis + ${MAX_FILES_REGISTERED} file per batch, senza pubblicità`
+                  : `${SIGNUP_BONUS_CREDITS} free AI credits + ${MAX_FILES_REGISTERED} files per batch, no ads`}
+              </p>
 
-                  {/* Secondary: pay option for users who want to skip registration */}
-                  <button
-                    onClick={handleDayPass}
-                    disabled={dayPassLoading}
-                    className={btnSubtle}
-                    aria-label={isVideoUpsell ? "Buy a Video Day Pass — 24h full Pro access" : "Buy a Day Pass — 24h full Pro access"}
-                  >
-                    {dayPassLoading ? (
-                      <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
-                    ) : (
-                      <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
-                    )}
-                    {dayPassSecondaryLabel}
-                  </button>
-                </>
-              )}
+              {/* Secondary: pay option for users who want to skip registration */}
+              <button
+                onClick={handleDayPass}
+                disabled={dayPassLoading}
+                className={btnSubtle}
+                aria-label={isVideoUpsell ? "Buy a Video Day Pass — 24h full Pro access" : "Buy a Day Pass — 24h full Pro access"}
+              >
+                {dayPassLoading ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                ) : (
+                  <Clock className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
+                )}
+                {dayPassSecondaryLabel}
+              </button>
 
               {/* Continue with first N files — only files/batch triggers */}
               {showContinue && freeLimit && (
