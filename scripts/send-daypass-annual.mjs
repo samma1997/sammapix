@@ -18,7 +18,7 @@ const RESEND_KEY = process.env.RESEND_API_KEY;
 const AUDIENCE = process.env.RESEND_AUDIENCE_ID;
 const FROM = "Luca @ SammaPix <hello@sammapix.com>";
 const REPLY_TO = "lucasamm97@gmail.com";
-const OFFER = "https://www.sammapix.com/offer";
+const OFFER = "https://www.sammapix.com/pricing";
 const SEND = process.argv.includes("--send");
 
 if (!STRIPE_KEY || !RESEND_KEY || !AUDIENCE) {
@@ -67,16 +67,16 @@ console.log(`MODE: ${SEND ? "INVIO REALE" : "DRY-RUN (nessun invio)"}\n`);
 finalList.forEach(e => console.log("  -", e));
 
 // ── 3. Email ────────────────────────────────────────────────────────────────
-const subject = "A full year of Pro for the price of ~10 Day Passes";
+const subject = "You've bought a Day Pass — the cheaper way if you keep coming back";
 const html = (email) => `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
 <body style="background:#ffffff;margin:0;font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#171717">
   <div style="display:none;max-height:0;overflow:hidden;opacity:0">You've used a Day Pass before. Here is the cheaper way if you keep coming back.</div>
   <div style="margin:0 auto;padding:40px 24px;max-width:520px">
     <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Hey,</p>
     <p style="font-size:16px;line-height:1.6;margin:0 0 16px">You've bought a Day Pass on SammaPix before. Thanks, that genuinely helps keep the tools free for everyone else.</p>
-    <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Quick honest math, in case you keep coming back: a Day Pass is <strong>$2.99</strong> each time. A full year of Pro, first year, is <strong>$29</strong>. That is about <strong>ten Day Passes for 365 days</strong>, with everything unlimited and nothing to re-buy. Same privacy: your files still never leave your browser.</p>
+    <p style="font-size:16px;line-height:1.6;margin:0 0 16px">Quick honest math, in case you keep coming back: a Day Pass is <strong>$2.99</strong> each time. Pro is <strong>$9/month</strong> or <strong>$79/year</strong> for everything unlimited, with nothing to re-buy. If you reach for a Day Pass even a couple of times a month, Pro already works out cheaper, and you never think about it again. Same privacy: your files still never leave your browser.</p>
     <div style="text-align:center;margin:28px 0">
-      <a href="${OFFER}" style="display:inline-block;background:#6366F1;color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:14px 28px;border-radius:8px">Get a year of Pro for $29 &rarr;</a>
+      <a href="${OFFER}" style="display:inline-block;background:#6366F1;color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:14px 28px;border-radius:8px">See Pro plans &rarr;</a>
     </div>
     <p style="font-size:14px;line-height:1.6;color:#737373;margin:0 0 8px">No pressure. If the Day Pass is all you need, that is completely fine and it is not going anywhere.</p>
     <p style="font-size:14px;line-height:1.6;margin:24px 0 0">Luca</p>
