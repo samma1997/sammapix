@@ -2,11 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { resend } from "@/lib/resend";
 import {
   sendDay2Email,
-  sendDay3Email,
   sendDay7Email,
   sendDay30Email,
   sendDay14Email,
-  sendDay21Email,
 } from "@/lib/email-service";
 import { getUserPlan } from "@/lib/user-plan";
 
@@ -48,32 +46,15 @@ export async function GET(request: NextRequest) {
       const name = (contactAny.first_name as string) || (contactAny.firstName as string) || null;
 
       try {
-        // Cadence: 6 touchpoints. Value at Day2/7, Pro offers at Day3/21/30
-        // (free users only), light check-in at Day17. Day3+Day21 re-added so the
-        // offer reaches one-shot users before they go cold (Day30 alone was too
-        // late). The protective trial reminder lives in its own cron (trial-monitor).
+        // Lean cadence (trimmed from 13 to 4 touchpoints): bother users as
+        // little as possible. The protective trial reminder lives in its own
+        // cron (trial-monitor) and is intentionally NOT part of this funnel.
         if (daysSince === 2) {
           await sendDay2Email(contact.email, name);
           sent++;
-        } else if (daysSince === 3) {
-          // Early Pro offer: the one-shot audience often goes cold after day 1-2,
-          // so the only offer at Day30 arrives too late. This catches them while
-          // still warm. Free users only — never pitch Pro to existing Pro users.
-          const plan = await getUserPlan(contact.email).catch(() => "free");
-          if (plan === "free") {
-            await sendDay3Email(contact.email, name);
-            sent++;
-          }
         } else if (daysSince === 7) {
           await sendDay7Email(contact.email, name);
           sent++;
-        } else if (daysSince === 21) {
-          // Value-framed Pro nudge ("what Pro users can do"). Free users only.
-          const plan = await getUserPlan(contact.email).catch(() => "free");
-          if (plan === "free") {
-            await sendDay21Email(contact.email, name);
-            sent++;
-          }
         } else if (daysSince === 17) {
           // Neutral check-in (not a "we miss you" win-back): we have no
           // reliable last-active signal, so we must NOT assume the user has
