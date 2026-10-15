@@ -80,73 +80,68 @@ async function convertDocxToPdf(
   // 2. Read the file buffer.
   const arrayBuffer = await file.arrayBuffer();
 
-  // 3. Create an offscreen container sized to A4 at 96 dpi (794 x 1123 px).
-  const A4_W = 794;
-  const PAGE_H = 1123; // A4 at 96 dpi
+  // 3. Offscreen container. No fixed width and NO wrapper: docx-preview renders
+  //    each page as its own <section> at the document's real page size (margins
+  //    included). The old code wrapped everything in a grey padded wrapper and
+  //    then sliced by a fixed 1123px height — the wrapper padding + per-page gaps
+  //    made every slice drift, which decentred the content page after page.
   const container = document.createElement("div");
   container.style.cssText = `
     position: fixed;
     left: -9999px;
     top: 0;
-    width: ${A4_W}px;
-    background: white;
-    font-family: sans-serif;
-    font-size: 12px;
-    line-height: 1.5;
+    background: #ffffff;
     z-index: -1;
   `;
   document.body.appendChild(container);
 
   try {
-    // 4. Render the DOCX into the container.
+    // 4. Render the DOCX. inWrapper:false → sections are appended directly, each
+    //    one is a real page; breakPages:true splits at page breaks.
     onProgress?.("Rendering document...");
     await renderAsync(arrayBuffer, container, undefined, {
-      className: "docx-preview-container",
+      className: "docx",
       ignoreLastRenderedPageBreak: false,
-      inWrapper: true,
+      inWrapper: false,
       breakPages: true,
       useBase64URL: true,
     });
 
     // 5. Wait a tick for images/fonts to settle.
-    await new Promise((r) => setTimeout(r, 300));
+    await new Promise((r) => setTimeout(r, 350));
 
-    const totalH = container.scrollHeight;
-    const pageCount = Math.max(1, Math.ceil(totalH / PAGE_H));
+    // 6. One rendered page = one <section>. Capture each at its true bounds.
+    let pages = Array.from(container.querySelectorAll("section")) as HTMLElement[];
+    if (pages.length === 0) pages = [container]; // fallback: whole doc as one page
 
-    onProgress?.(`Generating PDF (${pageCount} page${pageCount !== 1 ? "s" : ""})...`);
+    onProgress?.(`Generating PDF (${pages.length} page${pages.length !== 1 ? "s" : ""})...`);
 
-    // 6. Create jsPDF document (A4, mm, portrait).
     const pdf = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
     const pdfW = pdf.internal.pageSize.getWidth();   // 210 mm
     const pdfH = pdf.internal.pageSize.getHeight();  // 297 mm
 
-    for (let i = 0; i < pageCount; i++) {
-      onProgress?.(`Rendering page ${i + 1} / ${pageCount}...`);
+    for (let i = 0; i < pages.length; i++) {
+      onProgress?.(`Rendering page ${i + 1} / ${pages.length}...`);
 
-      // Scroll the clip window: snapshot one A4-page-height slice of the container.
-      const clipY = i * PAGE_H;
-      const clipH = Math.min(PAGE_H, totalH - clipY);
-
-      const canvas = await html2canvas(container, {
-        scale: 1.5, // slightly higher DPI for readability
+      const el = pages[i];
+      const canvas = await html2canvas(el, {
+        scale: 2, // crisp text
         useCORS: true,
         allowTaint: true,
         backgroundColor: "#ffffff",
-        // Clip to only the current page's slice.
-        y: clipY,
-        height: clipH,
-        windowHeight: clipH,
-        scrollY: -clipY,
         logging: false,
       });
 
-      const imgData = canvas.toDataURL("image/jpeg", 0.88);
+      // Fit the page image to A4 keeping aspect ratio, then centre it.
+      const ratio = Math.min(pdfW / canvas.width, pdfH / canvas.height);
+      const w = canvas.width * ratio;
+      const h = canvas.height * ratio;
+      const x = (pdfW - w) / 2;             // centre horizontally
+      const y = Math.max(0, (pdfH - h) / 2); // centre vertically if shorter
 
+      const imgData = canvas.toDataURL("image/jpeg", 0.92);
       if (i > 0) pdf.addPage();
-
-      // Fill the full A4 page with the snapshot.
-      pdf.addImage(imgData, "JPEG", 0, 0, pdfW, pdfH);
+      pdf.addImage(imgData, "JPEG", x, y, w, h);
     }
 
     return pdf.output("blob");
