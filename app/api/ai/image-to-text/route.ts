@@ -73,6 +73,15 @@ export async function POST(req: NextRequest) {
   }
 
   const email = session.user.email;
+
+  // "Pro without AI" grants: AI endpoints are off-limits (they cost money).
+  const { aiBlockedForEmail } = await import("@/lib/ai-access");
+  if (aiBlockedForEmail(email)) {
+    return NextResponse.json(
+      { error: "AI tools are not included in your plan.", code: "AI_NOT_INCLUDED" },
+      { status: 403 }
+    );
+  }
   const isPro = (session.user as { plan?: string }).plan === "pro";
   const dailyLimit = isPro ? AI_OPS_PRO_PER_DAY : AI_OPS_FREE_PER_DAY;
 

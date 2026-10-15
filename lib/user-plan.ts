@@ -13,8 +13,11 @@ import { exec } from "@/lib/redis";
 export async function getUserPlan(email: string | null | undefined): Promise<"free" | "pro"> {
   if (!email) return "free";
 
-  // 1. Manual override via env var (comma-separated)
-  const manualPro = (process.env.PRO_EMAILS ?? "")
+  // 1. Manual override via env var (comma-separated). PRO_EMAILS = full Pro,
+  //    PRO_NO_AI_EMAILS = Pro for everything except the AI endpoints (those are
+  //    blocked separately in /api/ai/* via aiBlockedForEmail). Both count as Pro
+  //    here so all non-AI Pro features (no ads, batch, ZIP, no limits) apply.
+  const manualPro = `${process.env.PRO_EMAILS ?? ""},${process.env.PRO_NO_AI_EMAILS ?? ""}`
     .split(",")
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);
