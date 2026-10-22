@@ -1,0 +1,367 @@
+[
+  {
+    "start": 2,
+    "end": 6.8,
+    "text": "Installed desktop apps (Duplicate Cleaner, Gemini, dupeGuru)"
+  },
+  {
+    "start": 6.8,
+    "end": 9.3,
+    "text": "Upload-based web tools"
+  },
+  {
+    "start": 9.8,
+    "end": 14.21,
+    "text": "How TwinHunt finds duplicates: perceptual hashing explained"
+  },
+  {
+    "start": 14.21,
+    "end": 18.12,
+    "text": "The DCT-based pHash algorithm step by step"
+  },
+  {
+    "start": 18.12,
+    "end": 22.47,
+    "text": "How to find duplicate photos free with TwinHunt (step by step)"
+  },
+  {
+    "start": 23.97,
+    "end": 27.28,
+    "text": "Step 4: Review the duplicate groups"
+  },
+  {
+    "start": 27.28,
+    "end": 31.22,
+    "text": "Step 5: Export the deletion report and clean up"
+  },
+  {
+    "start": 31.22,
+    "end": 36.33,
+    "text": "Comparison: browser tool vs installed app vs upload-based web tool"
+  },
+  {
+    "start": 36.83,
+    "end": 39.88,
+    "text": "Resolution: keep the larger file"
+  },
+  {
+    "start": 39.88,
+    "end": 44.75,
+    "text": "Edit vs original: keep both, or keep the edited version only"
+  },
+  {
+    "start": 45.25,
+    "end": 49.28,
+    "text": "When in doubt, keep the file with the earlier creation date"
+  },
+  {
+    "start": 50.28,
+    "end": 54.05,
+    "text": "Windows: using File Explorer or PowerShell"
+  },
+  {
+    "start": 54.55,
+    "end": 58.44,
+    "text": "What TwinHunt cannot do (and what to use instead)"
+  },
+  {
+    "start": 58.44,
+    "end": 62.85,
+    "text": "Is there a free duplicate photo finder that doesn't upload my photos?"
+  },
+  {
+    "start": 62.85,
+    "end": 67.32,
+    "text": "What is the best free alternative to Duplicate Cleaner or Gemini?"
+  },
+  {
+    "start": 68.82,
+    "end": 71.82,
+    "text": "How many photos can I scan for free?"
+  },
+  {
+    "start": 71.82,
+    "end": 85.64,
+    "text": "Drop your photos into TwinHunt. Perceptual hashing runs in your browser in secon"
+  },
+  {
+    "start": 85.64,
+    "end": 87.51,
+    "text": "Quick answer"
+  },
+  {
+    "start": 87.51,
+    "end": 114.75,
+    "text": "The best free duplicate photo finder that requires no upload and no installation"
+  },
+  {
+    "start": 115.25,
+    "end": 134.88,
+    "text": "The cumulative effect is significant. A typical smartphone user with five years "
+  },
+  {
+    "start": 134.88,
+    "end": 150.96,
+    "text": "Before diving into how TwinHunt works, it helps to understand the landscape of a"
+  },
+  {
+    "start": 150.96,
+    "end": 182.76,
+    "text": "Desktop apps scan your local filesystem directly and can handle very large libra"
+  },
+  {
+    "start": 182.76,
+    "end": 198.89,
+    "text": "For corporate laptops with security restrictions, borrowed computers, or users w"
+  },
+  {
+    "start": 199.39,
+    "end": 229.54,
+    "text": "The third approach runs the entire analysis inside your browser tab using JavaSc"
+  },
+  {
+    "start": 229.54,
+    "end": 241.32,
+    "text": "SammaPix TwinHunt is the tool in this category with the most complete implementa"
+  },
+  {
+    "start": 241.32,
+    "end": 264,
+    "text": "Most people assume duplicate detection works by comparing file sizes or checksum"
+  },
+  {
+    "start": 264,
+    "end": 288.14,
+    "text": "TwinHunt uses perceptual hashing (pHash), which works differently. Instead of co"
+  },
+  {
+    "start": 288.14,
+    "end": 298.2,
+    "text": "TwinHunt uses a Discrete Cosine Transform (DCT) implementation of pHash. Here is"
+  },
+  {
+    "start": 298.7,
+    "end": 306.07,
+    "text": "The workflow takes under five minutes for a typical batch of 50 photos. Here is "
+  },
+  {
+    "start": 306.57,
+    "end": 326.99,
+    "text": "Drag a folder or a selection of photos onto the upload area, or click to browse."
+  },
+  {
+    "start": 326.99,
+    "end": 346.12,
+    "text": "For best results when targeting a specific suspected duplicate set, narrow the s"
+  },
+  {
+    "start": 346.12,
+    "end": 370.41,
+    "text": "TwinHunt computes a perceptual hash for each photo immediately after it is loade"
+  },
+  {
+    "start": 370.41,
+    "end": 384.98,
+    "text": "Duplicate and near-duplicate pairs appear side by side. Each match shows both fi"
+  },
+  {
+    "start": 384.98,
+    "end": 407.61,
+    "text": "Mark the photos you want to remove, then download the plain-text deletion report"
+  },
+  {
+    "start": 407.61,
+    "end": 414.52,
+    "text": "The table below compares the three main approaches across the dimensions that ma"
+  },
+  {
+    "start": 414.52,
+    "end": 430.22,
+    "text": "Finding duplicates is only half the work. Deciding which file to keep and which "
+  },
+  {
+    "start": 430.22,
+    "end": 455.56,
+    "text": "When two photos are visually identical but stored at different resolutions, alwa"
+  },
+  {
+    "start": 455.56,
+    "end": 479.06,
+    "text": "If the duplicate pair consists of a RAW or unedited JPEG and an edited export, a"
+  },
+  {
+    "start": 479.06,
+    "end": 495.33,
+    "text": "For burst-mode groups, TwinHunt's Normal or Loose sensitivity will surface them."
+  },
+  {
+    "start": 495.33,
+    "end": 509.18,
+    "text": "If resolution and quality look equal, the earlier creation date is typically the"
+  },
+  {
+    "start": 509.18,
+    "end": 521.3,
+    "text": "Because TwinHunt produces a deletion report rather than deleting files directly,"
+  },
+  {
+    "start": 521.3,
+    "end": 534.71,
+    "text": "For larger batches on macOS, the Terminal command while read f; do rm &quot;$f&q"
+  },
+  {
+    "start": 534.71,
+    "end": 549.23,
+    "text": "Once duplicates are removed, two follow-up tasks consistently recover additional"
+  },
+  {
+    "start": 549.23,
+    "end": 563.37,
+    "text": "TwinHunt is the right tool for most personal photo library cleanup tasks. There "
+  },
+  {
+    "start": 563.37,
+    "end": 587.06,
+    "text": "For the overwhelming majority of personal photo library cleanup use cases — clea"
+  },
+  {
+    "start": 587.06,
+    "end": 594.54,
+    "text": "Ready to start? Drop your photos into TwinHunt and get the first batch of duplic"
+  },
+  {
+    "start": 594.54,
+    "end": 616.41,
+    "text": "Yes. SammaPix TwinHunt runs entirely in your browser. No photo is ever uploaded "
+  },
+  {
+    "start": 616.41,
+    "end": 641.9,
+    "text": "SammaPix TwinHunt is the best browser-based alternative for users who want no in"
+  },
+  {
+    "start": 641.9,
+    "end": 664.67,
+    "text": "Yes. Perceptual hashing finds duplicates based on visual content, not file bytes"
+  },
+  {
+    "start": 664.67,
+    "end": 688.05,
+    "text": "Yes. TwinHunt supports HEIC files natively. It uses the embedded JPEG thumbnail "
+  },
+  {
+    "start": 688.55,
+    "end": 709.04,
+    "text": "TwinHunt allows up to 50 images per session on the free plan. For larger batches"
+  },
+  {
+    "start": 709.04,
+    "end": 776.44,
+    "text": "Find duplicates free } > Quick answer The best free duplicate photo finder that "
+  },
+  {
+    "start": 776.44,
+    "end": 791.56,
+    "text": "WhatsApp and messaging apps: Every photo you send or receive is saved to your ca"
+  },
+  {
+    "start": 791.56,
+    "end": 805.6,
+    "text": "Burst mode and brackets: Modern smartphones shoot bursts of 5-20 frames for a si"
+  },
+  {
+    "start": 805.6,
+    "end": 821.1,
+    "text": "Export and edit copies: Photo editors like Lightroom, Snapseed, and Photoshop ro"
+  },
+  {
+    "start": 821.1,
+    "end": 833.7,
+    "text": "Device migrations and backups: Transferring photos from an old phone to a new on"
+  },
+  {
+    "start": 833.7,
+    "end": 917.65,
+    "text": "TwinHunt is the tool in this category with the most complete implementation: per"
+  },
+  {
+    "start": 917.65,
+    "end": 928.21,
+    "text": "The Discrete Cosine Transform is applied to the 32x32 pixel array, decomposing t"
+  },
+  {
+    "start": 928.71,
+    "end": 939.1,
+    "text": "A 64-bit hash is generated by comparing each coefficient to the average. The res"
+  },
+  {
+    "start": 939.1,
+    "end": 956.91,
+    "text": "Every pair of hashes is compared using Hamming distance — counting how many of t"
+  },
+  {
+    "start": 956.91,
+    "end": 1064.89,
+    "text": "sammapix.com/tools/twinhunt . No account is required to start. The page works in"
+  },
+  {
+    "start": 1066.39,
+    "end": 1070.78,
+    "text": "Open the deletion report in TextEdit or any text editor."
+  },
+  {
+    "start": 1070.78,
+    "end": 1080.28,
+    "text": "Use Finder's search bar (Command + F) to locate each file by name, or use Spotli"
+  },
+  {
+    "start": 1080.28,
+    "end": 1087.48,
+    "text": "Select all files to delete and move them to Trash (Command + Delete). Empty Tras"
+  },
+  {
+    "start": 1087.48,
+    "end": 1092.93,
+    "text": "Open File Explorer and use the search bar to locate files by name from the repor"
+  },
+  {
+    "start": 1092.93,
+    "end": 1099.75,
+    "text": "Select and delete each listed file, or use the Windows search (Windows + S) for "
+  },
+  {
+    "start": 1099.75,
+    "end": 1107.69,
+    "text": "For batch deletion in PowerShell, use Get-Content deletion-report.txt | Remove-I"
+  },
+  {
+    "start": 1107.69,
+    "end": 1117.92,
+    "text": "SammaPix Compress — reduce JPEG and PNG file sizes by 50-80% with no visible qua"
+  },
+  {
+    "start": 1117.92,
+    "end": 1126.27,
+    "text": "SammaPix Convert — convert HEIC, PNG, and RAW files to JPEG or WebP for broader "
+  },
+  {
+    "start": 1126.27,
+    "end": 1147.15,
+    "text": "Very large libraries (thousands of photos): The free tier supports 50 images per"
+  },
+  {
+    "start": 1147.15,
+    "end": 1166.83,
+    "text": "Heavy crops and aggressive filters: pHash detects duplicates based on low-freque"
+  },
+  {
+    "start": 1166.83,
+    "end": 1181.4,
+    "text": "Automatic deletion: Browsers do not have filesystem write access. TwinHunt provi"
+  },
+  {
+    "start": 1181.4,
+    "end": 1190.4,
+    "text": "Video duplicate detection: TwinHunt currently handles image files only. Duplicat"
+  }
+]
