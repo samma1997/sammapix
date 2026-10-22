@@ -1,0 +1,227 @@
+[
+  {
+    "start": 0,
+    "end": 4.73,
+    "text": "Try SammaPix free. Batch-ready, no upload"
+  },
+  {
+    "start": 4.73,
+    "end": 7.78,
+    "text": "What Squoosh is (and what it is great at)"
+  },
+  {
+    "start": 7.78,
+    "end": 11.57,
+    "text": "Privacy: both tools keep files on your device"
+  },
+  {
+    "start": 12.07,
+    "end": 15.76,
+    "text": "Feature comparison: SammaPix vs Squoosh"
+  },
+  {
+    "start": 15.76,
+    "end": 19.51,
+    "text": "Format support: HEIC and the iPhone gap"
+  },
+  {
+    "start": 19.51,
+    "end": 23.85,
+    "text": "Codec control: Squoosh goes deeper, SammaPix goes wider"
+  },
+  {
+    "start": 23.85,
+    "end": 26.54,
+    "text": "A note on compression quality"
+  },
+  {
+    "start": 26.54,
+    "end": 29.59,
+    "text": "When to use Squoosh vs SammaPix"
+  },
+  {
+    "start": 29.59,
+    "end": 32.25,
+    "text": "Squoosh is the better choice if:"
+  },
+  {
+    "start": 32.75,
+    "end": 36.26,
+    "text": "Overall verdict: SammaPix vs Squoosh"
+  },
+  {
+    "start": 36.76,
+    "end": 40.24,
+    "text": "Can Squoosh compress multiple images at once?"
+  },
+  {
+    "start": 40.24,
+    "end": 43.48,
+    "text": "Is SammaPix a good Squoosh alternative?"
+  },
+  {
+    "start": 43.48,
+    "end": 46.28,
+    "text": "What formats does Squoosh support?"
+  },
+  {
+    "start": 46.28,
+    "end": 49.84,
+    "text": "Is Squoosh still maintained in 2026?"
+  },
+  {
+    "start": 50.34,
+    "end": 52.21,
+    "text": "Quick answer"
+  },
+  {
+    "start": 53.71,
+    "end": 71.68,
+    "text": "That precision is Squoosh's strength. It is also its intended scope. Squoosh was"
+  },
+  {
+    "start": 71.68,
+    "end": 88.99,
+    "text": "This is important to state clearly, because some comparison articles get it wron"
+  },
+  {
+    "start": 88.99,
+    "end": 109,
+    "text": "SammaPix works the same way. When you use the SammaPix Compress tool , your file"
+  },
+  {
+    "start": 109,
+    "end": 134.95,
+    "text": "On privacy, Squoosh and SammaPix are equivalent. Both are safe for sensitive con"
+  },
+  {
+    "start": 134.95,
+    "end": 142.03,
+    "text": "This is where Squoosh and SammaPix diverge most clearly, and where the choice be"
+  },
+  {
+    "start": 142.03,
+    "end": 171.26,
+    "text": "Squoosh handles one image at a time. You open a file, adjust settings, download "
+  },
+  {
+    "start": 172.26,
+    "end": 186.64,
+    "text": "Squoosh supports a solid range of output codecs: MozJPEG, OxiPNG, WebP, AVIF, JX"
+  },
+  {
+    "start": 186.64,
+    "end": 210.76,
+    "text": "The gap is on the input side. Squoosh does not support HEIC files. HEIC is the d"
+  },
+  {
+    "start": 210.76,
+    "end": 229.81,
+    "text": "SammaPix handles HEIC directly. You can drop an iPhone photo into the compress t"
+  },
+  {
+    "start": 229.81,
+    "end": 252.47,
+    "text": "Squoosh's strongest feature is its compression control panel. For each codec, yo"
+  },
+  {
+    "start": 252.47,
+    "end": 271.16,
+    "text": "This level of control is genuinely valuable for specific use cases. A frontend d"
+  },
+  {
+    "start": 271.16,
+    "end": 298.88,
+    "text": "SammaPix takes the opposite approach: instead of exposing codec internals, it ap"
+  },
+  {
+    "start": 299.38,
+    "end": 327.87,
+    "text": "Because Squoosh allows manual quality adjustment, it is possible to compress a f"
+  },
+  {
+    "start": 327.87,
+    "end": 349.59,
+    "text": "Squoosh is a genuinely excellent tool and deserves its reputation. Google Chrome"
+  },
+  {
+    "start": 349.59,
+    "end": 362.6,
+    "text": "The limitation is scope. Squoosh was not designed for batch workflows, does not "
+  },
+  {
+    "start": 362.6,
+    "end": 388.38,
+    "text": "SammaPix is a broader tool. Compression is one part of a 20-tool toolkit that in"
+  },
+  {
+    "start": 388.38,
+    "end": 405.99,
+    "text": "The honest summary: use Squoosh when you need to tune one image with full codec "
+  },
+  {
+    "start": 405.99,
+    "end": 419.31,
+    "text": "Curious how upload-based compressors like TinyPNG compare on the privacy and com"
+  },
+  {
+    "start": 419.31,
+    "end": 435.42,
+    "text": "No. Squoosh processes images entirely in your browser using WebAssembly. Your fi"
+  },
+  {
+    "start": 435.92,
+    "end": 461.57,
+    "text": "Yes, particularly for batch work and users who need tools beyond compression. Bo"
+  },
+  {
+    "start": 461.57,
+    "end": 482.19,
+    "text": "Squoosh accepts JPEG, PNG, WebP, AVIF, and BMP as input. Output codecs include M"
+  },
+  {
+    "start": 482.69,
+    "end": 714.24,
+    "text": "Compress images free } > Quick answer Both SammaPix and Squoosh are free, privac"
+  },
+  {
+    "start": 714.24,
+    "end": 720.22,
+    "text": "SammaPix: drop multiple files, process in parallel, download ZIP of all results"
+  },
+  {
+    "start": 720.72,
+    "end": 726.96,
+    "text": "SammaPix input: JPEG, PNG, WebP, AVIF, HEIC, GIF, and more"
+  },
+  {
+    "start": 726.96,
+    "end": 774.4,
+    "text": "resize tool , convert formats, remove backgrounds, work with PDFs, or strip EXIF"
+  },
+  {
+    "start": 774.9,
+    "end": 781.89,
+    "text": "You are a developer exploring codec options like AVIF vs WebP vs MozJPEG for a s"
+  },
+  {
+    "start": 783.39,
+    "end": 788.57,
+    "text": "You regularly work with HEIC files from an iPhone or recent Apple device"
+  },
+  {
+    "start": 788.57,
+    "end": 795.03,
+    "text": "You want a single tool that handles compression, resizing, format conversion, an"
+  },
+  {
+    "start": 795.53,
+    "end": 799.66,
+    "text": "You are handling GIF files alongside standard image formats"
+  },
+  {
+    "start": 799.66,
+    "end": 805.46,
+    "text": "You want AI-powered features like background removal or file renaming as part of"
+  }
+]

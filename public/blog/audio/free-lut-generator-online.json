@@ -1,0 +1,302 @@
+[
+  {
+    "start": 0,
+    "end": 3.34,
+    "text": "Apply film looks free — no upload needed"
+  },
+  {
+    "start": 3.34,
+    "end": 7.01,
+    "text": "What is a LUT and why do people search for one?"
+  },
+  {
+    "start": 7.01,
+    "end": 11.02,
+    "text": "LUTs for photos vs video: the key difference"
+  },
+  {
+    "start": 11.02,
+    "end": 14.57,
+    "text": "SammaPix FilmLab: what it actually does"
+  },
+  {
+    "start": 14.57,
+    "end": 16.68,
+    "text": "What FilmLab does"
+  },
+  {
+    "start": 16.68,
+    "end": 19.15,
+    "text": "What FilmLab does not do"
+  },
+  {
+    "start": 19.15,
+    "end": 22.27,
+    "text": "The 14 film presets explained"
+  },
+  {
+    "start": 22.27,
+    "end": 26.21,
+    "text": "How to apply a film look to your photos (step by step)"
+  },
+  {
+    "start": 26.21,
+    "end": 29.14,
+    "text": "Practical tips for better results"
+  },
+  {
+    "start": 29.14,
+    "end": 33.65,
+    "text": "Free browser tool vs paid desktop apps: honest comparison"
+  },
+  {
+    "start": 33.65,
+    "end": 37.15,
+    "text": "When FilmLab is the right tool — and when it is not"
+  },
+  {
+    "start": 37.15,
+    "end": 39.84,
+    "text": "FilmLab is the right choice if:"
+  },
+  {
+    "start": 40.34,
+    "end": 44.01,
+    "text": "Bonus: match colors across your whole photo set"
+  },
+  {
+    "start": 44.01,
+    "end": 47.71,
+    "text": "What is a LUT and how does it work on photos?"
+  },
+  {
+    "start": 47.71,
+    "end": 51.91,
+    "text": "Does SammaPix FilmLab export .cube LUT files?"
+  },
+  {
+    "start": 51.91,
+    "end": 55.8,
+    "text": "Which film presets are available in SammaPix FilmLab?"
+  },
+  {
+    "start": 55.8,
+    "end": 60.69,
+    "text": "Is there a free online tool to apply film looks to photos without Photoshop?"
+  },
+  {
+    "start": 62.19,
+    "end": 64.06,
+    "text": "Quick answer"
+  },
+  {
+    "start": 64.06,
+    "end": 87.56,
+    "text": "A LUT (Look-Up Table) remaps the colors in a photo or video to produce a consist"
+  },
+  {
+    "start": 87.56,
+    "end": 117.46,
+    "text": "LUT stands for Look-Up Table. At its core, a LUT is a file — most commonly a .cu"
+  },
+  {
+    "start": 117.46,
+    "end": 138.61,
+    "text": "Professional colorists build custom LUTs in software like DaVinci Resolve or Bas"
+  },
+  {
+    "start": 138.61,
+    "end": 170.65,
+    "text": "The problem is that creating a custom LUT from scratch requires a colorist workf"
+  },
+  {
+    "start": 170.65,
+    "end": 195.03,
+    "text": "In video production, a LUT is applied at the colorgrading stage in a timeline ed"
+  },
+  {
+    "start": 195.53,
+    "end": 211.83,
+    "text": "This is the practical distinction that matters most when choosing a tool: if you"
+  },
+  {
+    "start": 211.83,
+    "end": 231.17,
+    "text": "SammaPix FilmLab is a free browser-based tool that applies analog film looks to "
+  },
+  {
+    "start": 231.17,
+    "end": 255.1,
+    "text": "Internally, FilmLab applies a multi-step color processing pipeline for each pres"
+  },
+  {
+    "start": 255.1,
+    "end": 268.44,
+    "text": "For the majority of photo workflows — social media content, blog photography, po"
+  },
+  {
+    "start": 268.94,
+    "end": 291.65,
+    "text": "Each preset is a starting point, not a locked setting. Once you choose a stock, "
+  },
+  {
+    "start": 291.65,
+    "end": 303.7,
+    "text": "The entire process runs in the browser and takes less than a minute for a single"
+  },
+  {
+    "start": 303.7,
+    "end": 324.62,
+    "text": "Most color grading discussions assume a professional video workflow as the basel"
+  },
+  {
+    "start": 324.62,
+    "end": 340.66,
+    "text": "The table shows a clear pattern. If you need to create or export actual .cube LU"
+  },
+  {
+    "start": 341.16,
+    "end": 359.32,
+    "text": "Once you have applied a film look to your photos in FilmLab, a common next step "
+  },
+  {
+    "start": 359.82,
+    "end": 372.57,
+    "text": "If you also need to reduce file size after applying the film look — for web publ"
+  },
+  {
+    "start": 372.57,
+    "end": 395.7,
+    "text": "A LUT (Look-Up Table) is a mathematical map that transforms every color in your "
+  },
+  {
+    "start": 395.7,
+    "end": 415.19,
+    "text": "No. FilmLab applies film looks directly to your photos and exports the finished "
+  },
+  {
+    "start": 415.19,
+    "end": 436,
+    "text": "FilmLab includes 14 presets: 6 classic film stocks — Kodak Gold, Fuji Pro 400H, "
+  },
+  {
+    "start": 436.5,
+    "end": 456.73,
+    "text": "Yes. Upload your full batch, set your look using a preset and the sliders, then "
+  },
+  {
+    "start": 457.73,
+    "end": 465.08,
+    "text": "Provides manual control over grain, vignette, fade, temperature, contrast, satur"
+  },
+  {
+    "start": 465.08,
+    "end": 470.21,
+    "text": "Shows a live preview with 100ms debounce as sliders are adjusted"
+  },
+  {
+    "start": 470.21,
+    "end": 474.41,
+    "text": "Processes a full batch of photos with the same look in one click"
+  },
+  {
+    "start": 474.41,
+    "end": 478.42,
+    "text": "Downloads results individually or as a ZIP archive"
+  },
+  {
+    "start": 478.42,
+    "end": 484.13,
+    "text": "Runs 100% in the browser — no upload, no account required for basic use"
+  },
+  {
+    "start": 484.13,
+    "end": 500.04,
+    "text": "It does not export .cube LUT files. FilmLab outputs processed photos, not reusab"
+  },
+  {
+    "start": 500.04,
+    "end": 505.37,
+    "text": "It does not apply LUTs to video files — FilmLab processes still images only."
+  },
+  {
+    "start": 505.87,
+    "end": 514.42,
+    "text": "Open FilmLab. Go to sammapix.com/tools/filmlab . No account or download needed."
+  },
+  {
+    "start": 514.42,
+    "end": 528.6,
+    "text": "Drop your photos. Drag and drop one or more photos onto the drop zone, or click "
+  },
+  {
+    "start": 529.1,
+    "end": 542.8,
+    "text": "Fine-tune with sliders. Adjust grain, vignette, fade (black lift), temperature, "
+  },
+  {
+    "start": 542.8,
+    "end": 554.25,
+    "text": "Apply to all and download. Click &quot;Apply to all&quot; to process your full b"
+  },
+  {
+    "start": 554.25,
+    "end": 564.33,
+    "text": "Start with a preset close to your target aesthetic, then adjust only one or two "
+  },
+  {
+    "start": 564.33,
+    "end": 575.13,
+    "text": "If your photo already has visible camera noise, reduce the grain slider before a"
+  },
+  {
+    "start": 575.13,
+    "end": 584.42,
+    "text": "Vignette is most natural on portraits. For wide landscape shots, keep it under 3"
+  },
+  {
+    "start": 584.92,
+    "end": 598.17,
+    "text": "Fade (black lift) combined with a slight contrast boost mimics the characteristi"
+  },
+  {
+    "start": 598.67,
+    "end": 602.58,
+    "text": "You do not want to install or pay for desktop software"
+  },
+  {
+    "start": 602.58,
+    "end": 606.78,
+    "text": "You want to batch process a set of photos with the same look quickly"
+  },
+  {
+    "start": 606.78,
+    "end": 611.17,
+    "text": "You want full manual control over the look without a subscription"
+  },
+  {
+    "start": 611.17,
+    "end": 616.4,
+    "text": "You are working with HEIC files from an iPhone and do not want to convert them f"
+  },
+  {
+    "start": 616.9,
+    "end": 625.78,
+    "text": "You need to export a .cube LUT file for DaVinci Resolve, Premiere Pro, or Final "
+  },
+  {
+    "start": 625.78,
+    "end": 631.14,
+    "text": "You need to apply a color grade to video footage — FilmLab handles still images "
+  },
+  {
+    "start": 631.14,
+    "end": 638.43,
+    "text": "You are doing professional print-production retouching that requires non-destruc"
+  },
+  {
+    "start": 638.43,
+    "end": 645.7,
+    "text": "You need to load a third-party .cube file that you already own — FilmLab does no"
+  }
+]

@@ -222,6 +222,14 @@ export const APP_DESCRIPTION =
 
 // Blog post slugs - must match actual directories
 export const BLOG_SLUGS = [
+  "best-free-topaz-photo-ai-alternative",
+  "best-free-optimizilla-alternative",
+  "sammapix-vs-squoosh",
+  "best-free-ilovepdf-alternative",
+  "best-free-smallpdf-alternative",
+  "best-free-remove-bg-alternative",
+  "free-duplicate-photo-finder-online",
+  "free-lut-generator-online",
   "image-api-for-ai-agents-comparison-2026",
   "image-pipelines-for-ai-agents",
   "best-image-mcp-servers-2026",
