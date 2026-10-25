@@ -80,6 +80,7 @@ export default function AboutPage() {
     jobTitle: "Digital Product Builder & Travel Photographer",
     sameAs: [
       "https://lucasammarco.com",
+      "https://sammagym.com",
       "https://github.com/samma1997",
       "https://www.linkedin.com/in/luca-sammarco-a88b8a148/",
       "https://dev.to/samma1997",
@@ -225,6 +226,19 @@ export default function AboutPage() {
               Today, SammaPix has {TOOL_COUNT} free tools used by photographers, bloggers, and developers in 40+ countries.
               Everything still runs in the browser. Your photos never leave your device. That was the promise from
               day one, and it hasn&apos;t changed.
+            </p>
+            <p className="text-sm text-[#525252] dark:text-[#A3A3A3] leading-relaxed mb-4">
+              SammaPix is part of a small family of tools I build on the same idea: genuinely useful, free, and respectful
+              of your data. The latest is{" "}
+              <a
+                href="https://sammagym.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#171717] dark:text-[#E5E5E5] underline underline-offset-2 decoration-gray-300 dark:decoration-[#444] hover:decoration-gray-700 dark:hover:decoration-[#A3A3A3] transition-colors"
+              >
+                SammaGym
+              </a>
+              , a free, offline-first workout tracker with an evidence-based training program. Same philosophy, different problem.
             </p>
             <Link
               href="/tools"
