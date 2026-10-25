@@ -366,6 +366,15 @@ export default function Footer({ locale = "en" }: { locale?: string }) {
             >
               Luca Sammarco
             </a>
+            {" · also by Luca: "}
+            <a
+              href="https://sammagym.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 dark:text-[#737373] hover:text-gray-700 dark:hover:text-[#A3A3A3] transition-colors duration-150"
+            >
+              SammaGym
+            </a>
           </p>
         </div>
       </div>
