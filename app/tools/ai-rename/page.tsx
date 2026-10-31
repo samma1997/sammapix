@@ -11,9 +11,9 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "AI Image Rename Tool Online Free",
+  title: "Rename Photos Online Free — AI Batch Renamer (No Upload)",
   description:
-    "Turn IMG_0001.jpg into SEO-friendly filenames with AI. Batch rename 20+ images in seconds. Browser-based, powered by Gemini. No signup to try.",
+    "Rename photos and images online free. AI reads each photo and writes clear, SEO-friendly filenames. Batch rename 20+ at once in your browser — no upload, no signup to try.",
   keywords: [
     "image filename seo",
     "rename images for seo",
@@ -29,9 +29,9 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/tools/ai-rename`,
   },
   openGraph: {
-    title: "AI Image Rename Tool Online Free",
+    title: "Rename Photos Online Free — AI Batch Renamer (No Upload)",
     description:
-      "Turn IMG_0001.jpg into SEO-friendly filenames with AI. Batch rename 20+ images in seconds. Browser-based, powered by Gemini. No signup to try.",
+      "Rename photos and images online free. AI reads each photo and writes clear, SEO-friendly filenames. Batch rename 20+ at once in your browser — no upload, no signup to try.",
     url: `${APP_URL}/tools/ai-rename`,
     siteName: "SammaPix",
     type: "website",
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Image Rename Tool Online Free",
+    title: "Rename Photos Online Free — AI Batch Renamer (No Upload)",
     description:
-      "Turn IMG_0001.jpg into SEO-friendly filenames with AI. Batch rename 20+ images in seconds. Browser-based, powered by Gemini. No signup to try.",
+      "Rename photos and images online free. AI reads each photo and writes clear, SEO-friendly filenames. Batch rename 20+ at once in your browser — no upload, no signup to try.",
   },
 };
 

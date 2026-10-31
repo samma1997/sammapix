@@ -120,8 +120,9 @@ const nextConfig = {
 {
         source: "/(.*)",
         headers: [
-          // Anti-scraping: prevent Google/Bing from caching page copies
-          { key: "X-Robots-Tag", value: "noarchive" },
+          // NB: no site-wide "noarchive". It does not affect ranking but Bing
+          // excludes noarchive pages from Copilot / AI grounding, hurting GEO.
+          // API routes keep noindex,noarchive via lib/api-security.ts.
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           {
