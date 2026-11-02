@@ -15,7 +15,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Reduce file size up to 90%",
     slug: "/tools/compress",
     category: "optimize",
-    relatedTools: ["webp", "resizepack", "exif", "croproatio"],
+    relatedTools: ["webp", "resizepack", "exif", "croproatio", "photo-enhance"],
     relatedBlogSlugs: [
       "compress-images-without-losing-quality",
       "best-image-compression-tools-2026",
@@ -217,7 +217,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Resize for social media & web",
     slug: "/tools/resizepack",
     category: "optimize",
-    relatedTools: ["croproatio", "compress", "webp", "weblift"],
+    relatedTools: ["croproatio", "compress", "webp", "weblift", "photo-enhance"],
     relatedBlogSlugs: [
       "resize-images-for-social-media",
       "compress-images-without-losing-quality",
@@ -369,7 +369,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Crop images to exact aspect ratios",
     slug: "/tools/croproatio",
     category: "edit",
-    relatedTools: ["resizepack", "compress", "webp", "filmlab"],
+    relatedTools: ["resizepack", "compress", "webp", "filmlab", "photo-enhance"],
     relatedBlogSlugs: [
       "resize-images-for-social-media",
     ],
@@ -398,7 +398,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "Remove image background instantly",
     slug: "/tools/remove-bg",
     category: "edit",
-    relatedTools: ["compress", "croproatio", "stampit", "webp"],
+    relatedTools: ["compress", "croproatio", "stampit", "webp", "photo-enhance"],
     relatedBlogSlugs: [],
   },
   upscale: {
@@ -407,7 +407,7 @@ export const TOOLS: Record<string, ToolMeta> = {
     shortDesc: "AI upscale images 2x or 4x",
     slug: "/tools/upscale",
     category: "optimize",
-    relatedTools: ["compress", "remove-bg", "croproatio", "webp"],
+    relatedTools: ["compress", "remove-bg", "croproatio", "webp", "photo-enhance"],
     relatedBlogSlugs: [],
   },
   "passport-photo": {
