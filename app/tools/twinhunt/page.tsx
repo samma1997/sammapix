@@ -10,25 +10,24 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 
 
 export const metadata: Metadata = {
-  title: "Find Duplicate Photos Online Free. AI Perceptual Hashing",
+  title: "Duplicate Photo Finder Online — Find & Remove Duplicates Free",
   description:
-    "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based, your photos stay private.",
+    "Free duplicate photo finder: detect and remove duplicate and near-duplicate photos and images online. 100% in your browser, no upload, your photos stay private.",
   keywords: [
-    "find duplicate photos",
     "duplicate photo finder",
+    "duplicate image finder",
+    "find duplicate photos",
+    "remove duplicate photos",
+    "duplicate photo finder online",
     "similar image finder",
-    "phash tool",
     "photo deduplicator",
     "find similar images",
-    "duplicate photo finder",
-    "similar image finder",
-    "photo deduplicator",
   ],
   alternates: { canonical: `${APP_URL}/tools/twinhunt` },
   openGraph: {
-    title: "Find Duplicate Photos Free Online | Perceptual Hashing",
+    title: "Duplicate Photo Finder Online — Find & Remove Duplicates Free",
     description:
-      "Find duplicate photos instantly with AI hashing. Reclaim disk space, identify near-duplicates. Free online, zero uploads, no sorting.",
+      "Find and remove duplicate and near-duplicate photos online, free. Reclaim disk space. 100% in your browser, zero uploads, your photos stay private.",
     url: `${APP_URL}/tools/twinhunt`,
     siteName: "SammaPix",
     type: "website",
@@ -43,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Find Duplicate Photos Online Free. AI Perceptual Hashing",
+    title: "Duplicate Photo Finder Online — Find & Remove Duplicates Free",
     description:
-      "Find and remove duplicate photos online for free. Uses perceptual hashing to detect similar images. Browser-based, your photos stay private.",
+      "Free duplicate photo finder: detect and remove duplicate and near-duplicate photos and images online. 100% in your browser, no upload, your photos stay private.",
   },
 };
 
