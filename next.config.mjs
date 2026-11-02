@@ -160,8 +160,16 @@ const nextConfig = {
               // worker-src blob: is required for JSZip and browser-image-compression workers
               "worker-src 'self' blob: https://staticimgly.com https://*.staticimgly.com",
               // Nominatim geocoding is called server-side; client only hits /api/geocode
-              "connect-src 'self' blob: https://api.stripe.com https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://www.facebook.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.google.com https://pagead2.googlesyndication.com https://fonts.gstatic.com https://www.googleapis.com https://accounts.google.com https://content.googleapis.com https://www.dropbox.com https://dl.dropboxusercontent.com https://api.dropboxapi.com https://staticimgly.com https://*.staticimgly.com https://huggingface.co https://*.huggingface.co https://cdn-lfs.huggingface.co https://cdn-lfs-us-1.huggingface.co https://hf.co https://*.hf.co https://cdn-lfs.hf.co https://cdn.jsdelivr.net https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.adtrafficquality.google",
-              "frame-src https://js.stripe.com https://accounts.google.com https://docs.google.com https://www.dropbox.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net",
+              // connect-src: m.stripe.com and m.stripe.network are Stripe's
+              // fraud-detection / telemetry endpoints required by the Express
+              // Checkout Element (Apple Pay / Google Pay). Without these, the
+              // element silently fails its internal security checks and may not
+              // show any payment buttons.
+              "connect-src 'self' blob: https://api.stripe.com https://m.stripe.com https://m.stripe.network https://*.tile.openstreetmap.org https://nominatim.openstreetmap.org https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://www.facebook.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.google.com https://pagead2.googlesyndication.com https://fonts.gstatic.com https://www.googleapis.com https://accounts.google.com https://content.googleapis.com https://www.dropbox.com https://dl.dropboxusercontent.com https://api.dropboxapi.com https://staticimgly.com https://*.staticimgly.com https://huggingface.co https://*.huggingface.co https://cdn-lfs.huggingface.co https://cdn-lfs-us-1.huggingface.co https://hf.co https://*.hf.co https://cdn-lfs.hf.co https://cdn.jsdelivr.net https://www.clarity.ms https://*.clarity.ms https://c.bing.com https://cloudflareinsights.com https://*.cloudflareinsights.com https://*.adtrafficquality.google",
+              // frame-src: Stripe Express Checkout Element needs hooks.stripe.com
+              // in addition to js.stripe.com (Payment Element iframe).
+              // Apple Pay sheet is served by apple.com frames embedded by Stripe.
+              "frame-src https://js.stripe.com https://hooks.stripe.com https://apple.com https://*.apple.com https://accounts.google.com https://docs.google.com https://www.dropbox.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self' https://checkout.stripe.com",

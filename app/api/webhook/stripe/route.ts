@@ -425,6 +425,93 @@ export async function POST(req: NextRequest) {
       }
       break;
     }
+    case "payment_intent.succeeded": {
+      // ----------------------------------------------------------------
+      // Express Checkout Day Pass — PaymentIntent path
+      //
+      // This branch handles Day Passes purchased via the Express Checkout
+      // Element (Apple Pay / Google Pay one-tap flow). The standard hosted
+      // Checkout Session path still goes through checkout.session.completed
+      // above and is NOT touched.
+      //
+      // IMPORTANT — Stripe Dashboard action required:
+      //   The webhook endpoint must have `payment_intent.succeeded` enabled.
+      //   Go to Stripe Dashboard → Developers → Webhooks → your endpoint →
+      //   "Add events" and add `payment_intent.succeeded`.
+      //   This event is NOT in the default set for endpoints created before
+      //   the Express Checkout integration was added. Without it this branch
+      //   will never fire and express-checkout Day Pass grants will be missed.
+      // ----------------------------------------------------------------
+      const paymentIntent = event.data.object as Stripe.PaymentIntent;
+      const piMeta = paymentIntent.metadata ?? {};
+
+      // Only handle Day Pass PaymentIntents created by /api/checkout/day-pass/intent.
+      if (piMeta.type !== "day_pass") break;
+
+      // Resolve buyer email: prefer metadata (always set for logged-in users),
+      // then receipt_email (set from session if logged in, or filled by Stripe
+      // from wallet billing details after confirm), then the latest charge's
+      // billing_details.email (most reliable fallback for guest wallets).
+      let piEmail =
+        (piMeta.userEmail || paymentIntent.receipt_email || "").trim();
+
+      if (!piEmail) {
+        // Last resort: expand the latest charge and read billing_details.email.
+        try {
+          const latestChargeId =
+            typeof paymentIntent.latest_charge === "string"
+              ? paymentIntent.latest_charge
+              : paymentIntent.latest_charge?.id;
+          if (latestChargeId) {
+            const charge = await stripe.charges.retrieve(latestChargeId);
+            piEmail = (charge.billing_details?.email ?? "").trim();
+          }
+        } catch (chargeErr) {
+          console.warn(
+            "[stripe/webhook] payment_intent.succeeded: could not retrieve charge for email:",
+            chargeErr
+          );
+        }
+      }
+
+      if (!piEmail) {
+        console.error(
+          "[stripe/webhook] Day Pass (PaymentIntent): cannot resolve email — " +
+            "metadata.userEmail empty, no receipt_email, and no charge billing_details.email. " +
+            "PaymentIntent:",
+          paymentIntent.id
+        );
+        break;
+      }
+
+      await grantDayPass(piEmail);
+      console.log(
+        `[stripe/webhook] Day Pass granted (PaymentIntent): ${piEmail} (${paymentIntent.id})`
+      );
+
+      // GA4 purchase event — mirrors EXACTLY the checkout.session.completed
+      // day_pass branch above (same params, only transaction_id differs).
+      const isVideoVariant = piMeta.variant === "video";
+      const dpPiGaClientId =
+        parseGAClientId(piMeta.ga_cookie) ?? piEmail;
+      sendGA4Event({
+        clientId: dpPiGaClientId,
+        userId: piEmail,
+        events: [
+          {
+            name: "purchase",
+            params: {
+              currency: "USD",
+              value: isVideoVariant ? 4.99 : 2.99,
+              transaction_id: paymentIntent.id,
+              item_category: "day_pass",
+              item_name: "day_pass_24h",
+            },
+          },
+        ],
+      }).catch(() => {});
+      break;
+    }
     default:
       break;
   }
