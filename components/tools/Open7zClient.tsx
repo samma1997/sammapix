@@ -275,6 +275,7 @@ export default function Open7zClient() {
 
         setUiState("results");
         setProgress(100);
+        trackEvent("tool_used", { tool_name: "open-7z", files_count: filteredTotal });
         trackEvent("open7z_extracted", { files: filteredTotal });
 
       } catch (err: unknown) {

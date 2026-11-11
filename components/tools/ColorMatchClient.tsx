@@ -303,6 +303,7 @@ export default function ColorMatchClient() {
     // Soft session tracking + upsell decision (no hard block).
     const processedCount = filesRef.current.filter((f) => f.status === "done").length;
     if (processedCount > 0) {
+      trackEvent("tool_used", { tool_name: "color-match", files_count: processedCount });
       recordBatchRun("color_match", processedCount);
       const isLoggedIn = !!session?.user?.email;
       const decision = shouldShowUpsell("color_match", isLoggedIn, isPro);

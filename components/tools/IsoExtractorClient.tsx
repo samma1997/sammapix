@@ -241,6 +241,7 @@ export default function IsoExtractorClient() {
 
       setUiState("results");
       setProgress(100);
+      trackEvent("tool_used", { tool_name: "iso-extractor", files_count: filteredTotal });
       trackEvent("iso_extractor_done", { files: filteredTotal });
 
     } catch (err: unknown) {

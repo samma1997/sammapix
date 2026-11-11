@@ -165,6 +165,7 @@ export default function ZipCreatorClient() {
         used.add(p);
         zip.file(p, it.file);
       }
+      trackEvent("tool_used", { tool_name: "zip-creator", files_count: items.length });
       trackEvent("zipcreator_build", { files: items.length });
       const blob = await zip.generateAsync(
         { type: "blob", compression: "DEFLATE", compressionOptions: { level: 6 } },

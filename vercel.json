@@ -23,6 +23,10 @@
   },
   "crons": [
     {
+      "path": "/api/cron/seo-digest",
+      "schedule": "0 8 * * 1"
+    },
+    {
       "path": "/api/cron/email-drip",
       "schedule": "0 10 * * *"
     },

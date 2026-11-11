@@ -162,6 +162,7 @@ export default function IpaExtractorClient() {
       }
 
       setUiState("results");
+      trackEvent("tool_used", { tool_name: "ipa-extractor", files_count: parsed.filter((e) => !e.isDir).length });
       trackEvent("ipa_extractor_opened", {
         files: parsed.filter((e) => !e.isDir).length,
       });

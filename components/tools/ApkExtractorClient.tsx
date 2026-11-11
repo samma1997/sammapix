@@ -136,6 +136,7 @@ export default function ApkExtractorClient() {
 
       setEntries(parsed);
       setUiState("results");
+      trackEvent("tool_used", { tool_name: "apk-extractor", files_count: parsed.filter((e) => !e.isDir).length });
       trackEvent("apk_extractor_opened", {
         ext: file.name.split(".").pop() ?? "",
         files: parsed.filter((e) => !e.isDir).length,

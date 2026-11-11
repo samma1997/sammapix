@@ -230,6 +230,7 @@ export default function UnrarClient() {
             terminateWorker();
             setUiState("results");
             setProgress(100);
+            trackEvent("tool_used", { tool_name: "unrar", files_count: accEntries.length });
             trackEvent("unrar_extracted", { files: accEntries.length });
           } else if (type === "error") {
             terminateWorker();
