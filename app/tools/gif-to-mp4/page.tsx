@@ -12,7 +12,7 @@ import MetaViewContent from "@/components/tracking/MetaViewContent";
 const TOOL_URL = `${APP_URL}/tools/gif-to-mp4`;
 
 export const metadata: Metadata = {
-  title: "GIF to MP4 Converter — Free, Browser-Based",
+  title: "GIF to MP4 Converter Online Free — No Upload, Batch",
   description:
     "Convert animated GIF to MP4 (or WebM) online free. Shrink GIFs by 80-90% with high/balanced/small quality presets. Batch, no signup, no upload.",
   keywords: [
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     canonical: TOOL_URL,
   },
   openGraph: {
-    title: "GIF to MP4 Converter — Free, Browser-Based",
+    title: "GIF to MP4 Converter Online Free — No Upload, Batch",
     description:
       "Convert animated GIF to MP4 online free. 80-90% smaller files, batch, no upload.",
     url: TOOL_URL,
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "GIF to MP4 Converter — Free, Browser-Based",
+    title: "GIF to MP4 Converter Online Free — No Upload, Batch",
     description: "Convert animated GIF to MP4. Batch, no upload, 80-90% smaller files.",
   },
 };
