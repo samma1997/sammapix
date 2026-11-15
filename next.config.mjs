@@ -169,7 +169,7 @@ const nextConfig = {
               // frame-src: Stripe Express Checkout Element needs hooks.stripe.com
               // in addition to js.stripe.com (Payment Element iframe).
               // Apple Pay sheet is served by apple.com frames embedded by Stripe.
-              "frame-src https://js.stripe.com https://hooks.stripe.com https://apple.com https://*.apple.com https://accounts.google.com https://docs.google.com https://www.dropbox.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net",
+              "frame-src https://js.stripe.com https://hooks.stripe.com https://apple.com https://*.apple.com https://applepay.cdn-apple.com https://pay.google.com https://accounts.google.com https://docs.google.com https://www.dropbox.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self' https://checkout.stripe.com",
