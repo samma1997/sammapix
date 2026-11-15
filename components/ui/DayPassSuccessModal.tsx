@@ -44,7 +44,12 @@ export default function DayPassSuccessModal() {
     update().catch(() => {}); // JWT prende subito il piano Pro
     // Segna che l'utente ha comprato un Day Pass: alla scadenza l'upsell diventa
     // un re-sell a caldo ("le tue 24h sono finite, riprendi").
-    try { localStorage.setItem("sammapix_daypass_had", String(Date.now())); } catch { /* storage off */ }
+    try {
+      localStorage.setItem("sammapix_daypass_had", String(Date.now()));
+      // Scadenza (24h dal grant) per il badge "Pro · Xh rimaste".
+      localStorage.setItem("sammapix_daypass_expires", String(Date.now() + 24 * 60 * 60 * 1000));
+      window.dispatchEvent(new Event("daypass:started"));
+    } catch { /* storage off */ }
   }
 
   useEffect(() => {
