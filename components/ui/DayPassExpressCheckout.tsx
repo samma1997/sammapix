@@ -211,7 +211,10 @@ export default function DayPassExpressCheckout({
         const appUrl =
           process.env.NEXT_PUBLIC_APP_URL ||
           (typeof window !== "undefined" ? window.location.origin : "https://sammapix.com");
-        const returnUrl = `${appUrl}/dashboard?daypass=active`;
+        // Return the buyer to the tool they were using (source = "upsell:trigger:/tools/x"),
+        // not the generic dashboard, so they immediately continue what they paid for.
+        const toolPath = (source && source.match(/(\/[^:]*)$/)?.[1]) || "/dashboard";
+        const returnUrl = `${appUrl}${toolPath}?daypass=active`;
 
         try {
           const result = await stripe!.confirmPayment({

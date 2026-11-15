@@ -125,11 +125,11 @@ export async function POST(req: NextRequest) {
       // Ensure Stripe always collects and stores the customer email (needed for guest grant).
       customer_creation: "always",
       // {CHECKOUT_SESSION_ID} è sostituito da Stripe — /auth/complete logga l'utente automaticamente.
-      // Redirect back to where the user started (the source page) if it's a safe
-      // internal path, otherwise fall back to the dashboard. (Previously this was
-      // hardcoded to /tools/unrar, which sent every buyer there regardless.)
+      // Riporta l'utente al TOOL che stava usando. source = "upsell:trigger:/tools/x"
+      // (o un path nudo): estraggo il path finale così continua ciò per cui ha pagato.
+      // Fallback /dashboard solo se non c'è un path valido.
       success_url: `${appUrl}/auth/complete?session_id={CHECKOUT_SESSION_ID}&dest=${encodeURIComponent(
-        (source && source.startsWith("/") ? source : "/dashboard") + "?daypass=active"
+        ((source && source.match(/(\/[^:]*)$/)?.[1]) || "/dashboard") + "?daypass=active"
       )}`,
       cancel_url: `${appUrl}/dashboard?daypass=canceled`,
       metadata: {

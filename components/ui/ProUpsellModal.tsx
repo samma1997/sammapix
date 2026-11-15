@@ -511,7 +511,7 @@ export default function ProUpsellModal({
                     onSuccess={() => {
                       trackEvent("upsell_daypass_clicked", { trigger });
                       onClose();
-                      router.push("/dashboard?daypass=active");
+                      window.dispatchEvent(new Event("daypass:success"));
                     }}
                   />
 
@@ -616,7 +616,7 @@ export default function ProUpsellModal({
                         onSuccess={() => {
                           trackEvent("upsell_daypass_clicked", { trigger });
                           onClose();
-                          router.push("/dashboard?daypass=active");
+                          window.dispatchEvent(new Event("daypass:success"));
                         }}
                       />
                       <div className="flex items-center gap-2 my-1">
@@ -681,7 +681,7 @@ export default function ProUpsellModal({
                         onSuccess={() => {
                           trackEvent("upsell_daypass_clicked", { trigger });
                           onClose();
-                          router.push("/dashboard?daypass=active");
+                          window.dispatchEvent(new Event("daypass:success"));
                         }}
                       />
                       <div className="flex items-center gap-2 my-1">
