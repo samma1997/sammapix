@@ -42,6 +42,9 @@ export default function DayPassSuccessModal() {
     setIsIt(window.location.pathname.startsWith("/it"));
     setOpen(true);
     update().catch(() => {}); // JWT prende subito il piano Pro
+    // Segna che l'utente ha comprato un Day Pass: alla scadenza l'upsell diventa
+    // un re-sell a caldo ("le tue 24h sono finite, riprendi").
+    try { localStorage.setItem("sammapix_daypass_had", String(Date.now())); } catch { /* storage off */ }
   }
 
   useEffect(() => {

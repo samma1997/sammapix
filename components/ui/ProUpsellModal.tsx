@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -172,6 +172,15 @@ export default function ProUpsellModal({
   const [annualLoading, setAnnualLoading] = useState(false);
   const [creditsLoading, setCreditsLoading] = useState(false);
   const [dayPassLoading, setDayPassLoading] = useState(false);
+  // "hadPass": l'utente ha già comprato un Day Pass in passato (flag locale). Se
+  // ora rivede l'upsell significa che il pass è scaduto → re-sell a caldo ("le tue
+  // 24h sono finite, riprendi") invece dell'upsell generico da primo acquisto.
+  const [hadPass, setHadPass] = useState(false);
+  useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem("sammapix_daypass_had")) {
+      setHadPass(true);
+    }
+  }, []);
   const showContinue = trigger === "files" || trigger === "batch";
   // Money moments: ZIP download + file/batch limit drive 62% of all Day Pass
   // revenue. At these points the anonymous visitor has concrete value in hand
@@ -448,9 +457,11 @@ export default function ProUpsellModal({
             <Zap className="h-6 w-6 text-[#6366F1]" strokeWidth={1.5} />
           </div>
 
-          {/* Headline */}
+          {/* Headline — re-sell a caldo se il Day Pass è già stato usato ed è scaduto */}
           <Dialog.Title className="text-center text-base font-semibold text-[#171717] dark:text-[#E5E5E5] mb-2">
-            {getHeadline(trigger, isIt)}
+            {hadPass && trigger !== "success"
+              ? (isIt ? "Le tue 24h di Pro sono finite" : "Your 24h of Pro has ended")
+              : getHeadline(trigger, isIt)}
           </Dialog.Title>
 
           {/* Subtext */}
@@ -458,7 +469,11 @@ export default function ProUpsellModal({
             id="upsell-description"
             className="text-center text-sm text-[#737373] dark:text-[#A3A3A3] mb-5 leading-relaxed"
           >
-            {getSubtext(trigger, filesDropped, freeLimit, toolsExplored, isIt)}
+            {hadPass && trigger !== "success"
+              ? (isIt
+                  ? "Ti è servito? Riprendi con un Day Pass, o passa a Pro illimitato."
+                  : "Loved it? Continue with a Day Pass, or go unlimited with Pro.")
+              : getSubtext(trigger, filesDropped, freeLimit, toolsExplored, isIt)}
           </p>
 
           {/* Features */}
