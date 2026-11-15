@@ -67,7 +67,17 @@ export default function DayPassExpressCheckout({
   const expressRef = useRef<StripeExpressCheckoutElement | null>(null);
   const clientSecretRef = useRef<string | null>(null);
 
+  // ── KILL SWITCH (2026-11-15) ────────────────────────────────────────────────
+  // DISABILITATO: in produzione creava PaymentIntent a ogni apertura modale (112
+  // in 3 giorni) tutti abbandonati (0 vendite) e cannibalizzava il flusso redirect
+  // che funzionava → crollo vendite Day Pass. Spento finché non si diagnostica il
+  // motivo per cui l'Express non completa (wallet non renderizzati / UX). Con
+  // ENABLED=false: niente fetch, niente PaymentIntent, niente UI → resta solo il
+  // bottone redirect (comportamento pre-Express, provato e funzionante).
+  const EXPRESS_CHECKOUT_ENABLED = false;
+
   useEffect(() => {
+    if (!EXPRESS_CHECKOUT_ENABLED) return; // kill switch: no PI, no mount
     // Guard: abort if already initialised (strict-mode double-invoke).
     let aborted = false;
 
@@ -260,6 +270,9 @@ export default function DayPassExpressCheckout({
   }, [source, variant]);
 
   // ── Render ──────────────────────────────────────────────────────────────────
+
+  // KILL SWITCH: se disabilitato, non renderizza nulla (resta il bottone redirect).
+  if (!EXPRESS_CHECKOUT_ENABLED) return null;
 
   // Don't take up any space if wallets aren't available or init failed.
   if (status === "hidden" || status === "error" || status === "done") {
